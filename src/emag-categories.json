@@ -1,0 +1,3708 @@
+[
+ {
+  "id": 1,
+  "slug": "laptop-tablete-telefoane",
+  "name": "Laptop, Tablete & Telefoane",
+  "groups": [
+   {
+    "name": "Laptopuri si accesorii",
+    "slug": "laptopuri-accesorii",
+    "categories": [
+     {
+      "name": "Laptopuri",
+      "slug": "laptopuri"
+     },
+     {
+      "name": "Genti laptop",
+      "slug": "genti-laptop"
+     },
+     {
+      "name": "Docking stations",
+      "slug": "docking-stations"
+     },
+     {
+      "name": "Standuri/Coolere notebook",
+      "slug": "standuri-coolere-notebook"
+     },
+     {
+      "name": "Hard disk-uri notebook",
+      "slug": "hard-disk-uri-notebook"
+     },
+     {
+      "name": "Memorii Notebook",
+      "slug": "memorii-notebook"
+     },
+     {
+      "name": "Incarcatoare laptop",
+      "slug": "incarcatoare-laptop"
+     },
+     {
+      "name": "Baterii laptop",
+      "slug": "baterii-laptop"
+     },
+     {
+      "name": "Alte accesorii",
+      "slug": "alte-accesorii"
+     },
+     {
+      "name": "Display laptop",
+      "slug": "display-laptop"
+     },
+     {
+      "name": "Tastaturi laptop",
+      "slug": "tastaturi-laptop"
+     },
+     {
+      "name": "Folii protectie si autocolante laptop",
+      "slug": "folii-protectie-autocolante-laptop"
+     },
+     {
+      "name": "Sisteme securizare laptop",
+      "slug": "sisteme-securizare-laptop"
+     }
+    ]
+   },
+   {
+    "name": "Accesorii laptop",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Genti laptop",
+      "slug": "genti-laptop"
+     },
+     {
+      "name": "Standuri/Coolere laptop",
+      "slug": "standuri-coolere-notebook"
+     },
+     {
+      "name": "Hard disk-uri notebook",
+      "slug": "hard-disk-uri-notebook"
+     }
+    ]
+   },
+   {
+    "name": "Telefoane mobile si accesorii",
+    "slug": "telefoane-mobile-accesorii",
+    "categories": [
+     {
+      "name": "Telefoane mobile",
+      "slug": "telefoane-mobile"
+     },
+     {
+      "name": "Huse telefoane",
+      "slug": "huse-telefoane"
+     },
+     {
+      "name": "Folii protectie telefoane",
+      "slug": "folii-protectie-telefoane"
+     },
+     {
+      "name": "Power bank telefoane",
+      "slug": "power-bank-telefoane"
+     },
+     {
+      "name": "Baterii telefoane",
+      "slug": "baterii-telefoane"
+     },
+     {
+      "name": "Incarcatoare telefoane",
+      "slug": "incarcatoare-telefoane"
+     },
+     {
+      "name": "Casti audio telefoane",
+      "slug": "casti-audio-telefoane"
+     },
+     {
+      "name": "Selfie stick-uri",
+      "slug": "selfie-stick-uri"
+     },
+     {
+      "name": "Cabluri de date telefoane",
+      "slug": "cabluri-date-telefoane"
+     },
+     {
+      "name": "Adaptoare telefoane mobile",
+      "slug": "adaptoare-telefoane-mobile"
+     },
+     {
+      "name": "Suport si docking telefoane",
+      "slug": "suport-docking-telefoane"
+     },
+     {
+      "name": "Carduri memorie",
+      "slug": "carduri-memorie"
+     },
+     {
+      "name": "Card reader",
+      "slug": "card-reader"
+     },
+     {
+      "name": "Alte accesorii telefoane",
+      "slug": "alte-accesorii-telefoane"
+     },
+     {
+      "name": "Memorie externa telefon mobil",
+      "slug": "memorie-externa-telefon-mobil"
+     },
+     {
+      "name": "Cartele Pre-paid",
+      "slug": "cartele-pre-paid"
+     },
+     {
+      "name": "Piese si Componente Telefoane",
+      "slug": "piese-componente-telefoane"
+     },
+     {
+      "name": "Carcase telefoane",
+      "slug": "carcase-telefoane"
+     },
+     {
+      "name": "Benzi flex telefoane",
+      "slug": "benzi-flex-telefoane"
+     },
+     {
+      "name": "Display-uri si touchscreen telefoane",
+      "slug": "display-uri-touchscreen-telefoane"
+     },
+     {
+      "name": "Placi de baza telefoane",
+      "slug": "placi-baza-telefoane"
+     },
+     {
+      "name": "Telefoane cu fir",
+      "slug": "telefoane"
+     },
+     {
+      "name": "Telefoane fara fir",
+      "slug": "telefoane_fara_fir"
+     },
+     {
+      "name": "Sisteme de teleconferinta",
+      "slug": "sisteme-teleconferinta"
+     },
+     {
+      "name": "Centrale Telefonice",
+      "slug": "centrale-telefonice"
+     }
+    ]
+   },
+   {
+    "name": "Accesorii telefoane",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Huse telefoane",
+      "slug": "huse-telefoane"
+     },
+     {
+      "name": "Folii protectie telefoane",
+      "slug": "folii-protectie-telefoane"
+     },
+     {
+      "name": "Incarcatoare telefoane",
+      "slug": "incarcatoare-telefoane"
+     }
+    ]
+   },
+   {
+    "name": "Tablete si accesorii",
+    "slug": "tablete-accesorii",
+    "categories": [
+     {
+      "name": "Tablete",
+      "slug": "tablete"
+     },
+     {
+      "name": "Huse tablete",
+      "slug": "huse-tablete"
+     },
+     {
+      "name": "Suport auto si Docking",
+      "slug": "suport-auto-docking"
+     },
+     {
+      "name": "Folii protectie tablete",
+      "slug": "folii-protectie-tablete"
+     },
+     {
+      "name": "Incarcatoare tablete",
+      "slug": "incarcatoare-tablete"
+     },
+     {
+      "name": "Tastaturi tablete",
+      "slug": "tastaturi-tablete"
+     },
+     {
+      "name": "Cabluri si adaptoare tablete",
+      "slug": "cabluri-adaptoare-tablete"
+     },
+     {
+      "name": "Alte accesorii tablete",
+      "slug": "alte-accesorii-tablete"
+     }
+    ]
+   },
+   {
+    "name": "Wearables & Gadgeturi",
+    "slug": "wearables-gadgeturi",
+    "categories": [
+     {
+      "name": "Smartwatch-uri",
+      "slug": "smartwatch"
+     },
+     {
+      "name": "Bratari fitness",
+      "slug": "bratari-fitness"
+     },
+     {
+      "name": "Casti wireless",
+      "slug": "casti-bluetooth-telefoane"
+     },
+     {
+      "name": "Accesorii Smartwatch",
+      "slug": "accesorii-smartwatch"
+     },
+     {
+      "name": "Accesorii Bratari fitness",
+      "slug": "accesorii-bratari-fitness"
+     },
+     {
+      "name": "Inele Inteligente Smart Rings",
+      "slug": "inele-inteligente-smart-rings"
+     },
+     {
+      "name": "Ochelari VR",
+      "slug": "ochelari-vr"
+     },
+     {
+      "name": "Accesorii ochelari VR",
+      "slug": "accesorii-ochelari-vr"
+     },
+     {
+      "name": "Cantare corporale SMART",
+      "slug": "cantare-corporale-smart"
+     },
+     {
+      "name": "Becuri Smart",
+      "slug": "becuri-smart"
+     },
+     {
+      "name": "Prize Smart",
+      "slug": "prize-smart"
+     },
+     {
+      "name": "Alarme Smart",
+      "slug": "alarme-smart"
+     },
+     {
+      "name": "Kit-uri Smart Home si senzori",
+      "slug": "kit-uri-smart-home-si-senzori"
+     },
+     {
+      "name": "Boxe Portabile",
+      "slug": "boxe-portabile"
+     },
+     {
+      "name": "Alte gadgeturi",
+      "slug": "alte-gadgeturi"
+     },
+     {
+      "name": "Articole imbracaminte SMART",
+      "slug": "articole-imbracaminte-smart"
+     },
+     {
+      "name": "Dispozitive anti-pierdere",
+      "slug": "dispozitive-anti-pierdere"
+     },
+     {
+      "name": "Dispozitive spionaj",
+      "slug": "dispozitive-spionaj"
+     },
+     {
+      "name": "Dispozitive smart monitorizare somn",
+      "slug": "dispozitive-smart-monitorizare-somn"
+     },
+     {
+      "name": "Centrale & Module smart home",
+      "slug": "centrale-module-smart-home"
+     },
+     {
+      "name": "Alarme & accesorii",
+      "slug": "alarme-accesorii"
+     },
+     {
+      "name": "Camere de supraveghere",
+      "slug": "camere-supraveghere"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 23,
+  "slug": "pc-periferice-software",
+  "name": "PC, Periferice & Software",
+  "groups": [
+   {
+    "name": "Desktop PC & Monitoare",
+    "slug": "desktop-pc-monitoare",
+    "categories": [
+     {
+      "name": "Desktop PC",
+      "slug": "desktop-pc"
+     },
+     {
+      "name": "Monitoare",
+      "slug": "monitoare-lcd-led"
+     },
+     {
+      "name": "Accesorii monitoare",
+      "slug": "accesorii-monitoare"
+     }
+    ]
+   },
+   {
+    "name": "Componente PC",
+    "slug": "componente",
+    "categories": [
+     {
+      "name": "Placi video",
+      "slug": "placi_video"
+     },
+     {
+      "name": "Placi de baza",
+      "slug": "placi_baza"
+     },
+     {
+      "name": "Procesoare",
+      "slug": "procesoare"
+     },
+     {
+      "name": "Solid-State Drive (SSD)",
+      "slug": "solid-state_drive_ssd_"
+     },
+     {
+      "name": "Hard Disk-uri",
+      "slug": "hard_disk-uri"
+     },
+     {
+      "name": "Memorii",
+      "slug": "memorii"
+     },
+     {
+      "name": "Carcase",
+      "slug": "carcase"
+     },
+     {
+      "name": "Coolere procesor",
+      "slug": "coolere_procesor"
+     },
+     {
+      "name": "Placi de sunet",
+      "slug": "placi_sunet"
+     },
+     {
+      "name": "Surse PC",
+      "slug": "surse-pc"
+     },
+     {
+      "name": "Accesorii IT",
+      "slug": "accesorii-it"
+     },
+     {
+      "name": "DVD Writer",
+      "slug": "dvd-writer"
+     },
+     {
+      "name": "Blu Ray",
+      "slug": "blu-ray"
+     },
+     {
+      "name": "Tape drive",
+      "slug": "tape_drive"
+     },
+     {
+      "name": "Coolere Hard disk",
+      "slug": "coolere_hard_disk"
+     },
+     {
+      "name": "Ventilatoare PC",
+      "slug": "ventilatoare-pc"
+     },
+     {
+      "name": "Coolere VGA",
+      "slug": "coolere_vga"
+     },
+     {
+      "name": "Rack Hard-disk",
+      "slug": "rack-hard-disk"
+     },
+     {
+      "name": "Paste Termice",
+      "slug": "paste_termice"
+     },
+     {
+      "name": "Fan Controllere",
+      "slug": "fan-controllere"
+     },
+     {
+      "name": "Accesorii cooling",
+      "slug": "accesorii-cooling"
+     }
+    ]
+   },
+   {
+    "name": "Software",
+    "slug": "software",
+    "categories": [
+     {
+      "name": "Sisteme de operare",
+      "slug": "sisteme-operare"
+     },
+     {
+      "name": "Office & Aplicatii desktop",
+      "slug": "office---aplicatii-desktop"
+     },
+     {
+      "name": "Antivirus",
+      "slug": "antivirus"
+     }
+    ]
+   },
+   {
+    "name": "Periferice PC",
+    "slug": "periferice-accesorii",
+    "categories": [
+     {
+      "name": "Mouse",
+      "slug": "mouse"
+     },
+     {
+      "name": "Tastaturi",
+      "slug": "tastaturi"
+     },
+     {
+      "name": "Hard disk-uri externe",
+      "slug": "hard_disk-uri_externe"
+     },
+     {
+      "name": "SSD-uri externe",
+      "slug": "ssd-uri-externe"
+     },
+     {
+      "name": "Boxe PC",
+      "slug": "boxe-pc"
+     },
+     {
+      "name": "Casti PC",
+      "slug": "casti-pc"
+     },
+     {
+      "name": "Microfoane PC",
+      "slug": "microfoane-pc"
+     },
+     {
+      "name": "Tablete grafice",
+      "slug": "tablete-grafice"
+     },
+     {
+      "name": "Memorii USB",
+      "slug": "memorii-usb"
+     },
+     {
+      "name": "Camere Web",
+      "slug": "camere-web"
+     },
+     {
+      "name": "Mousepad",
+      "slug": "mousepad"
+     },
+     {
+      "name": "Accesorii hard disk-uri externe",
+      "slug": "accesorii-hard-disk-uri-externe"
+     },
+     {
+      "name": "Unitati optice externe",
+      "slug": "unitati-optice-externe"
+     },
+     {
+      "name": "Periferice Diverse",
+      "slug": "periferice-diverse"
+     },
+     {
+      "name": "Accesorii Laptop",
+      "slug": "accesorii-laptop"
+     }
+    ]
+   },
+   {
+    "name": "Imprimante, scanere & consumabile",
+    "slug": "imprimante-scanere-consumabile",
+    "categories": [
+     {
+      "name": "Cartuse, tonere si alte consumabile",
+      "slug": "tonere-imprimante-laser"
+     },
+     {
+      "name": "Imprimante si multifunctionale",
+      "slug": "imprimante-multifunctionale"
+     },
+     {
+      "name": "Imprimante termice",
+      "slug": "imprimante_termice"
+     },
+     {
+      "name": "Imprimante matriciale",
+      "slug": "imprimante_matriciale"
+     },
+     {
+      "name": "Imprimante de format mare",
+      "slug": "imprimante-format-mare"
+     },
+     {
+      "name": "Scannere",
+      "slug": "scannere"
+     },
+     {
+      "name": "Cartuse imprimante inkjet",
+      "slug": "cartuse-imprimante-inkjet"
+     },
+     {
+      "name": "Riboane imprimante",
+      "slug": "riboane-imprimante"
+     },
+     {
+      "name": "Benzi etichete",
+      "slug": "benzi-etichete"
+     },
+     {
+      "name": "Accesorii imprimante",
+      "slug": "accesorii-imprimante"
+     },
+     {
+      "name": "Imprimante 3D",
+      "slug": "imprimante-3d"
+     },
+     {
+      "name": "Scannere 3D",
+      "slug": "scannere-3d"
+     },
+     {
+      "name": "Consumabile 3D",
+      "slug": "consumabile-3d"
+     },
+     {
+      "name": "Consumabile si Accesorii 3D",
+      "slug": "accesorii-imprimare-3d"
+     },
+     {
+      "name": "Creioane 3D",
+      "slug": "creioane-3d"
+     },
+     {
+      "name": "Imprimante laser",
+      "slug": "imprimante-laser"
+     },
+     {
+      "name": "Imprimante foto",
+      "slug": "imprimante_foto"
+     }
+    ]
+   },
+   {
+    "name": "Servere, Componente & UPS",
+    "slug": "servere-componente-ups",
+    "categories": [
+     {
+      "name": "UPS-uri",
+      "slug": "ups"
+     },
+     {
+      "name": "Sisteme server",
+      "slug": "sisteme_server"
+     },
+     {
+      "name": "Cabinete metalice",
+      "slug": "cabinete_metalice"
+     },
+     {
+      "name": "PDU",
+      "slug": "pdu"
+     },
+     {
+      "name": "Rack server",
+      "slug": "rack_server"
+     },
+     {
+      "name": "Surse server",
+      "slug": "surse_server"
+     },
+     {
+      "name": "Hard Disk-uri server",
+      "slug": "hard_disk-uri_server"
+     },
+     {
+      "name": "Memorii server",
+      "slug": "memorii_server"
+     },
+     {
+      "name": "Procesoare server",
+      "slug": "procesoare_server"
+     },
+     {
+      "name": "Unitati optice server",
+      "slug": "unitati_optice_server"
+     },
+     {
+      "name": "Carcase server",
+      "slug": "carcase_server"
+     },
+     {
+      "name": "Accesorii server",
+      "slug": "accesorii_server"
+     },
+     {
+      "name": "UPS-uri fara management",
+      "slug": "ups-fara-management"
+     },
+     {
+      "name": "UPS-uri montabile in rack",
+      "slug": "ups-uri_montabile_rack"
+     },
+     {
+      "name": "Stabilizatoare de tensiune",
+      "slug": "stabilizatoare-tensiune"
+     },
+     {
+      "name": "Accesorii UPS-uri",
+      "slug": "accesorii_ups"
+     },
+     {
+      "name": "Accesorii UPS-uri Server",
+      "slug": "accesorii-ups-uri-server"
+     }
+    ]
+   },
+   {
+    "name": "Retelistica & supraveghere",
+    "slug": "retelistica-si-supraveghere",
+    "categories": [
+     {
+      "name": "Routere wireless",
+      "slug": "routere_wireless"
+     },
+     {
+      "name": "Access point-uri",
+      "slug": "puncte_acces"
+     },
+     {
+      "name": "NAS-uri",
+      "slug": "nas"
+     },
+     {
+      "name": "Camere de supraveghere",
+      "slug": "camere-supraveghere"
+     },
+     {
+      "name": "Acces Point-uri",
+      "slug": "acces-point-uri"
+     },
+     {
+      "name": "Adaptoare wireless",
+      "slug": "adaptoare_ethernet"
+     },
+     {
+      "name": "Antene retelistica si accesorii",
+      "slug": "antene-retelistica-accesorii"
+     },
+     {
+      "name": "Accesorii & Componente NAS",
+      "slug": "accesorii-componente-nas"
+     },
+     {
+      "name": "Switch-uri cu management",
+      "slug": "switch_cu_management"
+     },
+     {
+      "name": "Switch-uri fara management",
+      "slug": "switch_fara_management"
+     },
+     {
+      "name": "Switch-uri KVM",
+      "slug": "switch-uri-kvm"
+     },
+     {
+      "name": "Accesorii switch-uri",
+      "slug": "accesorii_switch"
+     },
+     {
+      "name": "Accesorii Switch-uri KVM",
+      "slug": "accesorii-switch-uri-kvm"
+     },
+     {
+      "name": "Hub-uri",
+      "slug": "hub-uri"
+     },
+     {
+      "name": "Adaptoare PowerLAN",
+      "slug": "adaptoare-powerlan"
+     },
+     {
+      "name": "Placi de retea",
+      "slug": "placi_retea"
+     },
+     {
+      "name": "Print Servere",
+      "slug": "print_servere"
+     },
+     {
+      "name": "Media convertoare",
+      "slug": "media_convertoare"
+     },
+     {
+      "name": "Cabluri si accesorii",
+      "slug": "cabluri-accesorii"
+     },
+     {
+      "name": "Echipamente VoIP",
+      "slug": "echipamente_voip"
+     },
+     {
+      "name": "Routere deleted",
+      "slug": "routere"
+     },
+     {
+      "name": "Placi de retea server",
+      "slug": "placi_retea_server"
+     },
+     {
+      "name": "Firewall",
+      "slug": "firewall"
+     },
+     {
+      "name": "Accesorii cabinete metalice",
+      "slug": "accesorii-cabinete-metalice"
+     },
+     {
+      "name": "Accesorii VoIP",
+      "slug": "accesorii_voip"
+     },
+     {
+      "name": "Sisteme DVR & NVR",
+      "slug": "sisteme-dvr---nvr"
+     },
+     {
+      "name": "Kit Supraveghere si Securitate",
+      "slug": "kit-supraveghere-securitate"
+     },
+     {
+      "name": "Accesorii control acces si supraveghere",
+      "slug": "accesorii-control-acces-supraveghere"
+     },
+     {
+      "name": "Centrale si module smart home",
+      "slug": "centrale-module-smart-home"
+     },
+     {
+      "name": "Alarme & accesorii",
+      "slug": "alarme-accesorii"
+     },
+     {
+      "name": "Control acces & accesorii",
+      "slug": "control-acces-accesorii"
+     },
+     {
+      "name": "Montaj echipamente supraveghere",
+      "slug": "montaj-echipamente-supraveghere"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 190,
+  "slug": "tv-audio-video-foto",
+  "name": "TV, Audio-Video & Foto",
+  "groups": [
+   {
+    "name": "Televizoare & accesorii",
+    "slug": "televizoare-accesorii",
+    "categories": [
+     {
+      "name": "Televizoare",
+      "slug": "televizoare"
+     },
+     {
+      "name": "Cabluri si adaptoare",
+      "slug": "cabluri-adaptoare"
+     },
+     {
+      "name": "Suporturi TV",
+      "slug": "suporturi-tv"
+     },
+     {
+      "name": "Telecomenzi",
+      "slug": "telecomenzi"
+     },
+     {
+      "name": "Antene TV si accesorii",
+      "slug": "antene-tv-accesorii"
+     },
+     {
+      "name": "Kituri de curatare",
+      "slug": "kituri-curatare"
+     },
+     {
+      "name": "Accesorii TV",
+      "slug": "accesorii-tv"
+     },
+     {
+      "name": "Prelungitoare si fise priza",
+      "slug": "prelungitoare-priza"
+     },
+     {
+      "name": "Montaj Audio video",
+      "slug": "montaj-audio-video"
+     }
+    ]
+   },
+   {
+    "name": "Accesorii TV",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Suporturi",
+      "slug": "suporturi-tv"
+     }
+    ]
+   },
+   {
+    "name": "Audio HI-FI & Profesionale",
+    "slug": "audio-hi-fi",
+    "categories": [
+     {
+      "name": "Boxe",
+      "slug": "boxe"
+     },
+     {
+      "name": "Sisteme complete",
+      "slug": "sisteme-complete"
+     },
+     {
+      "name": "Playere & Receivere",
+      "slug": "receivere"
+     },
+     {
+      "name": "Amplificatoare",
+      "slug": "amplificatoare"
+     },
+     {
+      "name": "Pick-Up",
+      "slug": "pick-up"
+     },
+     {
+      "name": "Accesorii Audio Hi-Fi",
+      "slug": "accesorii-audio-hi-fi"
+     },
+     {
+      "name": "Boxe profesionale",
+      "slug": "boxe-profesionale"
+     },
+     {
+      "name": "Amplificatoare profesionale",
+      "slug": "amplificatoare-profesionale"
+     },
+     {
+      "name": "Procesoare sunet",
+      "slug": "procesoare-sunet"
+     },
+     {
+      "name": "Mixere audio",
+      "slug": "mixere-audio"
+     },
+     {
+      "name": "Controllere",
+      "slug": "controllere"
+     },
+     {
+      "name": "Echipamente DJ",
+      "slug": "echipamente-dj"
+     },
+     {
+      "name": "Microfoane",
+      "slug": "microfoane"
+     },
+     {
+      "name": "Stative",
+      "slug": "stative"
+     },
+     {
+      "name": "Echipamente de lumini",
+      "slug": "echipamente-de-lumini"
+     },
+     {
+      "name": "Echipamente de fum",
+      "slug": "echipamente-de-fum"
+     },
+     {
+      "name": "Instrumente de percutie",
+      "slug": "instrumente-de-percutie"
+     },
+     {
+      "name": "Megafoane",
+      "slug": "megafoane"
+     },
+     {
+      "name": "Saxofon",
+      "slug": "saxofon"
+     },
+     {
+      "name": "Trompeta",
+      "slug": "trompeta"
+     },
+     {
+      "name": "Tobe acustice",
+      "slug": "tobe-acustice"
+     },
+     {
+      "name": "Vioara electrica",
+      "slug": "vioara-electrica"
+     },
+     {
+      "name": "Naiuri",
+      "slug": "naiuri"
+     },
+     {
+      "name": "Flaut",
+      "slug": "flaut"
+     },
+     {
+      "name": "Goarne",
+      "slug": "goarne"
+     },
+     {
+      "name": "Acordeoane",
+      "slug": "acordeoane"
+     },
+     {
+      "name": "Tobe electronice",
+      "slug": "tobe-electronice"
+     },
+     {
+      "name": "Instrumente cu clape",
+      "slug": "instrumente-cu-clape"
+     },
+     {
+      "name": "Instrumente cu coarde",
+      "slug": "instrumente-coarde"
+     },
+     {
+      "name": "Instrumente de suflat",
+      "slug": "instrumente-de-suflat"
+     },
+     {
+      "name": "Accesorii instrumente muzicale",
+      "slug": "accesorii-instrumente-muzicale"
+     },
+     {
+      "name": "Coarde instrumente muzicale",
+      "slug": "coarde-instrumente-muzicale"
+     },
+     {
+      "name": "Amplificatoare chitara",
+      "slug": "amplificatoare-chitara"
+     },
+     {
+      "name": "Accesorii chitara",
+      "slug": "accesorii-chitara"
+     },
+     {
+      "name": "Accesorii tobe si percutie",
+      "slug": "accesorii-tobe-percutie"
+     },
+     {
+      "name": "Accesorii orga",
+      "slug": "accesorii-orga"
+     },
+     {
+      "name": "Electronice instrumente muzicale",
+      "slug": "electronice-instrumente-muzicale"
+     },
+     {
+      "name": "Accesorii vioara-viola",
+      "slug": "accesorii-vioara-viola"
+     },
+     {
+      "name": "Instrumente de suflat si accesorii",
+      "slug": "instrumente-suflat-accesorii"
+     },
+     {
+      "name": "Accesorii acordeoane",
+      "slug": "accesorii-acordeoane"
+     }
+    ]
+   },
+   {
+    "name": "Home Cinema & Audio",
+    "slug": "home-cinema-blu-ray",
+    "categories": [
+     {
+      "name": "Soundbar",
+      "slug": "soundbar"
+     },
+     {
+      "name": "Sisteme audio",
+      "slug": "sisteme-audio"
+     },
+     {
+      "name": "Smart audio",
+      "slug": "smart-audio"
+     },
+     {
+      "name": "Sisteme Home Cinema",
+      "slug": "sisteme-home-cinema"
+     },
+     {
+      "name": "DVD & Blu-Ray Playere",
+      "slug": "dvd-blu-ray-playere"
+     },
+     {
+      "name": "Mediaplayere",
+      "slug": "mediaplayere"
+     },
+     {
+      "name": "Montaj Audio video",
+      "slug": "montaj-audio-video"
+     }
+    ]
+   },
+   {
+    "name": "Portabile audio",
+    "slug": "ipod-mp3-mp4-casti-audio",
+    "categories": [
+     {
+      "name": "Boxe portabile",
+      "slug": "boxe-portabile"
+     },
+     {
+      "name": "Casti Wireless",
+      "slug": "casti-bluetooth-telefoane"
+     },
+     {
+      "name": "Casti cu fir",
+      "slug": "casti-audio"
+     },
+     {
+      "name": "Amplificatoare casti",
+      "slug": "amplificatoare-casti"
+     },
+     {
+      "name": "MP3 si MP4 Playere",
+      "slug": "mp3-mp4-playere"
+     },
+     {
+      "name": "iPod",
+      "slug": "ipod"
+     },
+     {
+      "name": "Radio cu ceas & portabile",
+      "slug": "radio-ceas-portabile"
+     },
+     {
+      "name": "Accesorii playere si casti",
+      "slug": "accesorii-playere-casti"
+     },
+     {
+      "name": "Reportofoane",
+      "slug": "reportofoane"
+     }
+    ]
+   },
+   {
+    "name": "Aparate foto & accesorii",
+    "slug": "aparate-foto-accesorii",
+    "categories": [
+     {
+      "name": "Aparate foto Mirrorless",
+      "slug": "aparate-foto-mirrorless"
+     },
+     {
+      "name": "Aparate foto D-SLR",
+      "slug": "aparate_foto_d-slr"
+     },
+     {
+      "name": "Aparate foto Compacte",
+      "slug": "aparate-foto-compacte"
+     },
+     {
+      "name": "Aparate foto instant",
+      "slug": "aparate-foto-instant"
+     },
+     {
+      "name": "Obiective",
+      "slug": "obiective"
+     },
+     {
+      "name": "Stabilizatoare de imagine",
+      "slug": "stabilizatoare-de-imagine"
+     },
+     {
+      "name": "Trepiede",
+      "slug": "trepiede"
+     },
+     {
+      "name": "Blitzuri",
+      "slug": "blitzuri"
+     },
+     {
+      "name": "Genti / Rucsacuri / Huse",
+      "slug": "genti-huse-foto-video"
+     },
+     {
+      "name": "Acumulatori si incarcatoare dedicate",
+      "slug": "acumulatori-incarcatoare-dedicate"
+     },
+     {
+      "name": "Baterii, acumulatori si incarcatoare",
+      "slug": "baterii--acumulatori-incarcatoare"
+     },
+     {
+      "name": "Filtre DSLR",
+      "slug": "filtre-dslr"
+     },
+     {
+      "name": "Rame foto digitale",
+      "slug": "rame-foto-digitale"
+     },
+     {
+      "name": "Carduri memorie",
+      "slug": "carduri-memorie"
+     },
+     {
+      "name": "Card reader",
+      "slug": "card-reader"
+     },
+     {
+      "name": "Alte accesorii foto & video",
+      "slug": "alte-accesorii-foto"
+     },
+     {
+      "name": "Drone",
+      "slug": "drone"
+     },
+     {
+      "name": "Accesorii drone",
+      "slug": "accesorii-drone"
+     }
+    ]
+   },
+   {
+    "name": "Accesorii foto",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Obiective",
+      "slug": "obiective"
+     },
+     {
+      "name": "Stabilizatoare de imagine",
+      "slug": "stabilizatoare-de-imagine"
+     },
+     {
+      "name": "Trepiede",
+      "slug": "trepiede"
+     },
+     {
+      "name": "Baterii, acumulatori si incarcatoare",
+      "slug": "baterii--acumulatori-incarcatoare"
+     }
+    ]
+   },
+   {
+    "name": "Foto-video",
+    "slug": null,
+    "categories": [
+     {
+      "name": "MP3 si MP4 playere",
+      "slug": "mp3-mp4-playere"
+     },
+     {
+      "name": "Genti foto",
+      "slug": "genti---rucsacuri---huse"
+     },
+     {
+      "name": "Rame foto digitale",
+      "slug": "rame-foto-digitale"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 267,
+  "slug": "electrocasnice-climatizare",
+  "name": "Electrocasnice & Climatizare",
+  "groups": [
+   {
+    "name": "Electrocasnice & Climatizare",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Combine frigorifice",
+      "slug": "combine-frigorifice"
+     },
+     {
+      "name": "Frigidere",
+      "slug": "frigidere"
+     },
+     {
+      "name": "Side by side",
+      "slug": "side-by-side"
+     },
+     {
+      "name": "Lazi frigorifice",
+      "slug": "lazi-frigorifice"
+     }
+    ]
+   },
+   {
+    "name": "Masini de spalat rufe",
+    "slug": "masini-spalat-rufe",
+    "categories": [
+     {
+      "name": "Uscatoare de rufe",
+      "slug": "uscatoare-rufe"
+     },
+     {
+      "name": "Masini de spalat rufe",
+      "slug": "masini-spalat-rufe"
+     },
+     {
+      "name": "Accesorii si piese masini spalat rufe si uscatoare",
+      "slug": "accesorii-piese-masini-spalat-rufe-uscatoare"
+     },
+     {
+      "name": "Montaj electrocasnice mari",
+      "slug": "montaj-electrocasnice-mari"
+     }
+    ]
+   },
+   {
+    "name": "Incorporabile",
+    "slug": "incorporabile",
+    "categories": [
+     {
+      "name": "Cuptoare incorporabile",
+      "slug": "cuptoare-incorporabile"
+     },
+     {
+      "name": "Plite",
+      "slug": "plite-electrice"
+     },
+     {
+      "name": "Accesorii si piese plite",
+      "slug": "accesorii-piese-plite"
+     },
+     {
+      "name": "Accesorii si piese cuptoare",
+      "slug": "accesorii-piese-cuptoare"
+     },
+     {
+      "name": "Montaj electrocasnice mari",
+      "slug": "montaj-electrocasnice-mari"
+     },
+     {
+      "name": "Hote incorporabile",
+      "slug": "hote"
+     },
+     {
+      "name": "Espressoare",
+      "slug": "espressoare"
+     },
+     {
+      "name": "Cuptoare cu microunde",
+      "slug": "cuptoare-microunde"
+     },
+     {
+      "name": "Masini de spalat vase",
+      "slug": "masini-spalat-vase"
+     },
+     {
+      "name": "Masini de spalat rufe",
+      "slug": "accesorii-piese-masini-spalat-rufe-uscatoare"
+     }
+    ]
+   },
+   {
+    "name": "Aragazuri, hote si cuptoare",
+    "slug": "aragazuri-cuptoare-microunde",
+    "categories": [
+     {
+      "name": "Aragazuri",
+      "slug": "aragazuri"
+     },
+     {
+      "name": "Cuptoare cu microunde",
+      "slug": "cuptoare-microunde"
+     },
+     {
+      "name": "Accesorii si piese aragazuri",
+      "slug": "accesorii-piese-aragazuri"
+     },
+     {
+      "name": "Cuptoare incorporabile",
+      "slug": "cuptoare-incorporabile"
+     },
+     {
+      "name": "Accesorii si piese cuptoare cu microunde",
+      "slug": "accesorii-piese-cuptoare-microunde"
+     },
+     {
+      "name": "Hote",
+      "slug": "hote"
+     },
+     {
+      "name": "Accesorii si piese hote",
+      "slug": "accesorii-piese-hote"
+     },
+     {
+      "name": "Montaj electrocasnice mari",
+      "slug": "montaj-electrocasnice-mari"
+     }
+    ]
+   },
+   {
+    "name": "Electrocasnice bucatarie",
+    "slug": "electrocasnice-bucatarie",
+    "categories": [
+     {
+      "name": "Blendere si tocatoare",
+      "slug": "blendere----tocatoare"
+     },
+     {
+      "name": "Roboti de bucatarie",
+      "slug": "roboti-bucatarie"
+     },
+     {
+      "name": "Mixere",
+      "slug": "mixere"
+     },
+     {
+      "name": "Masini de tocat",
+      "slug": "masini-tocat"
+     },
+     {
+      "name": "Feliatoare",
+      "slug": "feliatoare"
+     },
+     {
+      "name": "Accesorii electrocasnice mici",
+      "slug": "accesorii-piese-electrocasnice-bucatarie"
+     },
+     {
+      "name": "Storcatoare",
+      "slug": "storcatoare"
+     },
+     {
+      "name": "Fierbatoare",
+      "slug": "fierbatoare"
+     },
+     {
+      "name": "Masini de paine",
+      "slug": "masini-paine"
+     },
+     {
+      "name": "Prajitoare de paine",
+      "slug": "prajitoare"
+     },
+     {
+      "name": "Sandwich-maker",
+      "slug": "sandwich-maker"
+     },
+     {
+      "name": "Friteuze",
+      "slug": "friteuze"
+     },
+     {
+      "name": "Multicooker",
+      "slug": "multicooker"
+     },
+     {
+      "name": "Gratare electrice",
+      "slug": "gratare-electrice"
+     },
+     {
+      "name": "Aparate de gatit cu aburi & Deshidratoare",
+      "slug": "aparate-gatit-aburi-deshidratoare"
+     },
+     {
+      "name": "Cuptoare electrice",
+      "slug": "cuptoare-electrice"
+     },
+     {
+      "name": "Aparate de preparat desert",
+      "slug": "aparate-preparat-desert"
+     },
+     {
+      "name": "Cantare de bucatarie",
+      "slug": "cantare-bucatarie"
+     },
+     {
+      "name": "Aparate de vidat",
+      "slug": "aparate-vidat"
+     }
+    ]
+   },
+   {
+    "name": "Aspiratoare & fiare de calcat",
+    "slug": "aspiratoare-fiare-de-calcat",
+    "categories": [
+     {
+      "name": "Aspiratoare",
+      "slug": "aspiratoare"
+     },
+     {
+      "name": "Fiare si statii de calcat cu abur",
+      "slug": "fiare-statii-aparate-calcat-abur"
+     },
+     {
+      "name": "Accesorii si piese aspiratoare",
+      "slug": "accesorii-piese-aspiratoare"
+     },
+     {
+      "name": "Aparate de curatat cu abur si mopuri electrice",
+      "slug": "aparate-de-curatat-cu-aburi-mopuri-electrice"
+     },
+     {
+      "name": "Accesorii fiare, statii si prese de calcat",
+      "slug": "accesorii-fiare-statii-prese-calcat"
+     },
+     {
+      "name": "Masini de cusut",
+      "slug": "masini-cusut"
+     },
+     {
+      "name": "Accesorii si piese masini de cusut",
+      "slug": "accesorii-piese-masini-cusut"
+     },
+     {
+      "name": "Produse Mercerie",
+      "slug": "produse-mercerie"
+     }
+    ]
+   },
+   {
+    "name": "Aparate de aer conditionat",
+    "slug": "aparate_aer_conditionat",
+    "categories": [
+     {
+      "name": "Ventilatoare si racitoare de aer",
+      "slug": "ventilatoare-racitoare-aer"
+     },
+     {
+      "name": "Montare aer conditionat",
+      "slug": "instalari-aer-conditionat"
+     }
+    ]
+   },
+   {
+    "name": "Climatizare",
+    "slug": "climatizare-sisteme-incalzire",
+    "categories": [
+     {
+      "name": "Aeroterme",
+      "slug": "aeroterme"
+     },
+     {
+      "name": "Calorifere Electrice",
+      "slug": "calorifere-electrice"
+     },
+     {
+      "name": "Aparate de aer conditionat",
+      "slug": "aparate_aer_conditionat"
+     },
+     {
+      "name": "Ventilatoare si racitoare aer",
+      "slug": "ventilatoare-racitoare-aer"
+     },
+     {
+      "name": "Convectoare electrice",
+      "slug": "convectoare-electrice"
+     },
+     {
+      "name": "Panouri radiante",
+      "slug": "panouri-radiante"
+     },
+     {
+      "name": "Incalzitoare cu halogen si quartz",
+      "slug": "incalzitoare-halogen-quartz"
+     },
+     {
+      "name": "Seminee electrice",
+      "slug": "seminee-electrice"
+     },
+     {
+      "name": "Dezumidificatoare",
+      "slug": "dezumidificatoare"
+     },
+     {
+      "name": "Umidificatoare",
+      "slug": "umidificatoare"
+     },
+     {
+      "name": "Purificatoare",
+      "slug": "purificatoare"
+     },
+     {
+      "name": "Generatoare ozon",
+      "slug": "generatoare-ozon"
+     },
+     {
+      "name": "Accesorii aparate climatizare",
+      "slug": "accesorii-aparate-climatizare"
+     },
+     {
+      "name": "Instalari Aer Conditionat",
+      "slug": "instalari-aer-conditionat"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 463,
+  "slug": "gaming-carti-birotica",
+  "name": "Gaming, Carti & Birotica",
+  "groups": [
+   {
+    "name": "Accesorii Gaming",
+    "slug": "gamepad-joystick-uri-casti-gaming",
+    "categories": [
+     {
+      "name": "Ochelari VR gaming",
+      "slug": "ochelari-vr-gaming"
+     },
+     {
+      "name": "Gamepad / Controller",
+      "slug": "controlere-volane-casti-gaming"
+     },
+     {
+      "name": "Scaune Gaming",
+      "slug": "scaune-gaming"
+     }
+    ]
+   },
+   {
+    "name": "Librarie online",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Fictiune",
+      "slug": "fictiune"
+     },
+     {
+      "name": "Dezvoltare personala",
+      "slug": "dezvoltare-personala"
+     },
+     {
+      "name": "Biografii, memorii si jurnale",
+      "slug": "biografii-memorii-jurnale"
+     },
+     {
+      "name": "Administrarea afacerilor",
+      "slug": "administrarea-afacerilor"
+     },
+     {
+      "name": "Management",
+      "slug": "management"
+     },
+     {
+      "name": "Istorie",
+      "slug": "istorie"
+     },
+     {
+      "name": "Psihologie",
+      "slug": "psihologie"
+     },
+     {
+      "name": "Cresterea copilului",
+      "slug": "sarcina-cresterea-copilului"
+     },
+     {
+      "name": "Benzi desenate",
+      "slug": "benzi-desenate"
+     }
+    ]
+   },
+   {
+    "name": "Carti pentru copii",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Activitati extracuriculare",
+      "slug": "activitati-extracurriculare"
+     },
+     {
+      "name": "Fictiune pentru copii",
+      "slug": "fictiune-copii"
+     },
+     {
+      "name": "Povesti pentru copii",
+      "slug": "povesti-copii"
+     }
+    ]
+   },
+   {
+    "name": "Birotica si papetarie",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Distrugatoare",
+      "slug": "distrugatoare-documente-accesorii"
+     },
+     {
+      "name": "Laminatoare",
+      "slug": "laminatoare"
+     },
+     {
+      "name": "Table de conferinta",
+      "slug": "table-conferinta"
+     },
+     {
+      "name": "Flipcharturi si rezerve",
+      "slug": "flipcharturi-rezerve"
+     },
+     {
+      "name": "Instrumente de scris premium",
+      "slug": "instrumente-scris-premium"
+     },
+     {
+      "name": "Hartie copiator",
+      "slug": "hartie-copiator"
+     }
+    ]
+   },
+   {
+    "name": "Rechizite pentru copii",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Ghiozdane, genti",
+      "slug": "ghiozdane-genti"
+     },
+     {
+      "name": "Penare",
+      "slug": "penare"
+     },
+     {
+      "name": "Caiete",
+      "slug": "caiete"
+     },
+     {
+      "name": "Creioane si carioci",
+      "slug": "creioane-colorate-si-carioci"
+     },
+     {
+      "name": "Markere",
+      "slug": "markere"
+     },
+     {
+      "name": "Acuarele si pensule",
+      "slug": "acuarele-pensule-si-blocuri-de-desen"
+     }
+    ]
+   },
+   {
+    "name": "Jocuri video",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Jocuri consola & PC",
+      "slug": "jocuri-consola-pc"
+     }
+    ]
+   },
+   {
+    "name": "Rechizite si birotica",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Instrumente de scris si desen",
+      "slug": "instrumente-scris-desen"
+     },
+     {
+      "name": "Dosare si clasoare",
+      "slug": "dosare"
+     },
+     {
+      "name": "Felicitari",
+      "slug": "felicitari"
+     },
+     {
+      "name": "Ambalaje cadouri",
+      "slug": "ambalaje-cadouri"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 1308,
+  "slug": "alimente-bauturi",
+  "name": "Bacanie",
+  "groups": [
+   {
+    "name": "Bacanie",
+    "slug": "bacanie",
+    "categories": [
+     {
+      "name": "Alimente de baza",
+      "slug": "alimente-de-baza"
+     },
+     {
+      "name": "Paste fainoase",
+      "slug": "paste-fainoase"
+     },
+     {
+      "name": "Ketchup & sosuri",
+      "slug": "ketchup-sosuri"
+     },
+     {
+      "name": "Cereale",
+      "slug": "cereale"
+     },
+     {
+      "name": "Dulceata, Miere & Crema tartinabila",
+      "slug": "dulceata-compot"
+     },
+     {
+      "name": "Dulciuri",
+      "slug": "dulciuri-1"
+     },
+     {
+      "name": "Chipsuri & Snacksuri",
+      "slug": "chipsuri-snacksuri"
+     },
+     {
+      "name": "Produse Gourmet & dietetice",
+      "slug": "produse-gourmet"
+     },
+     {
+      "name": "Lapte praf Bebelusi",
+      "slug": "lapte-praf-bebelusi"
+     },
+     {
+      "name": "Conserve - Produse Instant",
+      "slug": "conserve-produse-instant"
+     },
+     {
+      "name": "Condimente & Mixuri",
+      "slug": "condimente-mixuri"
+     },
+     {
+      "name": "Produse dietetice si naturiste",
+      "slug": "produse-dietetice-naturiste"
+     },
+     {
+      "name": "Cafea",
+      "slug": "cafea"
+     },
+     {
+      "name": "Ceaiuri",
+      "slug": "ceaiuri"
+     },
+     {
+      "name": "Pachete si cosuri cadou",
+      "slug": "pachete-cosuri-cadou"
+     },
+     {
+      "name": "Vopsea oua",
+      "slug": "vopsea-oua"
+     }
+    ]
+   },
+   {
+    "name": "Bauturi alcoolice",
+    "slug": "bauturi-alcoolice",
+    "categories": [
+     {
+      "name": "Vinuri",
+      "slug": "vinuri"
+     },
+     {
+      "name": "Sampanie & Vin spumant",
+      "slug": "sampanie-vin-spumant"
+     },
+     {
+      "name": "Whisky",
+      "slug": "whisky"
+     },
+     {
+      "name": "Vodca",
+      "slug": "vodca"
+     },
+     {
+      "name": "Cognac & Armagnac",
+      "slug": "cognac-armaniac"
+     },
+     {
+      "name": "Gin",
+      "slug": "gin"
+     },
+     {
+      "name": "Rom",
+      "slug": "rom"
+     },
+     {
+      "name": "Lichior",
+      "slug": "lichior"
+     },
+     {
+      "name": "Aperitive",
+      "slug": "aperitive"
+     },
+     {
+      "name": "Tequila",
+      "slug": "tequila"
+     },
+     {
+      "name": "Bauturi Traditionale",
+      "slug": "traditionale"
+     },
+     {
+      "name": "Bere si Cidru",
+      "slug": "beri"
+     },
+     {
+      "name": "Alte bauturi alcoolice",
+      "slug": "alte-bauturi"
+     }
+    ]
+   },
+   {
+    "name": "Bauturi Non-Alcoolice",
+    "slug": "bauturi-non-alcoolice",
+    "categories": [
+     {
+      "name": "Bauturi energizante",
+      "slug": "bauturi-energizante"
+     },
+     {
+      "name": "Bauturi carbogazoase",
+      "slug": "bauturi-carbogazoase"
+     },
+     {
+      "name": "Bauturi necarbogazoase",
+      "slug": "bauturi-necarbogazoase"
+     },
+     {
+      "name": "Siropuri",
+      "slug": "sirop"
+     },
+     {
+      "name": "Apa minerala",
+      "slug": "apa-minerala"
+     }
+    ]
+   },
+   {
+    "name": "Cosmetice",
+    "slug": "cosmetice",
+    "categories": [
+     {
+      "name": "Geluri dus",
+      "slug": "geluri-dus"
+     },
+     {
+      "name": "Sampon",
+      "slug": "sampon-par"
+     },
+     {
+      "name": "Deodorante & Antiperspirante",
+      "slug": "deodorante-antiperspirante"
+     },
+     {
+      "name": "Lotiuni & Creme corp",
+      "slug": "lotiuni-creme-corp"
+     },
+     {
+      "name": "Creme fata",
+      "slug": "creme-fata"
+     },
+     {
+      "name": "Parfumuri & Seturi",
+      "slug": "parfumuri-seturi-cadou"
+     },
+     {
+      "name": "Ingrijire Manichiura & Pedichiura",
+      "slug": "unghiere-clesti-manichiura-pedichiura"
+     },
+     {
+      "name": "Sapunuri",
+      "slug": "sapunuri"
+     }
+    ]
+   },
+   {
+    "name": "Ingrijire personala",
+    "slug": "ingrijire-personala",
+    "categories": [
+     {
+      "name": "Periute de dinti",
+      "slug": "periute-dinti-clasice"
+     },
+     {
+      "name": "Pasta de dinti",
+      "slug": "pasta-de-dinti"
+     },
+     {
+      "name": "Unghiere si clesti manichiura & pedichiura",
+      "slug": "unghiere-clesti-manichiura-pedichiura"
+     },
+     {
+      "name": "Foarfece manichiura si pedichiura",
+      "slug": "foarfece-manichiura-pedichiura"
+     }
+    ]
+   },
+   {
+    "name": "Spalare & Intretinere rufe",
+    "slug": "spalare-intretinere-rufe",
+    "categories": [
+     {
+      "name": "Detergent rufe",
+      "slug": "detergenti-rufe"
+     },
+     {
+      "name": "Balsam rufe",
+      "slug": "balsam-de-rufe"
+     },
+     {
+      "name": "Inalbitor rufe & Apret",
+      "slug": "inalbitor-rufe-apret"
+     },
+     {
+      "name": "Solutii intretinere textile",
+      "slug": "solutii-intretinere-textile"
+     },
+     {
+      "name": "Solutii anticalcar",
+      "slug": "solutii-anticalcar"
+     }
+    ]
+   },
+   {
+    "name": "Curatenie & Intretinere casa",
+    "slug": "curatenie-intretinere",
+    "categories": [
+     {
+      "name": "Detergent vase",
+      "slug": "bucatarie-vase"
+     },
+     {
+      "name": "Detergenti universali",
+      "slug": "detergent-universal"
+     },
+     {
+      "name": "Hartie igienica",
+      "slug": "hartie-igienica-toaleta"
+     },
+     {
+      "name": "Detergent rufe",
+      "slug": "detergenti-rufe"
+     },
+     {
+      "name": "Balsam de rufe",
+      "slug": "balsam-de-rufe"
+     },
+     {
+      "name": "Solutii anticalcar",
+      "slug": "solutii-anticalcar"
+     },
+     {
+      "name": "Solutii curatat pete",
+      "slug": "solutii-curatat-pete"
+     },
+     {
+      "name": "Solutii intretinere textile",
+      "slug": "solutii-intretinere-textile"
+     },
+     {
+      "name": "Inalbitor rufe si apret",
+      "slug": "inalbitor-rufe-apret"
+     },
+     {
+      "name": "Dezinfectant toaleta",
+      "slug": "dezinfectant-toaleta"
+     },
+     {
+      "name": "Detartrant toaleta",
+      "slug": "detartrant-toaleta"
+     },
+     {
+      "name": "Solutii suprafete baie",
+      "slug": "solutii-suprafete-baie"
+     },
+     {
+      "name": "Odorizant toaleta",
+      "slug": "odorizant-toaleta"
+     },
+     {
+      "name": "Absorbant umiditate",
+      "slug": "absorbant-umiditate"
+     },
+     {
+      "name": "Solutii desfundat tevi",
+      "slug": "solutii-desfundat-tevi"
+     },
+     {
+      "name": "Perii wc",
+      "slug": "perii-wc"
+     },
+     {
+      "name": "Solutii suprafete bucatarie",
+      "slug": "solutie-suprafete-bucatarie"
+     },
+     {
+      "name": "Saci menajeri",
+      "slug": "saci-menajeri1"
+     },
+     {
+      "name": "Bureti vase si lavete",
+      "slug": "bureti-lavete"
+     },
+     {
+      "name": "Folii si pungi alimentare",
+      "slug": "folii-pungi-alimentare1"
+     },
+     {
+      "name": "Prosoape de hartie si servetele",
+      "slug": "prosoape-hartie-si-servetele"
+     },
+     {
+      "name": "Vesela unica folosinta",
+      "slug": "vesela-unica-folosinta"
+     },
+     {
+      "name": "Solutii dezinfectante",
+      "slug": "solutii-dezinfectante"
+     },
+     {
+      "name": "Servetele umede antibacteriene suprafete",
+      "slug": "servetele-umede-antibacteriene-suprafete"
+     },
+     {
+      "name": "Solutie curatat mobila",
+      "slug": "solutie-curatat-mobila"
+     },
+     {
+      "name": "Solutie curatat podele",
+      "slug": "solutie-curatat-podele"
+     },
+     {
+      "name": "Solutie curatat geamuri",
+      "slug": "solutie-curatat-geamuri"
+     },
+     {
+      "name": "Solutie curatat covoare",
+      "slug": "solutie-curatat-covoare"
+     },
+     {
+      "name": "Insecticide si repelente",
+      "slug": "insecticide-repelente"
+     },
+     {
+      "name": "Produse ingrijire incaltaminte si accesorii",
+      "slug": "produse-ingrijire-incaltaminte-accesorii"
+     },
+     {
+      "name": "Odorizant camera",
+      "slug": "odorizante-camera"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 1696,
+  "slug": "fashion",
+  "name": "Fashion",
+  "groups": [
+   {
+    "name": "Imbracaminte femei",
+    "slug": "imbracaminte-femei",
+    "categories": [
+     {
+      "name": "Hanorace",
+      "slug": "hanorace-dama"
+     },
+     {
+      "name": "Tricouri",
+      "slug": "tricouri-dama"
+     },
+     {
+      "name": "Blugi",
+      "slug": "blugi-dama"
+     },
+     {
+      "name": "Pantaloni",
+      "slug": "pantaloni-dama"
+     },
+     {
+      "name": "Rochii",
+      "slug": "rochii"
+     },
+     {
+      "name": "Bluze dama",
+      "slug": "bluze-dama"
+     },
+     {
+      "name": "Camasi dama",
+      "slug": "camasi-dama"
+     },
+     {
+      "name": "Fuste",
+      "slug": "fuste"
+     },
+     {
+      "name": "Treninguri lifestyle",
+      "slug": "treninguri-lifestyle-dama"
+     },
+     {
+      "name": "Salopete dama",
+      "slug": "salopete-dama"
+     },
+     {
+      "name": "Costume si compleuri dama",
+      "slug": "costume-compleuri-dama"
+     },
+     {
+      "name": "Costume Populare dama",
+      "slug": "costume-populare-dama"
+     },
+     {
+      "name": "Sacouri dama",
+      "slug": "sacouri-dama"
+     },
+     {
+      "name": "Pulovere dama",
+      "slug": "pulovere-dama"
+     },
+     {
+      "name": "Geci dama",
+      "slug": "geci-dama"
+     },
+     {
+      "name": "Paltoane dama",
+      "slug": "paltoane-dama"
+     },
+     {
+      "name": "Rochii de mireasa",
+      "slug": "rochii-mireasa"
+     },
+     {
+      "name": "Pijamale dama",
+      "slug": "pijamale-dama"
+     },
+     {
+      "name": "Lenjerie intima dama",
+      "slug": "lenjerie-intima-dama"
+     },
+     {
+      "name": "Lenjerie sexy",
+      "slug": "lenjerie-sexy"
+     },
+     {
+      "name": "Sutiene",
+      "slug": "sutiene"
+     },
+     {
+      "name": "Dresuri dama",
+      "slug": "dresuri-dama"
+     },
+     {
+      "name": "Colanti",
+      "slug": "colanti"
+     },
+     {
+      "name": "Lenjerie modelatoare",
+      "slug": "lenjerie-modelatoare"
+     },
+     {
+      "name": "Sosete dama",
+      "slug": "sosete-dama"
+     },
+     {
+      "name": "Halate dama",
+      "slug": "halate-dama"
+     },
+     {
+      "name": "Corsete si portjartiere",
+      "slug": "corsete-portjartiere"
+     },
+     {
+      "name": "Maiouri si Body-uri",
+      "slug": "maiouri-body-uri"
+     },
+     {
+      "name": "Costume de baie dama",
+      "slug": "costume-baie-dama"
+     },
+     {
+      "name": "Imbracaminte plaja",
+      "slug": "imbracaminte-plaja"
+     },
+     {
+      "name": "Accesorii plaja",
+      "slug": "accesorii-plaja"
+     },
+     {
+      "name": "Voaluri mireasa",
+      "slug": "voaluri-mireasa"
+     },
+     {
+      "name": "Veste dama",
+      "slug": "veste-dama"
+     },
+     {
+      "name": "Tenisi dama",
+      "slug": "tenisi-dama"
+     },
+     {
+      "name": "Pantofi sport dama",
+      "slug": "pantofi-sport-dama"
+     },
+     {
+      "name": "Sandale dama",
+      "slug": "sandale-dama"
+     },
+     {
+      "name": "Slapi si papuci",
+      "slug": "slapi-papuci-saboti-dama"
+     },
+     {
+      "name": "Ceasuri dama",
+      "slug": "ceasuri-dama"
+     },
+     {
+      "name": "Bijuterii dama",
+      "slug": "bijuterii-dama"
+     },
+     {
+      "name": "Genti dama",
+      "slug": "genti-dama"
+     }
+    ]
+   },
+   {
+    "name": "Incaltaminte femei",
+    "slug": "incaltaminte-femei",
+    "categories": [
+     {
+      "name": "Sandale",
+      "slug": "sandale-dama"
+     },
+     {
+      "name": "Tenisi",
+      "slug": "tenisi-dama"
+     },
+     {
+      "name": "Pantofi sport",
+      "slug": "pantofi-sport-dama"
+     },
+     {
+      "name": "Pantofi dama",
+      "slug": "pantofi-dama"
+     },
+     {
+      "name": "Slapi, papuci, saboti dama",
+      "slug": "slapi-papuci-saboti-dama"
+     },
+     {
+      "name": "Balerini",
+      "slug": "balerini"
+     },
+     {
+      "name": "Mocasini dama",
+      "slug": "mocasini-dama"
+     },
+     {
+      "name": "Botine dama",
+      "slug": "botine-dama"
+     },
+     {
+      "name": "Ghete dama",
+      "slug": "ghete-dama"
+     },
+     {
+      "name": "Cizme dama",
+      "slug": "cizme-dama"
+     },
+     {
+      "name": "Produse ingrijire incaltaminte",
+      "slug": "produse-ingrijire-incaltaminte-accesorii"
+     },
+     {
+      "name": "Espadrile Dama",
+      "slug": "espadrile-dama"
+     },
+     {
+      "name": "Tricouri dama",
+      "slug": "tricouri-dama"
+     },
+     {
+      "name": "Rochii dama",
+      "slug": "rochii"
+     },
+     {
+      "name": "Bluze dama",
+      "slug": "bluze-dama"
+     },
+     {
+      "name": "Pantaloni dama",
+      "slug": "pantaloni-dama"
+     },
+     {
+      "name": "Ceasuri dama",
+      "slug": "ceasuri-dama"
+     },
+     {
+      "name": "Bijuterii dama",
+      "slug": "bijuterii-dama"
+     },
+     {
+      "name": "Genti dama",
+      "slug": "genti-dama"
+     },
+     {
+      "name": "Rucsacuri dama",
+      "slug": "rucsacuri-fashion-dama"
+     }
+    ]
+   },
+   {
+    "name": "Genti si accesorii femei",
+    "slug": "genti-accesorii-femei",
+    "categories": [
+     {
+      "name": "Genti",
+      "slug": "genti-dama"
+     },
+     {
+      "name": "Bijuterii",
+      "slug": "bijuterii-dama"
+     },
+     {
+      "name": "Rucsacuri dama",
+      "slug": "rucsacuri-fashion-dama"
+     },
+     {
+      "name": "Bijuterii pietre pretioase",
+      "slug": "bijuterii-pietre-pretioase"
+     },
+     {
+      "name": "Cutii bijuterii",
+      "slug": "cutii-bijuterii"
+     },
+     {
+      "name": "Ochelari de soare dama",
+      "slug": "ochelari-soare-dama"
+     },
+     {
+      "name": "Portofele dama",
+      "slug": "portofele-dama"
+     },
+     {
+      "name": "Curele dama",
+      "slug": "curele-dama"
+     },
+     {
+      "name": "Esarfe dama",
+      "slug": "esarfe-fulare-dama"
+     },
+     {
+      "name": "Manusi dama",
+      "slug": "manusi-dama"
+     },
+     {
+      "name": "Caciuli si palarii dama",
+      "slug": "caciuli-palarii-dama"
+     },
+     {
+      "name": "Umbrele femei",
+      "slug": "umbrele-femei"
+     },
+     {
+      "name": "Brelocuri",
+      "slug": "brelocuri"
+     },
+     {
+      "name": "Accesorii par",
+      "slug": "accesorii-par"
+     },
+     {
+      "name": "Bretele femei",
+      "slug": "bretele-femei"
+     },
+     {
+      "name": "Tricouri dama",
+      "slug": "tricouri-dama"
+     },
+     {
+      "name": "Pantaloni dama",
+      "slug": "pantaloni-dama"
+     },
+     {
+      "name": "Blugi dama",
+      "slug": "blugi-dama"
+     },
+     {
+      "name": "Rochii dama",
+      "slug": "rochii"
+     },
+     {
+      "name": "Fuste dama",
+      "slug": "fuste"
+     },
+     {
+      "name": "Costume de baie dama",
+      "slug": "costume-baie-dama"
+     },
+     {
+      "name": "Tenisi dama",
+      "slug": "tenisi-dama"
+     },
+     {
+      "name": "Sandale dama",
+      "slug": "sandale-dama"
+     },
+     {
+      "name": "Pantofi sport dama",
+      "slug": "pantofi-sport-dama"
+     }
+    ]
+   },
+   {
+    "name": "Imbracaminte barbati",
+    "slug": "imbracaminte-barbati",
+    "categories": [
+     {
+      "name": "Tricouri",
+      "slug": "tricouri-barbati"
+     },
+     {
+      "name": "Hanorace",
+      "slug": "hanorace-barbati"
+     },
+     {
+      "name": "Treninguri",
+      "slug": "treninguri-lifestyle-barbati"
+     },
+     {
+      "name": "Pantaloni barbati",
+      "slug": "pantaloni-barbati"
+     },
+     {
+      "name": "Blugi barbati",
+      "slug": "blugi-barbati"
+     },
+     {
+      "name": "Bluze barbati",
+      "slug": "bluze-barbati"
+     },
+     {
+      "name": "Camasi barbati",
+      "slug": "camasi-barbati"
+     },
+     {
+      "name": "Pulovere barbati",
+      "slug": "pulovere-barbati"
+     },
+     {
+      "name": "Geci barbati",
+      "slug": "geci-barbati"
+     },
+     {
+      "name": "Paltoane barbati",
+      "slug": "paltoane-barbati"
+     },
+     {
+      "name": "Sacouri barbati",
+      "slug": "sacouri-barbati"
+     },
+     {
+      "name": "Costume barbati",
+      "slug": "costume-barbati"
+     },
+     {
+      "name": "Costume populare barbati",
+      "slug": "costume-populare-barbati"
+     },
+     {
+      "name": "Lenjerie intima barbati",
+      "slug": "lenjerie-intima-barbati"
+     },
+     {
+      "name": "Sosete barbati",
+      "slug": "sosete-barbati"
+     },
+     {
+      "name": "Pijamale barbati",
+      "slug": "pijamale-barbati"
+     },
+     {
+      "name": "Maiouri barbati",
+      "slug": "maiouri-barbati"
+     },
+     {
+      "name": "Costume de baie barbati",
+      "slug": "costume-baie-barbati"
+     },
+     {
+      "name": "Halate Barbati",
+      "slug": "halate-barbati"
+     },
+     {
+      "name": "Veste Barbati",
+      "slug": "veste-barbati"
+     },
+     {
+      "name": "Tenisi barbati",
+      "slug": "tenisi-barbati"
+     },
+     {
+      "name": "Pantofi sport barbati",
+      "slug": "pantofi-sport"
+     },
+     {
+      "name": "Sandale barbati",
+      "slug": "sandale-barbati"
+     },
+     {
+      "name": "Slapi si papuci barbati",
+      "slug": "slapi-papuci-barbati"
+     },
+     {
+      "name": "Ceasuri barbati",
+      "slug": "ceasuri-barbatesti"
+     },
+     {
+      "name": "Genti barbati",
+      "slug": "genti-barbati"
+     },
+     {
+      "name": "Rucsacuri barbati",
+      "slug": "rucsacuri-barbati-deleted"
+     },
+     {
+      "name": "Ochelari de soare barbati",
+      "slug": "ochelari-soare-barbati"
+     }
+    ]
+   },
+   {
+    "name": "Incaltaminte barbati",
+    "slug": "incaltaminte-barbati",
+    "categories": [
+     {
+      "name": "Tenisi",
+      "slug": "tenisi-barbati"
+     },
+     {
+      "name": "Pantofi",
+      "slug": "pantofi-barbati"
+     },
+     {
+      "name": "Pantofi sport",
+      "slug": "pantofi-sport"
+     },
+     {
+      "name": "Sandale barbati",
+      "slug": "sandale-barbati"
+     },
+     {
+      "name": "Slapi, papuci barbati",
+      "slug": "slapi-papuci-barbati"
+     },
+     {
+      "name": "Mocasini barbati",
+      "slug": "mocasini-barbati"
+     },
+     {
+      "name": "Ghete barbati",
+      "slug": "ghete-barbati"
+     },
+     {
+      "name": "Produse ingrijire incaltaminte",
+      "slug": "produse-ingrijire-incaltaminte-accesorii"
+     },
+     {
+      "name": "Espadrile barbati",
+      "slug": "espadrile-barbati"
+     },
+     {
+      "name": "Tricouri barbati",
+      "slug": "tricouri-barbati"
+     },
+     {
+      "name": "Pantaloni barbati",
+      "slug": "pantaloni-barbati"
+     },
+     {
+      "name": "Blugi barbati",
+      "slug": "blugi-barbati"
+     },
+     {
+      "name": "Bluze barbati",
+      "slug": "bluze-barbati"
+     },
+     {
+      "name": "Camasi barbati",
+      "slug": "camasi-barbati"
+     },
+     {
+      "name": "Treninguri lifestyle barbati",
+      "slug": "treninguri-lifestyle-barbati"
+     },
+     {
+      "name": "Costume de baie barbati",
+      "slug": "costume-baie-barbati"
+     },
+     {
+      "name": "Ceasuri barbati",
+      "slug": "ceasuri-barbatesti"
+     },
+     {
+      "name": "Bijuterii barbati",
+      "slug": "bijuterii-barbati"
+     },
+     {
+      "name": "Ochelari de soare barbati",
+      "slug": "ochelari-soare-barbati"
+     },
+     {
+      "name": "Portofele barbati",
+      "slug": "portofele-barbati"
+     },
+     {
+      "name": "Genti barbati",
+      "slug": "genti-barbati"
+     },
+     {
+      "name": "Curele barbati",
+      "slug": "curele-barbati"
+     }
+    ]
+   },
+   {
+    "name": "Genti si accesorii barbati",
+    "slug": "accesorii-barbati",
+    "categories": [
+     {
+      "name": "Bijuterii",
+      "slug": "bijuterii-barbati"
+     },
+     {
+      "name": "Portofele",
+      "slug": "portofele-barbati"
+     },
+     {
+      "name": "Genti barbati",
+      "slug": "genti-barbati"
+     },
+     {
+      "name": "Ochelari de soare barbati",
+      "slug": "ochelari-soare-barbati"
+     },
+     {
+      "name": "Curele barbati",
+      "slug": "curele-barbati"
+     },
+     {
+      "name": "Sepci si caciuli barbati",
+      "slug": "sepci-caciuli-barbati"
+     },
+     {
+      "name": "Umbrele barbati",
+      "slug": "umbrele-barbati"
+     },
+     {
+      "name": "Bretele barbati",
+      "slug": "bretele-barbati"
+     },
+     {
+      "name": "Cravate",
+      "slug": "cravate"
+     },
+     {
+      "name": "Papioane barbati",
+      "slug": "papioane-barbati"
+     },
+     {
+      "name": "Butoni camasa",
+      "slug": "butoni-camasa"
+     },
+     {
+      "name": "Manusi barbati",
+      "slug": "manusi-barbati"
+     },
+     {
+      "name": "Fulare si esarfe barbati",
+      "slug": "fulare-esarfe-barbati"
+     },
+     {
+      "name": "Tenisi barbati",
+      "slug": "tenisi-barbati"
+     },
+     {
+      "name": "Pantofi sport barbati",
+      "slug": "pantofi-sport"
+     },
+     {
+      "name": "Sandale barbati",
+      "slug": "sandale-barbati"
+     },
+     {
+      "name": "Tricouri barbati",
+      "slug": "tricouri-barbati"
+     },
+     {
+      "name": "Hanorace barbati",
+      "slug": "hanorace-barbati"
+     },
+     {
+      "name": "Pantaloni barbati",
+      "slug": "pantaloni-barbati"
+     },
+     {
+      "name": "Blugi barbati",
+      "slug": "blugi-barbati"
+     },
+     {
+      "name": "Bluze barbati",
+      "slug": "bluze-barbati"
+     },
+     {
+      "name": "Camasi barbati",
+      "slug": "camasi-barbati"
+     },
+     {
+      "name": "Treninguri lifestyle barbati",
+      "slug": "treninguri-lifestyle-barbati"
+     }
+    ]
+   },
+   {
+    "name": "Selectii pentru EL",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Treninguri lifestyle",
+      "slug": "treninguri-lifestyle-barbati"
+     },
+     {
+      "name": "Pantaloni sport",
+      "slug": "pantaloni-sport"
+     }
+    ]
+   },
+   {
+    "name": "Selectii pentru EA",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Pantaloni sport",
+      "slug": "pantaloni-sport-dama"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 368,
+  "slug": "ingrijire-personala-cosmetice",
+  "name": "Ingrijire personala & Cosmetice",
+  "groups": [
+   {
+    "name": "Par",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Sampon",
+      "slug": "sampon-balsam"
+     },
+     {
+      "name": "Vopsea de par si oxidant",
+      "slug": "vopsea-par-accesorii"
+     }
+    ]
+   },
+   {
+    "name": "Corp",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Geluri de dus",
+      "slug": "geluri-dus"
+     }
+    ]
+   },
+   {
+    "name": "Ten",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Demachiere si curatare",
+      "slug": "produse-demachiere-curatare"
+     },
+     {
+      "name": "Masti ten si gomaje",
+      "slug": "masti-pentru-ten-gomaje"
+     }
+    ]
+   },
+   {
+    "name": "Igiena dentara",
+    "slug": "igiena-dentara",
+    "categories": [
+     {
+      "name": "Pasta de dinti, apa de gura",
+      "slug": "pasta-de-dinti"
+     },
+     {
+      "name": "Periute dinti",
+      "slug": "periute-dinti-clasice"
+     },
+     {
+      "name": "Periute de dinti electrice",
+      "slug": "periute-dinti-electrice"
+     },
+     {
+      "name": "Irigatoare bucale",
+      "slug": "irigatoare-bucale"
+     },
+     {
+      "name": "Accesorii periute de dinti electrice si irigatoare",
+      "slug": "accesorii-periute-dinti-electrice-irigatoare"
+     },
+     {
+      "name": "Ata dentara",
+      "slug": "ata-dentara"
+     },
+     {
+      "name": "Apa de gura",
+      "slug": "apa-gura"
+     },
+     {
+      "name": "Benzi si produse pentru albirea dintilor",
+      "slug": "benzi-produse-albirea-dintilor"
+     },
+     {
+      "name": "Produse ingrijire aparate si proteze dentare",
+      "slug": "produse-ingrijire-aparate-proteze-dentare"
+     }
+    ]
+   },
+   {
+    "name": "Ingrijire personala barbati",
+    "slug": "aparate-produse-ingrijire-personala-barbati",
+    "categories": [
+     {
+      "name": "Aparate de ras electrice",
+      "slug": "aparate-ras-electrice"
+     },
+     {
+      "name": "Aparate de tuns",
+      "slug": "aparate-tuns"
+     },
+     {
+      "name": "Accesorii aparate de ras clasice",
+      "slug": "accesorii-aparate-ras-clasice"
+     },
+     {
+      "name": "Servetele igiena intima",
+      "slug": "servetele-igiena-intima"
+     },
+     {
+      "name": "Seturi complete de tuns si ras",
+      "slug": "seturi-complete-ras-tuns"
+     },
+     {
+      "name": "Accesorii aparate de ras electrice",
+      "slug": "accesorii-aparate-ras-electrice"
+     },
+     {
+      "name": "Lubrifianti",
+      "slug": "lubrifianti"
+     },
+     {
+      "name": "Irigatoare bucale",
+      "slug": "irigatoare-bucale"
+     },
+     {
+      "name": "Accesorii periute electrice & irigatoare",
+      "slug": "accesorii-periute-dinti-electrice-irigatoare"
+     },
+     {
+      "name": "Pasta de dinti",
+      "slug": "pasta-de-dinti"
+     },
+     {
+      "name": "Spuma si gel de ras",
+      "slug": "spuma-gel-ras"
+     },
+     {
+      "name": "After shave",
+      "slug": "after-shave"
+     },
+     {
+      "name": "Aparate de ras clasice",
+      "slug": "aparate-ras-clasice"
+     },
+     {
+      "name": "Masti pentru ten si gomaje",
+      "slug": "masti-pentru-ten-gomaje"
+     },
+     {
+      "name": "Produse ingrijire barba si mustata",
+      "slug": "produse-ingrijire-barba-mustata"
+     },
+     {
+      "name": "Prezervative",
+      "slug": "prezervative"
+     }
+    ]
+   },
+   {
+    "name": "Ingrijire personala femei",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Epilatoare",
+      "slug": "epilatoare"
+     },
+     {
+      "name": "Uscatoare de par",
+      "slug": "uscatoare-par"
+     },
+     {
+      "name": "Perii de par electrice",
+      "slug": "perii-par-electrice"
+     },
+     {
+      "name": "Placi de indreptat parul",
+      "slug": "placi_indreptat_parul"
+     },
+     {
+      "name": "Ondulatoare & Bigudiuri",
+      "slug": "ondulatoare"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 477,
+  "slug": "casa-gradina-bricolaj",
+  "name": "Casa, Gradina & Bricolaj",
+  "groups": [
+   {
+    "name": "Gradina si terasa",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Balansoare si hamace",
+      "slug": "hamace-leagane"
+     },
+     {
+      "name": "Umbrele si pavilioane",
+      "slug": "umbrele-pavilioane-gradina"
+     }
+    ]
+   },
+   {
+    "name": "Sanitare baie",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Mobilier si oglinzi baie",
+      "slug": "oglinzi-mobilier-baie"
+     },
+     {
+      "name": "Coloane si seturi de dus",
+      "slug": "coloane-dus-seturi-dus"
+     }
+    ]
+   },
+   {
+    "name": "Incalzire",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Sisteme solare",
+      "slug": "sisteme-panouri-solare"
+     },
+     {
+      "name": "Boilere",
+      "slug": "boilere"
+     },
+     {
+      "name": "Centrale termice",
+      "slug": "centrale-termice"
+     }
+    ]
+   },
+   {
+    "name": "Iluminat & electrice",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Prelungitoare",
+      "slug": "prelungitoare-priza"
+     }
+    ]
+   },
+   {
+    "name": "Bucatarie si servire",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Oale si cratite",
+      "slug": "oale-cratite"
+     },
+     {
+      "name": "Ustensile bucatarie",
+      "slug": "seturi-ustensile-bucatarie"
+     },
+     {
+      "name": "Farfurii",
+      "slug": "farfurii"
+     },
+     {
+      "name": "Tacamuri",
+      "slug": "tacamuri-seturi"
+     },
+     {
+      "name": "Cani si cesti",
+      "slug": "cani-cesti"
+     },
+     {
+      "name": "Termosuri",
+      "slug": "termosuri-cani-termos"
+     },
+     {
+      "name": "Cutii alimentare",
+      "slug": "cutii-alimentare"
+     }
+    ]
+   },
+   {
+    "name": "Bricolaj si gradina",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Masini de gaurit si insurubat",
+      "slug": "masini-gaurit-insurubat"
+     },
+     {
+      "name": "Chei si truse",
+      "slug": "chei-truse-chei"
+     },
+     {
+      "name": "Unelte vopsit si tencuit",
+      "slug": "unelte-vopsit-tencuit"
+     },
+     {
+      "name": "Unelte de gradinarit",
+      "slug": "accesorii-unelte-gradinarit"
+     }
+    ]
+   },
+   {
+    "name": "Textile si decoratiuni",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Lenjerii de pat",
+      "slug": "lenjerii-pat"
+     },
+     {
+      "name": "Lumanari si candele",
+      "slug": "lumanari-candele"
+     },
+     {
+      "name": "Covorase baie",
+      "slug": "covorase-baie"
+     }
+    ]
+   },
+   {
+    "name": "Mobilier",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Scaune",
+      "slug": "scaune"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 651,
+  "slug": "sport-activitati-aer-liber",
+  "name": "Sport & Travel",
+  "groups": [
+   {
+    "name": "Fitness si nutritie",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Benzi de alergat",
+      "slug": "benzi-alergat"
+     },
+     {
+      "name": "Biciclete fitness",
+      "slug": "biciclete-fitness"
+     },
+     {
+      "name": "Haltere si gantere",
+      "slug": "haltere-gantere"
+     }
+    ]
+   },
+   {
+    "name": "Camping",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Corturi camping",
+      "slug": "corturi-camping"
+     },
+     {
+      "name": "Accesorii camping si drumetii",
+      "slug": "accesorii-camping-si-drumetii"
+     },
+     {
+      "name": "Cutite si bricege",
+      "slug": "cutite-bricege"
+     }
+    ]
+   },
+   {
+    "name": "Ciclism",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Biciclete pentru copii",
+      "slug": "biciclete-copii"
+     },
+     {
+      "name": "Biciclete electrice",
+      "slug": "biciclete-electrice"
+     }
+    ]
+   },
+   {
+    "name": "Fitness si calatorie",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Accesorii fitness",
+      "slug": "accesorii-fitness"
+     },
+     {
+      "name": "Accesorii de voiaj",
+      "slug": "accesorii-articole-de-voiaj"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 689,
+  "slug": "auto-moto-rca",
+  "name": "Auto, Moto  & RCA",
+  "groups": [
+   {
+    "name": "Anvelope & Jante",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Anvelope auto",
+      "slug": "anvelope-auto"
+     },
+     {
+      "name": "Jante auto",
+      "slug": "jante-auto"
+     }
+    ]
+   },
+   {
+    "name": "Alege dupa sezon",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Anvelope moto",
+      "slug": "anvelope-moto"
+     }
+    ]
+   },
+   {
+    "name": "Vehicule electrice",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Hoverboard-uri",
+      "slug": "hoverboard"
+     },
+     {
+      "name": "Trotinete electrice",
+      "slug": "trotinete-electrice"
+     },
+     {
+      "name": "Statii incarcare vehicule electrice",
+      "slug": "statii-incarcare-vehicule-electrice"
+     },
+     {
+      "name": "Accesorii vehicule electrice",
+      "slug": "accesorii-vehicule-electrice"
+     },
+     {
+      "name": "Motociclete si scutere",
+      "slug": "motociclete-scutere"
+     },
+     {
+      "name": "ATV si UTV",
+      "slug": "atv-utv"
+     }
+    ]
+   },
+   {
+    "name": "Intretinere & Cosmetica auto",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Produse cosmetica auto",
+      "slug": "produse-cosmetica-auto"
+     },
+     {
+      "name": "Aspiratoare auto",
+      "slug": "aspiratoare-auto"
+     },
+     {
+      "name": "Ulei motor",
+      "slug": "ulei-motor"
+     },
+     {
+      "name": "Pachete revizie",
+      "slug": "pachete-revizie"
+     },
+     {
+      "name": "Aditivi auto",
+      "slug": "aditivi-auto"
+     },
+     {
+      "name": "Stergatoare",
+      "slug": "stergatoare"
+     }
+    ]
+   },
+   {
+    "name": "Electronice Auto",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Camere auto DVR",
+      "slug": "camere-auto-dvr"
+     },
+     {
+      "name": "Multimedia auto",
+      "slug": "radio--cd--dvd-player-auto"
+     },
+     {
+      "name": "Difuzoare, Subwoofere & amplificatoare",
+      "slug": "subwoofere---boxe-auto"
+     },
+     {
+      "name": "Statii Radio CB",
+      "slug": "statii-radio---detectoare-radar"
+     },
+     {
+      "name": "Accesorii electronice auto",
+      "slug": "accesorii-electronice-auto"
+     }
+    ]
+   },
+   {
+    "name": "Accesorii auto",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Suporturi pentru bicicleta",
+      "slug": "suport-bicicleta-auto"
+     },
+     {
+      "name": "Cutii portbagaje",
+      "slug": "cutii-portbagaj"
+     },
+     {
+      "name": "Bare transversale",
+      "slug": "bare-transversale"
+     },
+     {
+      "name": "Huse scaune",
+      "slug": "huse"
+     },
+     {
+      "name": "Covorase auto",
+      "slug": "covorase-auto"
+     },
+     {
+      "name": "Frigidere auto",
+      "slug": "frigidere-auto"
+     }
+    ]
+   },
+   {
+    "name": "Reparatii si depanare",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Compresoare",
+      "slug": "compresoare-auto"
+     },
+     {
+      "name": "Redresoare",
+      "slug": "redresoare-auto"
+     },
+     {
+      "name": "Scule auto si accesorii",
+      "slug": "scule-auto"
+     },
+     {
+      "name": "Vopsea auto si accesorii",
+      "slug": "vopsea-auto"
+     },
+     {
+      "name": "Kituri siguranta auto",
+      "slug": "kit-uri-siguranta-auto"
+     }
+    ]
+   },
+   {
+    "name": "Electrica Auto",
+    "slug": "electrica-auto",
+    "categories": [
+     {
+      "name": "Becuri auto",
+      "slug": "becuri-sigurante-auto"
+     },
+     {
+      "name": "Baterii auto",
+      "slug": "baterii-auto"
+     },
+     {
+      "name": "Proiectoare, Lampi & Leduri",
+      "slug": "proiectoare--lampi---leduri"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 768,
+  "slug": "jucarii-copii-bebe",
+  "name": "Jucarii, Copii & Bebe",
+  "groups": [
+   {
+    "name": "Igiena si ingrijire",
+    "slug": "cosmetica-ingrijire-copii",
+    "categories": [
+     {
+      "name": "Creme si lotiuni de corp",
+      "slug": "creme-lotiuni-de-corp-copii"
+     },
+     {
+      "name": "Aerosoli",
+      "slug": "aparate-aerosoli-copii"
+     },
+     {
+      "name": "Aspiratoare nazale si accesorii",
+      "slug": "aspiratoare-nazale-accesorii"
+     },
+     {
+      "name": "Sampon si balsam copii",
+      "slug": "sampon-balsam-copii"
+     },
+     {
+      "name": "Sapun & Gel de dus copii",
+      "slug": "sapun-gel-de-dus-copii"
+     },
+     {
+      "name": "Ulei de corp copii",
+      "slug": "ulei-de-corp-copii"
+     },
+     {
+      "name": "Articole igiena dentara copii",
+      "slug": "articole-igiena-dentara-copii"
+     },
+     {
+      "name": "Ser fiziologic si comprese sterile",
+      "slug": "ser-fiziologic-comprese-sterile"
+     },
+     {
+      "name": "Umidificatoare",
+      "slug": "umidificatoare"
+     },
+     {
+      "name": "Produse machiaj copii",
+      "slug": "produse-machiaj-copii"
+     },
+     {
+      "name": "Termometre copii",
+      "slug": "termometre-copii"
+     },
+     {
+      "name": "Parfumuri si deodorante copii",
+      "slug": "parfumuri-deodorante-copii"
+     },
+     {
+      "name": "Accesorii ingrijire copii",
+      "slug": "accesorii-ingrijire-copii"
+     },
+     {
+      "name": "Cadite bebe si accesorii baie",
+      "slug": "cadite-bebe-accesorii-baie"
+     },
+     {
+      "name": "Olite si reductoare WC",
+      "slug": "olite-reductoare-wc"
+     },
+     {
+      "name": "Prosoape si halate de baie copii",
+      "slug": "prosoape-halate-baie-copii"
+     },
+     {
+      "name": "Detergenti speciali rufe",
+      "slug": "detergenti-speciali-rufe"
+     },
+     {
+      "name": "Cantare bebelusi si copii",
+      "slug": "cantare-bebelusi-copii"
+     }
+    ]
+   },
+   {
+    "name": "Carucioare si articole transport",
+    "slug": "carucioare-articole-transport",
+    "categories": [
+     {
+      "name": "Scaune auto",
+      "slug": "scaune-auto-copii"
+     },
+     {
+      "name": "Carucioare",
+      "slug": "carucioare-copii"
+     },
+     {
+      "name": "Marsupii si hamuri bebe",
+      "slug": "marsupii-hamuri-bebe"
+     },
+     {
+      "name": "Premergatoare",
+      "slug": "premergatoare"
+     },
+     {
+      "name": "Landouri bebelusi",
+      "slug": "landouri-bebelusi"
+     },
+     {
+      "name": "Accesorii transport copii",
+      "slug": "accesorii-transport-copii"
+     }
+    ]
+   },
+   {
+    "name": "Camera copilului",
+    "slug": "camera-copilului",
+    "categories": [
+     {
+      "name": "Patuturi",
+      "slug": "patut-bebe"
+     },
+     {
+      "name": "Saltele",
+      "slug": "saltele-copii"
+     },
+     {
+      "name": "Balansoare, leagane si hamace bebelusi",
+      "slug": "balansoare-leagane-hamace-bebelusi"
+     },
+     {
+      "name": "Mese de infasat",
+      "slug": "mese-de-infasat"
+     },
+     {
+      "name": "Tarcuri copii",
+      "slug": "tarcuri-copii-1"
+     },
+     {
+      "name": "Sisteme de siguranta copii",
+      "slug": "sisteme-de-siguranta-copii"
+     },
+     {
+      "name": "Mobilier camera copii",
+      "slug": "mobilier-camera-copii"
+     },
+     {
+      "name": "Lampi de veghe copii",
+      "slug": "lampi-de-veghe-copii"
+     },
+     {
+      "name": "Covoare copii",
+      "slug": "covoare-copii"
+     },
+     {
+      "name": "Decoratiuni camera copilului",
+      "slug": "decoratiuni-camera-copilului"
+     },
+     {
+      "name": "Lenjerii si huse patut",
+      "slug": "lenjerii-huse-patut"
+     },
+     {
+      "name": "Saci de dormit bebe si copii",
+      "slug": "saci-dormit-bebe-copii"
+     },
+     {
+      "name": "Paturici bebe",
+      "slug": "paturici-bebe"
+     },
+     {
+      "name": "Perne, pilote si pozitionatoare bebe",
+      "slug": "perne-pilote-pozitionatoare-bebe"
+     },
+     {
+      "name": "Monitoare video bebelusi",
+      "slug": "monitoare-video-bebelusi"
+     },
+     {
+      "name": "Monitoare audio bebelusi",
+      "slug": "monitoare-audio-bebelusi"
+     },
+     {
+      "name": "Aparate si Dispozitive Sunete Albe Bebelusi",
+      "slug": "dispozitive-smart-monitorizare-somn"
+     }
+    ]
+   },
+   {
+    "name": "Toys Shop",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Jocuri de memorie si inteligenta",
+      "slug": "jocuri-de-memorie-inteligenta"
+     }
+    ]
+   },
+   {
+    "name": "Jocuri & puzzle",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Jocuri de societate",
+      "slug": "jocuri-societate"
+     },
+     {
+      "name": "Jocuri educative",
+      "slug": "jocuri-jucarii-educative"
+     },
+     {
+      "name": "Puzzle",
+      "slug": "puzzle"
+     }
+    ]
+   },
+   {
+    "name": "Jucarii de exterior",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Masinute si vehicule",
+      "slug": "masinute-vehicule-copii"
+     }
+    ]
+   },
+   {
+    "name": "Jucarii",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Seturi de constructie",
+      "slug": "seturi-constructie"
+     },
+     {
+      "name": "Figurine",
+      "slug": "figurine"
+     },
+     {
+      "name": "Papusi",
+      "slug": "papusi"
+     },
+     {
+      "name": "Jucarii de plus",
+      "slug": "jucarii-plus"
+     },
+     {
+      "name": "Bucatarii pentru copii",
+      "slug": "bucatarii-copii"
+     },
+     {
+      "name": "Plastilina si modelaj",
+      "slug": "plastilina"
+     },
+     {
+      "name": "Jucarii de sortat",
+      "slug": "jucarii-de-sortat"
+     },
+     {
+      "name": "Jucarii dentitie",
+      "slug": "jucarii-dentitie"
+     },
+     {
+      "name": "Jucarii plaja si nisip",
+      "slug": "jucarii-pentru-plaja-nisip"
+     }
+    ]
+   },
+   {
+    "name": "Hranire si ingrijire bebe",
+    "slug": null,
+    "categories": [
+     {
+      "name": "Biberoane si tetine",
+      "slug": "biberoane-tetine-accesorii"
+     },
+     {
+      "name": "Suzete",
+      "slug": "suzete-accesorii"
+     },
+     {
+      "name": "Accesorii alaptare",
+      "slug": "accesorii-alaptare"
+     },
+     {
+      "name": "Scutece",
+      "slug": "scutece-chilotei"
+     },
+     {
+      "name": "Botosei",
+      "slug": "botosei"
+     }
+    ]
+   }
+  ]
+ }
+]
