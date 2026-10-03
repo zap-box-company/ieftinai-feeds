@@ -5,6 +5,7 @@ import { parseCsvObjects, responseText } from "./csv.js";
 import { executeStatements, loadCurrent, recordRun } from "./d1.js";
 import { fromTwoPerformant } from "./normalize.js";
 import { plan } from "./plan.js";
+import { fileURLToPath } from "node:url";
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
@@ -43,7 +44,7 @@ console.log(JSON.stringify({ day, budget, ...stats }, null, 2));
 if (dryRun) {
   console.log("dry run: nothing written. Sample:\n" + statements.slice(0, 4).join("\n").slice(0, 1500));
 } else {
-  await executeStatements(statements, new URL("../out/", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
+  await executeStatements(statements, fileURLToPath(new URL("../out/", import.meta.url)));
   await recordRun(day, "2performant", stats.seen, stats.estimatedRowsWritten);
   console.log("done");
 }
