@@ -51,7 +51,7 @@ export async function call(env, path, query = "", fetchImpl = fetch) {
 }
 
 const clean = (s) => {
-  const t = String(s ?? "").replace(/\s+/g, " ").trim();
+  const t = decodeEntities(String(s ?? "")).replace(/\s+/g, " ").trim();
   return t || null;
 };
 
