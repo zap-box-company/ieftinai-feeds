@@ -1,0 +1,32 @@
+name: Nightly catalog import
+
+on:
+  schedule:
+    - cron: "30 2 * * *" # 05:30 Romania (summer time), after the networks refresh their feeds
+  workflow_dispatch:
+    inputs:
+      budget:
+        description: "Max D1 rows written this run"
+        default: "90000"
+
+concurrency:
+  group: catalog-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Unit tests
+        run: npm test
+      - name: Import feeds into D1
+        env:
+          TP_FEED_URL: ${{ secrets.TP_FEED_URL }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node src/run.js --budget "${{ github.event.inputs.budget || '90000' }}"

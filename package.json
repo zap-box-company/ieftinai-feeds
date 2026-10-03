@@ -1,0 +1,11 @@
+{
+  "name": "ieftinai-feeds",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "import": "node src/run.js",
+    "dry-run": "node src/run.js --dry-run"
+  }
+}

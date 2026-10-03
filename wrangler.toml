@@ -1,0 +1,8 @@
+# Only used by the pipeline to reach the catalog database (no Worker is deployed from here).
+name = "ieftinai-feeds"
+compatibility_date = "2026-10-01"
+
+[[d1_databases]]
+binding = "CATALOG"
+database_name = "ieftinai-catalog"
+database_id = "0b7b96c2-90df-436b-9a12-076d2d39343e"
