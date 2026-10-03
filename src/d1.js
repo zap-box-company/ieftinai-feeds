@@ -1,17 +1,18 @@
-// D1 access through wrangler (OAuth locally, CLOUDFLARE_API_TOKEN in GitHub Actions).
+// D1 access through the pinned local wrangler, run without a shell so SQL arguments stay intact (OAuth locally, CLOUDFLARE_API_TOKEN in GitHub Actions).
 import { execFile } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
 const run = promisify(execFile);
 const DB = "ieftinai-catalog";
-const CONFIG = new URL("../wrangler.toml", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
+const CONFIG = fileURLToPath(new URL("../wrangler.toml", import.meta.url));
+const WRANGLER = fileURLToPath(new URL("../node_modules/wrangler/bin/wrangler.js", import.meta.url));
 
 async function wrangler(args) {
-  const { stdout } = await run("npx", ["--yes", "wrangler@4", ...args, "--config", CONFIG], {
+  const { stdout } = await run(process.execPath, [WRANGLER, ...args, "--config", CONFIG], {
     maxBuffer: 512 * 1024 * 1024,
-    shell: process.platform === "win32",
     env: { ...process.env, WRANGLER_SEND_METRICS: "false" },
   });
   return stdout;
