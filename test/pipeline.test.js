@@ -86,3 +86,9 @@ test("compact catalog: metadata changes are found through the signature", async 
   const renamed = new Map([["s:1", { price: 100, oldPrice: null, sig: metaSig({ ...r, title: "Lego Londra" }) }]]);
   assert.equal(plan([r], renamed, 20261004, 1000).stats.pending.metaChanges, 1);
 });
+
+test("2Performant program names become bare shop domains", async () => {
+  const { fromTwoPerformant } = await import("../src/normalize.js");
+  const p = fromTwoPerformant({ title: "Set oale", price: "99", aff_code: "https://event.2performant.com/x", campaign_name: "bazarulonline.ro/ ", product_id: "7" });
+  assert.equal(p.store, "bazarulonline.ro");
+});

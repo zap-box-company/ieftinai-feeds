@@ -60,7 +60,8 @@ export function fromTwoPerformant(row) {
   const affUrl = pick(row, "aff_code", "marketer link", "affiliate_link");
   const title = clean(pick(row, "title", "product title"));
   const price = parsePrice(pick(row, "price", "sale price"));
-  const store = clean(pick(row, "campaign_name", "merchant program"))?.toLowerCase();
+  // Program names come as "bazarulonline.ro/ " or "https://www.x.ro": keep the bare domain.
+  const store = clean(pick(row, "campaign_name", "merchant program"))?.toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/+$/, "");
   if (!affUrl || !title || !price || !store) return null;
 
   const productUnique = /[?&]unique=([^&]+)/.exec(affUrl)?.[1];
