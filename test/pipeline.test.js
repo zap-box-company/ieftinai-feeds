@@ -72,3 +72,8 @@ test("plan: price changes first, then new products with GTIN, within budget", ()
   assert.deepEqual(tight.stats.done, { priceChanges: 1, inserts: 1, metaChanges: 0 });
   assert.equal(tight.stats.pending.inserts, 2);
 });
+
+test("feed text: HTML entities decoded", async () => {
+  const { decodeEntities } = await import("../src/normalize.js");
+  assert.equal(decodeEntities("Accesorii &#x3E; Volane &amp; joystick-uri &#8211; nou"), "Accesorii > Volane & joystick-uri – nou");
+});

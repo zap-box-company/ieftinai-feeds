@@ -34,8 +34,16 @@ export function normalizeGtin(raw) {
   return digits.padStart(14, "0"); // one canonical form for EAN-8/UPC/EAN-13
 }
 
+/** Feeds sometimes carry HTML entities ("Accesorii &#x3E; Volane", "Tom &amp; Jerry"). */
+export function decodeEntities(s) {
+  return s
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+    .replace(/&(quot|apos|lt|gt|nbsp|amp);/g, (_, n) => ({ quot: '"', apos: "'", lt: "<", gt: ">", nbsp: " ", amp: "&" })[n]);
+}
+
 const clean = (s) => {
-  const t = String(s ?? "").replace(/\s+/g, " ").trim();
+  const t = decodeEntities(String(s ?? "")).replace(/\s+/g, " ").trim();
   return t || null;
 };
 

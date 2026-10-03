@@ -1,7 +1,7 @@
 // Profitshare product feeds (API affiliate-products, 20 products per page) for every approved
 // advertiser. Auth as in the official WP plugin and ../server/src/profitshare.js:
 // X-PS-Auth = hex(HMAC-SHA1(method + path + "/?" + query + "/" + apiUser + date, apiKey)).
-import { parsePrice } from "./normalize.js";
+import { decodeEntities, parsePrice } from "./normalize.js";
 
 const API = "https://api.profitshare.ro";
 
