@@ -30,6 +30,7 @@ jobs:
           TP_FEED_URL: ${{ secrets.TP_FEED_URL }}
           PS_API_USER: ${{ secrets.PS_API_USER }}
           PS_API_KEY: ${{ secrets.PS_API_KEY }}
+          PS_PROXY_URL: https://ieftinai-affiliate.ieftinai.workers.dev # Profitshare refuses GitHub runners
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: node src/run.js --budget "${{ github.event.inputs.budget || '1000000' }}"

@@ -35,3 +35,14 @@ test("reader pages every advertiser except eMAG", async () => {
   assert.deepEqual(products.map((p) => p.key).sort(), ["vexio.ro:P1", "vexio.ro:P2"]);
   assert.ok(!seen.some((u) => u.includes("filters[advertiser]=35")));
 });
+
+test("through the Worker proxy the import sends the daily token, not the API key", async () => {
+  const seen = [];
+  const fetchImpl = async (url, init) => { seen.push({ url, init }); return Response.json({ result: { a: { id: 1 } } }); };
+  const { call } = await import("../src/profitshare.js");
+  const r = await call({ PS_API_USER: "u", PS_API_KEY: "k", PS_PROXY_URL: "https://w.dev/" }, "affiliate-advertisers", "", fetchImpl);
+  assert.deepEqual(r, { a: { id: 1 } });
+  assert.equal(seen[0].url, "https://w.dev/v1/ps/affiliate-advertisers?");
+  assert.match(seen[0].init.headers["X-Pipeline-Token"], /^[0-9a-f]{64}$/);
+  assert.ok(!JSON.stringify(seen[0].init).includes('"k"'));
+});

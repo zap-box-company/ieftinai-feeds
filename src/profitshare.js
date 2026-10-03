@@ -17,7 +17,27 @@ async function sign(message, key) {
   return [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+/** Same token as ../server/src/feedproxy.js: hex HMAC-SHA256(PS_API_KEY, "pipeline:" + UTC day). */
+export async function pipelineToken(key, date = new Date()) {
+  const k = await crypto.subtle.importKey("raw", new TextEncoder().encode(key), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = await crypto.subtle.sign("HMAC", k, new TextEncoder().encode(`pipeline:${date.toISOString().slice(0, 10)}`));
+  return [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+/**
+ * One Profitshare API call. With env.PS_PROXY_URL it goes through our Worker (Profitshare refuses
+ * GitHub's servers with HTTP 400); otherwise straight to the API (works from a home connection).
+ */
 export async function call(env, path, query = "", fetchImpl = fetch) {
+  if (env.PS_PROXY_URL) {
+    const token = await pipelineToken(env.PS_API_KEY);
+    for (let attempt = 1; ; attempt++) {
+      const res = await fetchImpl(`${env.PS_PROXY_URL.replace(/\/+$/, "")}/v1/ps/${path}?${query}`, { headers: { "X-Pipeline-Token": token } });
+      if (res.ok) return (await res.json()).result;
+      if (res.status === 400 || res.status === 403 || attempt >= 3) throw new Error(`Profitshare via proxy ${path}?${query}: HTTP ${res.status}`);
+      await new Promise((r) => setTimeout(r, 2000 * attempt));
+    }
+  }
   const date = new Date().toUTCString();
   const auth = await sign(`GET${path}/?${query}/${env.PS_API_USER}${date}`, env.PS_API_KEY);
   for (let attempt = 1; ; attempt++) {
