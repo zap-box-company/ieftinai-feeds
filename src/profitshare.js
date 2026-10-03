@@ -6,10 +6,11 @@ import { decodeEntities, parsePrice } from "./normalize.js";
 const API = "https://api.profitshare.ro";
 
 /**
- * Advertisers we never import: eMAG forbids price comparators in its program (and its feed is not
- * offered: HTTP 400); Profitshare itself is not a shop.
+ * Advertisers we never import because their program terms forbid price comparators / price
+ * history sites and apps (checked on their Profitshare program pages, 2026-10-03): eMAG (35) and
+ * Fashion Days (88736). Profitshare itself (61861) is not a shop.
  */
-export const EXCLUDED_ADVERTISERS = new Set([35, 61861]);
+export const EXCLUDED_ADVERTISERS = new Set([35, 88736, 61861]);
 
 async function sign(message, key) {
   const k = await crypto.subtle.importKey("raw", new TextEncoder().encode(key), { name: "HMAC", hash: "SHA-1" }, false, ["sign"]);
