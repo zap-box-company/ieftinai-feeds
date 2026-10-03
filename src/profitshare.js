@@ -82,6 +82,8 @@ export function fromProfitshare(p) {
     brand: clean(p.brand_name),
     category: clean(p.category_name),
     gtin: null,
+    // Feed flag only: free delivery is 0; otherwise the cost is unknown (null), never guessed.
+    shipping: Number(p.free_shipping) === 1 ? 0 : null,
   };
 }
 

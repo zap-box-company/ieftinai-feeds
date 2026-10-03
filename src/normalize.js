@@ -81,5 +81,6 @@ export function fromTwoPerformant(row) {
     brand: clean(pick(row, "brand")),
     category: clean(pick(row, "category")),
     gtin: normalizeGtin(pick(row, "gtin", "ean")),
+    shipping: null,
   };
 }

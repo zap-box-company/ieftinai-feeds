@@ -42,13 +42,13 @@ export async function loadCurrent() {
   let after = "";
   for (;;) {
     const rows = await query(
-      "SELECT key, price, old_price, title, brand, url, image, gtin, category FROM products " +
+      "SELECT key, price, old_price, title, brand, url, image, gtin, category, shipping FROM products " +
         `WHERE key > '${after.replace(/'/g, "''")}' ORDER BY key LIMIT 20000`,
     );
     for (const r of rows) {
       current.set(r.key, {
         price: r.price, oldPrice: r.old_price, title: r.title, brand: r.brand,
-        url: r.url, image: r.image, gtin: r.gtin, category: r.category,
+        url: r.url, image: r.image, gtin: r.gtin, category: r.category, shipping: r.shipping,
       });
     }
     if (rows.length < 20000) return current;
