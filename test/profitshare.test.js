@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fromProfitshare, readProfitshare } from "../src/profitshare.js";
+import { fromProfitshare, readProfitshare, rotationGroups } from "../src/profitshare.js";
 
 const sample = {
   link: "https://www.vexio.ro/statii-radio/tti/147584-kit-tti-pack13/?utm=x",
@@ -45,4 +45,12 @@ test("through the Worker proxy the import sends the daily token, not the API key
   assert.equal(seen[0].url, "https://w.dev/v1/ps/affiliate-advertisers?");
   assert.match(seen[0].init.headers["X-Pipeline-Token"], /^[0-9a-f]{64}$/);
   assert.ok(!JSON.stringify(seen[0].init).includes('"k"'));
+});
+
+test("rotation: groups of similar size, every advertiser in exactly one", () => {
+  const ads = [{ id: 1, pages: 2914 }, { id: 2, pages: 1755 }, { id: 3, pages: 1251 }, { id: 4, pages: 1080 }, { id: 5, pages: 707 }, { id: 6, pages: 590 }, { id: 7, pages: 1 }];
+  const groups = rotationGroups(ads, 3);
+  assert.deepEqual(groups.flatMap((g) => [...g]).sort(), ["1", "2", "3", "4", "5", "6", "7"]);
+  const sizes = groups.map((g) => ads.filter((a) => g.has(String(a.id))).reduce((n, a) => n + a.pages, 0));
+  assert.ok(Math.max(...sizes) - Math.min(...sizes) < 1200, String(sizes));
 });

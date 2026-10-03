@@ -43,7 +43,8 @@ if (!feedUrl && !psEnv.PS_API_KEY) throw new Error("set TP_FEED_URL and/or PS_AP
 
 const records = [
   ...(feedUrl ? await readTwoPerformant(feedUrl) : []),
-  ...(psEnv.PS_API_KEY ? await readProfitshare(psEnv) : []),
+  // A third of the Profitshare shops in full each night (PS_ROTATION_PARTS=1 reads them all).
+  ...(psEnv.PS_API_KEY ? await readProfitshare(psEnv, { rotation: { parts: Number(process.env.PS_ROTATION_PARTS ?? 3), index: Math.floor(Date.UTC(Math.floor(day / 10000), Math.floor(day / 100) % 100 - 1, day % 100) / 86_400_000) } }) : []),
 ];
 const current = dryRun ? new Map() : await loadCurrent();
 console.log(`catalog currently has ${current.size} products`);

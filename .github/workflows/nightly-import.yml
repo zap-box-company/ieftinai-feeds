@@ -16,7 +16,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 340 # first imports page ~16k Profitshare pages and write up to 1M rows
+    timeout-minutes: 90 # ~45 min a night (a third of Profitshare, src/profitshare.js); keeps us in the free 2,000 min/month
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

@@ -90,23 +90,43 @@ export function fromProfitshare(p) {
 }
 
 /**
- * Every product of every approved advertiser, a few pages in parallel; pages that still fail get a
- * second, slower pass at the end (Profitshare answers 502 when busy).
+ * Splits advertisers into [parts] groups of about the same number of pages (biggest first, each to
+ * the lightest group); deterministic, so every advertiser is refreshed once every [parts] nights.
  */
-export async function readProfitshare(env, { concurrency = 4, log = console.log, fetchImpl = fetch } = {}) {
+export function rotationGroups(advertisers, parts) {
+  const groups = Array.from({ length: parts }, () => ({ pages: 0, ids: new Set() }));
+  for (const a of [...advertisers].sort((x, y) => y.pages - x.pages || Number(x.id) - Number(y.id))) {
+    const g = groups.reduce((min, g) => (g.pages < min.pages ? g : min));
+    g.pages += a.pages;
+    g.ids.add(String(a.id));
+  }
+  return groups.map((g) => g.ids);
+}
+
+/**
+ * Products of the approved advertisers, a few pages in parallel; pages that still fail get a second,
+ * slower pass at the end (Profitshare answers 502 when busy). Page 1 of every advertiser is read each
+ * night; the remaining pages only for tonight's rotation group (rotation: { parts, index }), which
+ * keeps the run inside GitHub's free Actions minutes. Products not read tonight keep their last price.
+ */
+export async function readProfitshare(env, { concurrency = 4, log = console.log, fetchImpl = fetch, rotation = { parts: 1, index: 0 } } = {}) {
   const advertisers = Object.values(await call(env, "affiliate-advertisers", "", fetchImpl)).filter((a) => !EXCLUDED_ADVERTISERS.has(Number(a.id)));
   const byKey = new Map();
+  const add = (r) => (r?.products ?? []).forEach((p) => { const x = fromProfitshare(p); if (x) byKey.set(x.key, x); });
+  const known = [];
   for (const a of advertisers) {
-    let first;
     try {
-      first = await call(env, "affiliate-products", `filters[advertiser]=${a.id}&page=1`, fetchImpl);
+      const first = await call(env, "affiliate-products", `filters[advertiser]=${a.id}&page=1`, fetchImpl);
+      add(first);
+      known.push({ ...a, pages: Number(first.total_pages) || 0 });
     } catch (error) {
       log(`profitshare: ${a.name} skipped (${error.message})`);
-      continue;
     }
-    const pages = Number(first.total_pages) || 0;
-    const add = (r) => (r?.products ?? []).forEach((p) => { const x = fromProfitshare(p); if (x) byKey.set(x.key, x); });
-    add(first);
+  }
+  const parts = Math.max(1, rotation.parts);
+  const tonight = rotationGroups(known, parts)[((rotation.index % parts) + parts) % parts];
+  for (const a of known) {
+    if (!tonight.has(String(a.id))) continue;
     const failed = [];
     const run = async (list, parallel, final) => {
       let i = 0;
@@ -123,10 +143,10 @@ export async function readProfitshare(env, { concurrency = 4, log = console.log,
       };
       await Promise.all(Array.from({ length: parallel }, worker));
     };
-    await run(Array.from({ length: Math.max(0, pages - 1) }, (_, k) => k + 2), concurrency, false);
+    await run(Array.from({ length: Math.max(0, a.pages - 1) }, (_, k) => k + 2), concurrency, false);
     if (failed.length) await run(failed, 1, true);
-    log(`profitshare: ${a.name} ${pages} pages, ${failed.length} retried`);
+    log(`profitshare: ${a.name} ${a.pages} pages, ${failed.length} retried`);
   }
-  log(`profitshare: ${byKey.size} usable products`);
+  log(`profitshare: group ${(rotation.index % parts) + 1}/${parts} tonight, ${byKey.size} usable products`);
   return [...byKey.values()];
 }
