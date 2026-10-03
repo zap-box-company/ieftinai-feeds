@@ -1,10 +1,12 @@
 // Nightly import: affiliate feeds -> D1 catalog (only what changed, within the free-tier budget).
 // Usage: node src/run.js [--dry-run] [--budget 90000]
-// Env: TP_FEED_URL (2Performant CSV), CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID in CI.
+// Env: TP_FEED_URL (2Performant CSV), PS_API_USER + PS_API_KEY (Profitshare), CLOUDFLARE_API_TOKEN +
+// CLOUDFLARE_ACCOUNT_ID in CI. Each source is optional; at least one must be set.
 import { parseCsvObjects, responseText } from "./csv.js";
 import { executeStatements, loadCurrent, recordRun } from "./d1.js";
 import { fromTwoPerformant } from "./normalize.js";
 import { plan } from "./plan.js";
+import { readProfitshare } from "./profitshare.js";
 import { fileURLToPath } from "node:url";
 
 const args = process.argv.slice(2);
@@ -32,9 +34,13 @@ async function readTwoPerformant(url) {
 }
 
 const feedUrl = process.env.TP_FEED_URL;
-if (!feedUrl) throw new Error("TP_FEED_URL is not set");
+const psEnv = { PS_API_USER: process.env.PS_API_USER, PS_API_KEY: process.env.PS_API_KEY };
+if (!feedUrl && !psEnv.PS_API_KEY) throw new Error("set TP_FEED_URL and/or PS_API_USER + PS_API_KEY");
 
-const records = await readTwoPerformant(feedUrl);
+const records = [
+  ...(feedUrl ? await readTwoPerformant(feedUrl) : []),
+  ...(psEnv.PS_API_KEY ? await readProfitshare(psEnv) : []),
+];
 const current = dryRun ? new Map() : await loadCurrent();
 console.log(`catalog currently has ${current.size} products`);
 
@@ -45,6 +51,6 @@ if (dryRun) {
   console.log("dry run: nothing written. Sample:\n" + statements.slice(0, 4).join("\n").slice(0, 1500));
 } else {
   await executeStatements(statements, fileURLToPath(new URL("../out/", import.meta.url)));
-  await recordRun(day, "2performant", stats.seen, stats.estimatedRowsWritten);
+  await recordRun(day, "feeds", stats.seen, stats.estimatedRowsWritten);
   console.log("done");
 }

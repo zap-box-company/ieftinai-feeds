@@ -1,7 +1,7 @@
 // Decides what to write tonight, within the D1 free-tier write budget, and renders it as SQL.
 
 /** Approximate D1 "rows written" per operation (table row + index entries + FTS + history). */
-export const COST = { insert: 5, priceUpdate: 3, metaUpdate: 2 };
+export const COST = { insert: 6, priceUpdate: 3, metaUpdate: 2 };
 
 const META_FIELDS = ["title", "brand", "url", "image", "gtin", "category"];
 

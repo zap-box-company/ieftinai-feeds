@@ -1,4 +1,4 @@
-# IeftinAI catalog import
+# PrețAI catalog import
 
 Nightly job: affiliate product feeds → Cloudflare D1 `ieftinai-catalog` (schema in `../server/migrations`).
 Only changed prices and new products are written, within the D1 free-tier budget (100k rows/day):

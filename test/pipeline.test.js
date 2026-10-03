@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { parseCsv, parseCsvObjects } from "../src/csv.js";
 import { fromTwoPerformant, normalizeGtin, parsePrice } from "../src/normalize.js";
-import { lit, plan } from "../src/plan.js";
+import { COST, lit, plan } from "../src/plan.js";
 
 async function* chunks(...parts) { yield* parts; }
 const collect = async (it) => { const out = []; for await (const x of it) out.push(x); return out; };
@@ -68,7 +68,7 @@ test("plan: price changes first, then new products with GTIN, within budget", ()
   assert.match(all.statements[0], /UPDATE products SET price=80, .*prev_price=100, drop_pct=20, updated_day=20261003 WHERE key='s:1'/);
   assert.match(all.statements[2], /'s:new-gtin'/); // GTIN products are inserted before others
 
-  const tight = plan(records, current, 20261003, 3 + 5); // one price update + one insert
+  const tight = plan(records, current, 20261003, COST.priceUpdate + COST.insert); // one price update + one insert
   assert.deepEqual(tight.stats.done, { priceChanges: 1, inserts: 1, metaChanges: 0 });
   assert.equal(tight.stats.pending.inserts, 2);
 });

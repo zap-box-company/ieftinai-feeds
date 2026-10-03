@@ -8,7 +8,8 @@
   "scripts": {
     "test": "node --test \"test/**/*.test.js\"",
     "import": "node src/run.js",
-    "dry-run": "node src/run.js --dry-run"
+    "dry-run": "node src/run.js --dry-run",
+    "trending": "node src/trending.js"
   },
   "devDependencies": {
     "wrangler": "4.147.0"

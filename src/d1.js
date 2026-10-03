@@ -24,6 +24,12 @@ async function query(sql) {
   return parsed[0]?.results ?? [];
 }
 
+/** Several SELECTs in one wrangler call; one result array per statement, in order. */
+export async function queryMany(sqls) {
+  const out = await wrangler(["d1", "execute", DB, "--remote", "--json", "--command", sqls.join(";\n")]);
+  return JSON.parse(out.slice(out.indexOf("["))).map((r) => r.results ?? []);
+}
+
 /** All products currently in D1, keyed by product key (paged by key to keep responses small). */
 export async function loadCurrent() {
   const current = new Map();
