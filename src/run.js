@@ -35,7 +35,9 @@ async function readTwoPerformant(url) {
 }
 
 const feedUrl = process.env.TP_FEED_URL;
-const psEnv = { PS_API_USER: process.env.PS_API_USER, PS_API_KEY: process.env.PS_API_KEY };
+// Secrets pasted into GitHub may carry spaces, newlines or quotes; Profitshare answers 400 to those.
+const secret = (v) => String(v ?? "").trim().replace(/^["']|["']$/g, "");
+const psEnv = { PS_API_USER: secret(process.env.PS_API_USER), PS_API_KEY: secret(process.env.PS_API_KEY) };
 if (!feedUrl && !psEnv.PS_API_KEY) throw new Error("set TP_FEED_URL and/or PS_API_USER + PS_API_KEY");
 
 const records = [
