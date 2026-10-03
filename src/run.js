@@ -1,9 +1,10 @@
-// Nightly import: affiliate feeds -> D1 catalog (only what changed, within the free-tier budget).
+// Nightly import: affiliate feeds -> D1 catalog (only what changed, capped to the Workers Paid included quota: src/quota.js).
 // Usage: node src/run.js [--dry-run] [--budget 90000]
 // Env: TP_FEED_URL (2Performant CSV), PS_API_USER + PS_API_KEY (Profitshare), CLOUDFLARE_API_TOKEN +
 // CLOUDFLARE_ACCOUNT_ID in CI. Each source is optional; at least one must be set.
 import { parseCsvObjects, responseText } from "./csv.js";
-import { executeStatements, loadCurrent, recordRun } from "./d1.js";
+import { databaseBytes, executeStatements, loadCurrent, recordRun } from "./d1.js";
+import { allowance } from "./quota.js";
 import { fromTwoPerformant } from "./normalize.js";
 import { plan } from "./plan.js";
 import { readProfitshare } from "./profitshare.js";
@@ -11,7 +12,7 @@ import { fileURLToPath } from "node:url";
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
-const budget = Number(args[args.indexOf("--budget") + 1]) || 90_000;
+const requested = Number(args[args.indexOf("--budget") + 1]) || 90_000;
 
 const day = Number(
   new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Bucharest", year: "numeric", month: "2-digit", day: "2-digit" })
@@ -44,7 +45,10 @@ const records = [
 const current = dryRun ? new Map() : await loadCurrent();
 console.log(`catalog currently has ${current.size} products`);
 
-const { statements, stats } = plan(records, current, day, budget);
+const size = dryRun ? 0 : await databaseBytes();
+const { budget, inserts, reason } = allowance(requested, size);
+console.log(`database ${(size / 1024 ** 2).toFixed(0)} MB; write budget ${budget}${reason ? ` (${reason})` : ""}`);
+const { statements, stats } = plan(records, current, day, budget, { inserts });
 console.log(JSON.stringify({ day, budget, ...stats }, null, 2));
 
 if (dryRun) {

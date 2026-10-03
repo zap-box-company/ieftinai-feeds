@@ -7,7 +7,7 @@ on:
     inputs:
       budget:
         description: "Max D1 rows written this run"
-        default: "90000"
+        default: "1000000"
 
 concurrency:
   group: catalog-import
@@ -32,7 +32,7 @@ jobs:
           PS_API_KEY: ${{ secrets.PS_API_KEY }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: node src/run.js --budget "${{ github.event.inputs.budget || '90000' }}"
+        run: node src/run.js --budget "${{ github.event.inputs.budget || '1000000' }}"
       - name: Rebuild "Cele mai căutate"
         continue-on-error: true # needs migration 0005 (trending table) on the catalog
         env:

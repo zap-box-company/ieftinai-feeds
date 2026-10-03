@@ -1,4 +1,4 @@
-// Decides what to write tonight, within the D1 free-tier write budget, and renders it as SQL.
+// Decides what to write tonight, within the write budget (src/quota.js), and renders it as SQL.
 
 /** Approximate D1 "rows written" per operation (table row + index entries + FTS + history). */
 export const COST = { insert: 6, priceUpdate: 3, metaUpdate: 2 };
@@ -20,8 +20,9 @@ export function lit(v) {
  * @param current   Map key -> {price, oldPrice, title, brand, url, image, gtin, category} already in D1
  * @param day       yyyymmdd
  * @param budget    max rows written for this run
+ * @param options   inserts: false = only update products already in the catalog (storage cap)
  */
-export function plan(records, current, day, budget) {
+export function plan(records, current, day, budget, { inserts = true } = {}) {
   const priceChanges = [];
   const newWithGtin = [];
   const newOther = [];
@@ -54,7 +55,7 @@ export function plan(records, current, day, budget) {
     spent += COST.priceUpdate;
     done.priceChanges++;
   }
-  for (const r of [...newWithGtin, ...newOther]) {
+  for (const r of inserts ? [...newWithGtin, ...newOther] : []) {
     if (!afford(COST.insert)) break;
     statements.push(
       "INSERT OR IGNORE INTO products (key, store, title, price, old_price, url, aff_url, image, brand, category, gtin, first_day, updated_day) VALUES (" +

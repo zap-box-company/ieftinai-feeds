@@ -24,6 +24,12 @@ async function query(sql) {
   return parsed[0]?.results ?? [];
 }
 
+/** Current database size in bytes (wrangler d1 info). */
+export async function databaseBytes() {
+  const out = await wrangler(["d1", "info", DB, "--json"]);
+  return Number(JSON.parse(out.slice(out.indexOf("{"))).database_size) || 0;
+}
+
 /** Several SELECTs in one wrangler call; one result array per statement, in order. */
 export async function queryMany(sqls) {
   const out = await wrangler(["d1", "execute", DB, "--remote", "--json", "--command", sqls.join(";\n")]);
