@@ -5,6 +5,17 @@ export const COST = { insert: 6, priceUpdate: 3, metaUpdate: 2 };
 
 const META_FIELDS = ["title", "brand", "url", "image", "gtin", "category", "shipping"];
 
+/**
+ * 32-bit FNV-1a of the descriptive fields: the catalog is held in memory as { price, oldPrice, sig }
+ * (2M+ products would not fit with every string), and a changed signature means a metadata update.
+ */
+export function metaSig(r) {
+  let h = 0x811c9dc5;
+  const s = META_FIELDS.map((f) => (r[f] ?? "")).join("");
+  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 0x01000193);
+  return h >>> 0;
+}
+
 /** SQL literal; feed data is untrusted, so every string is escaped. */
 export function lit(v) {
   if (v === null || v === undefined) return "NULL";
@@ -34,7 +45,7 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
       (r.gtin ? newWithGtin : newOther).push(r);
     } else if (cur.price !== r.price || (cur.oldPrice ?? null) !== (r.oldPrice ?? null)) {
       priceChanges.push({ r, cur });
-    } else if (META_FIELDS.some((f) => (cur[f] ?? null) !== (r[f] ?? null))) {
+    } else if (cur.sig !== undefined ? cur.sig !== metaSig(r) : META_FIELDS.some((f) => (cur[f] ?? null) !== (r[f] ?? null))) {
       metaChanges.push(r);
     }
   }

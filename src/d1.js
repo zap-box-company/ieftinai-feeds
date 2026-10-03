@@ -1,5 +1,6 @@
 // D1 access through the pinned local wrangler, run without a shell so SQL arguments stay intact (OAuth locally, CLOUDFLARE_API_TOKEN in GitHub Actions).
 import { execFile } from "node:child_process";
+import { metaSig } from "./plan.js";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -46,10 +47,7 @@ export async function loadCurrent() {
         `WHERE key > '${after.replace(/'/g, "''")}' ORDER BY key LIMIT 20000`,
     );
     for (const r of rows) {
-      current.set(r.key, {
-        price: r.price, oldPrice: r.old_price, title: r.title, brand: r.brand,
-        url: r.url, image: r.image, gtin: r.gtin, category: r.category, shipping: r.shipping,
-      });
+      current.set(r.key, { price: r.price, oldPrice: r.old_price, sig: metaSig({ ...r, oldPrice: r.old_price }) });
     }
     if (rows.length < 20000) return current;
     after = rows.at(-1).key;

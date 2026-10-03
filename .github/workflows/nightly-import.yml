@@ -16,7 +16,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 90 # ~45 min a night (a third of Profitshare, src/profitshare.js); keeps us in the free 2,000 min/month
+    timeout-minutes: 110 # ~50 min a night (2Performant 2.1M rows + a third of Profitshare); fits the free 2,000 min/month
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,6 +31,7 @@ jobs:
           PS_API_USER: ${{ secrets.PS_API_USER }}
           PS_API_KEY: ${{ secrets.PS_API_KEY }}
           PS_PROXY_URL: https://ieftinai-affiliate.ieftinai.workers.dev # Profitshare refuses GitHub runners
+          NODE_OPTIONS: --max-old-space-size=5120 # 2M+ feed rows in memory
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: node src/run.js --budget "${{ github.event.inputs.budget || '1000000' }}"

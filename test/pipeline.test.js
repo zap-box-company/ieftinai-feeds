@@ -77,3 +77,12 @@ test("feed text: HTML entities decoded", async () => {
   const { decodeEntities } = await import("../src/normalize.js");
   assert.equal(decodeEntities("Accesorii &#x3E; Volane &amp; joystick-uri &#8211; nou"), "Accesorii > Volane & joystick-uri – nou");
 });
+
+test("compact catalog: metadata changes are found through the signature", async () => {
+  const { plan, metaSig } = await import("../src/plan.js");
+  const r = { key: "s:1", store: "s", title: "Lego 21034", price: 100, oldPrice: null, brand: "LEGO", url: "u", image: "i", gtin: null, category: "Jucarii", shipping: null };
+  const same = new Map([["s:1", { price: 100, oldPrice: null, sig: metaSig(r) }]]);
+  assert.equal(plan([r], same, 20261004, 1000).stats.pending.metaChanges, 0);
+  const renamed = new Map([["s:1", { price: 100, oldPrice: null, sig: metaSig({ ...r, title: "Lego Londra" }) }]]);
+  assert.equal(plan([r], renamed, 20261004, 1000).stats.pending.metaChanges, 1);
+});
