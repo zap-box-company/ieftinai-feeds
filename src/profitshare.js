@@ -4,6 +4,8 @@
 import { decodeEntities, parsePrice } from "./normalize.js";
 
 const API = "https://api.profitshare.ro";
+const RETRIES = 6;
+const BACKOFF_MS = 3000;
 
 /**
  * Advertisers we never import because their program terms forbid price comparators / price
@@ -35,8 +37,8 @@ export async function call(env, path, query = "", fetchImpl = fetch) {
     for (let attempt = 1; ; attempt++) {
       const res = await fetchImpl(`${env.PS_PROXY_URL.replace(/\/+$/, "")}/v1/ps/${path}?${query}`, { headers: { "X-Pipeline-Token": token } });
       if (res.ok) return (await res.json()).result;
-      if (res.status === 400 || res.status === 403 || attempt >= 3) throw new Error(`Profitshare via proxy ${path}?${query}: HTTP ${res.status}`);
-      await new Promise((r) => setTimeout(r, 2000 * attempt));
+      if (res.status === 400 || res.status === 403 || attempt >= RETRIES) throw new Error(`Profitshare via proxy ${path}?${query}: HTTP ${res.status}`);
+      await new Promise((r) => setTimeout(r, BACKOFF_MS * attempt));
     }
   }
   const date = new Date().toUTCString();
@@ -46,8 +48,8 @@ export async function call(env, path, query = "", fetchImpl = fetch) {
       headers: { Date: date, "X-PS-Client": env.PS_API_USER, "X-PS-Accept": "json", "X-PS-Auth": auth },
     });
     if (res.ok) return (await res.json()).result;
-    if (res.status === 400 || attempt >= 3) throw new Error(`Profitshare ${path}?${query}: HTTP ${res.status}`);
-    await new Promise((r) => setTimeout(r, 2000 * attempt));
+    if (res.status === 400 || attempt >= RETRIES) throw new Error(`Profitshare ${path}?${query}: HTTP ${res.status}`);
+    await new Promise((r) => setTimeout(r, BACKOFF_MS * attempt));
   }
 }
 
@@ -87,8 +89,11 @@ export function fromProfitshare(p) {
   };
 }
 
-/** Every product of every approved advertiser, a few pages in parallel. */
-export async function readProfitshare(env, { concurrency = 8, log = console.log, fetchImpl = fetch } = {}) {
+/**
+ * Every product of every approved advertiser, a few pages in parallel; pages that still fail get a
+ * second, slower pass at the end (Profitshare answers 502 when busy).
+ */
+export async function readProfitshare(env, { concurrency = 4, log = console.log, fetchImpl = fetch } = {}) {
   const advertisers = Object.values(await call(env, "affiliate-advertisers", "", fetchImpl)).filter((a) => !EXCLUDED_ADVERTISERS.has(Number(a.id)));
   const byKey = new Map();
   for (const a of advertisers) {
@@ -102,19 +107,25 @@ export async function readProfitshare(env, { concurrency = 8, log = console.log,
     const pages = Number(first.total_pages) || 0;
     const add = (r) => (r?.products ?? []).forEach((p) => { const x = fromProfitshare(p); if (x) byKey.set(x.key, x); });
     add(first);
-    let next = 2;
-    const worker = async () => {
-      while (next <= pages) {
-        const page = next++;
-        try {
-          add(await call(env, "affiliate-products", `filters[advertiser]=${a.id}&page=${page}`, fetchImpl));
-        } catch (error) {
-          log(`profitshare: ${a.name} page ${page} failed (${error.message})`);
+    const failed = [];
+    const run = async (list, parallel, final) => {
+      let i = 0;
+      const worker = async () => {
+        while (i < list.length) {
+          const page = list[i++];
+          try {
+            add(await call(env, "affiliate-products", `filters[advertiser]=${a.id}&page=${page}`, fetchImpl));
+          } catch (error) {
+            if (final) log(`profitshare: ${a.name} page ${page} failed (${error.message})`);
+            else failed.push(page);
+          }
         }
-      }
+      };
+      await Promise.all(Array.from({ length: parallel }, worker));
     };
-    await Promise.all(Array.from({ length: concurrency }, worker));
-    log(`profitshare: ${a.name} ${pages} pages`);
+    await run(Array.from({ length: Math.max(0, pages - 1) }, (_, k) => k + 2), concurrency, false);
+    if (failed.length) await run(failed, 1, true);
+    log(`profitshare: ${a.name} ${pages} pages, ${failed.length} retried`);
   }
   log(`profitshare: ${byKey.size} usable products`);
   return [...byKey.values()];
