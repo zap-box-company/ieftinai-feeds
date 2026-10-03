@@ -85,7 +85,7 @@ export function fromProfitshare(p) {
 }
 
 /** Every product of every approved advertiser, a few pages in parallel. */
-export async function readProfitshare(env, { concurrency = 4, log = console.log, fetchImpl = fetch } = {}) {
+export async function readProfitshare(env, { concurrency = 8, log = console.log, fetchImpl = fetch } = {}) {
   const advertisers = Object.values(await call(env, "affiliate-advertisers", "", fetchImpl)).filter((a) => !EXCLUDED_ADVERTISERS.has(Number(a.id)));
   const byKey = new Map();
   for (const a of advertisers) {
