@@ -6,21 +6,37 @@ import { executeStatements, queryMany } from "./d1.js";
 import { lit } from "./plan.js";
 import { rankedQueries } from "./trending-queries.js";
 
-/** Accessories that share the product's name ("Husa iPhone 17 Pro") but are not what people search for. */
-const ACCESSORY = /^(husa|husă|folie|sticla|sticlă|cablu|incarcator|încărcător|adaptor|carcasa|carcasă|suport|curea|bratara|brățară|geanta|geantă|protectie|protecție|stand|skin|sticker|toc|baterie externa|filtru|sac|perie|accesoriu|set accesorii|cartus|cartuș|husa)\b/i;
+/** First title words (no diacritics) that name an accessory or a game for the product, not the product. */
+const ACCESSORY = new Set([
+  "husa", "folie", "sticla", "protector", "protectie", "cablu", "incarcator", "adaptor", "carcasa", "suport",
+  "curea", "bratara", "geanta", "stand", "skin", "sticker", "toc", "filtru", "sac", "perie", "accesoriu",
+  "accesorii", "cartus", "controler", "controller", "joc", "jocuri", "telecomanda", "rezerva",
+]);
 
 /** Free text -> FTS5 query where every word must match as a prefix (same rule as the site and the app). */
 export function ftsQuery(text) {
-  const words = String(text ?? "").normalize("NFD").replace(/\p{Mn}/gu, "").toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? [];
-  return words.slice(0, 8).map((w) => `"${w}"*`).join(" ");
+  return words(text).slice(0, 8).map((w) => `"${w}"*`).join(" ");
+}
+
+/** Lowercase words without diacritics. */
+function words(text) {
+  return String(text ?? "").normalize("NFD").replace(/\p{Mn}/gu, "").toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? [];
 }
 
 /**
- * Best candidate among FTS hits (already in relevance order): skip accessories and anything under
- * a third of the median price (cheap parts that slipped through), then keep the most relevant.
+ * Best candidate among FTS hits (already in relevance order): every query word must be a whole
+ * word of the title (FTS matches prefixes: "cuptor" finds "cuptorul" in a steriliser's title),
+ * accessories and anything under a third of the median price are skipped, the most relevant wins.
  */
-export function pickMatch(rows) {
-  const real = rows.filter((r) => !ACCESSORY.test(r.title.trim()));
+export function pickMatch(rows, query = "") {
+  const wanted = words(query);
+  const real = rows.filter((r) => {
+    // Shops put a game's platform in brackets: "Super Mario Maker 2 (Nintendo Switch)".
+    const outside = words(r.title.replace(/\([^)]*\)/g, " "));
+    const own = new Set(outside);
+    const accessory = ACCESSORY.has(outside[0]) && !wanted.includes(outside[0]);
+    return !accessory && wanted.every((w) => own.has(w));
+  });
   if (!real.length) return null;
   const prices = real.map((r) => r.price).sort((a, b) => a - b);
   const median = prices[Math.floor(prices.length / 2)];
@@ -41,7 +57,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const now = new Date().toISOString();
   const chosen = [];
   queries.forEach((q, i) => {
-    const hit = pickMatch(results[i] ?? []);
+    const hit = pickMatch(results[i] ?? [], q.query);
     console.log(`${String(q.rank).padStart(3)} ${q.query.padEnd(36)} ${hit ? `${hit.price} lei  ${hit.title.slice(0, 70)}` : "— no match"}`);
     if (hit) chosen.push({ ...q, key: hit.key });
   });
