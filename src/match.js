@@ -52,6 +52,24 @@ export function normalizeMpn(code) {
 /** Words that name another model of the same line. */
 const VARIANTS = new Set(["plus", "ultra", "pro", "max", "mini", "lite", "fe", "edge"]);
 
+/** Romanian and English names of the same colour, one name each. */
+const COLOR_SYNONYMS = {
+  neagra: "negru", black: "negru", midnight: "negru",
+  alba: "alb", white: "alb", starlight: "alb",
+  gray: "gri", grey: "gri",
+  argintie: "argintiu", silver: "argintiu",
+  aurie: "auriu", gold: "auriu",
+  albastra: "albastru", blue: "albastru",
+  rosie: "rosu", red: "rosu",
+  green: "verde",
+  galbena: "galben",
+  pink: "roz",
+  purple: "mov", violet: "mov",
+  navy: "bleumarin",
+  graphite: "grafit",
+};
+const sameColor = (w) => COLOR_SYNONYMS[w] ?? w;
+
 /** First words of accessories that carry the product's name ("Husa Samsung Galaxy S25"). */
 const ACCESSORY = new Set([
   "husa", "folie", "sticla", "protector", "protectie", "cablu", "incarcator", "adaptor", "carcasa", "suport",
@@ -81,8 +99,9 @@ export function titleSimilarity(a, b) {
   const wa = na.split(" ");
   const wb = nb.split(" ");
   if (ACCESSORY.has(wa[0]) !== ACCESSORY.has(wb[0])) return 0; // a case is not the phone
-  const ca = wa.filter((w) => COLORS.has(w));
-  const cb = wb.filter((w) => COLORS.has(w));
+  // Compared by meaning: "Negru" at dwyn.ro is "Black" at eMAG.
+  const ca = wa.filter((w) => COLORS.has(w)).map(sameColor);
+  const cb = wb.filter((w) => COLORS.has(w)).map(sameColor);
   if (ca.length && cb.length && !ca.some((c) => cb.includes(c))) return 0; // other colour, other variant
   const ta = new Set(wa);
   const tb = new Set(wb);
