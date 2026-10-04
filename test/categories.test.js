@@ -27,3 +27,8 @@ test("garden furniture is not a phone; phones and shampoos still map", () => {
   assert.equal(mapCategory("Telefoane").slug, "telefoane-mobile");
   assert.equal(mapCategory("Mobilier"), null);
 });
+
+test("an accessories category never lands in the main product", () => {
+  assert.equal(mapCategory("Accesorii Telefoane Mobile").slug, "alte-accesorii-telefoane");
+  assert.notEqual(mapCategory("Accesorii laptop")?.slug, "laptopuri");
+});

@@ -49,7 +49,11 @@ export function mapCategory(feedCategory, { threshold = 0.45 } = {}) {
   const fs = stems(feedCategory);
   if (!fs.length) return null;
   let best = null;
+  // "Accesorii Telefoane Mobile" holds cables and screen protectors: only an accessories category
+  // ("alte-accesorii-telefoane") fits, never the phones themselves.
+  const accessories = /^accesori/.test(plain(feedCategory));
   for (const t of TARGETS) {
+    if (accessories && !t.slug.includes("accesori")) continue;
     // The head word ("Unelte" in "Unelte electrice") must be in the eMAG category, not just any word.
     if (!t.s.includes(fs[0]) && !t.gs.includes(fs[0])) continue;
     const score = overlap(fs, t.s) * 0.7 + overlap(t.s, fs) * 0.2 + overlap(fs, t.gs) * 0.1 + (fs.join(" ") === t.s.join(" ") ? 0.5 : 0);
