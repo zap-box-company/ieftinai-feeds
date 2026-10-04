@@ -16,7 +16,11 @@ export async function syncCategories({ log = console.log } = {}) {
   let covered = 0;
   for (const { category, n } of counts) {
     const m = mapCategory(category);
-    if (!m) continue;
+    if (!m) {
+      // No longer fits anywhere (the rules got stricter): drop the old, wrong mapping.
+      if (before.has(category)) statements.push(`DELETE FROM category_map WHERE feed_category = ${lit(category)};`);
+      continue;
+    }
     mapped++;
     covered += n;
     const old = before.get(category);

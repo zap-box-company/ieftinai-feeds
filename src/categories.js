@@ -13,7 +13,7 @@ export function stems(text) {
     .normalize("NFD").replace(/\p{Mn}/gu, "").toLowerCase()
     .match(/[\p{L}\p{N}]+/gu)
     ?.filter((w) => w.length > 1 && !STOP.has(w))
-    .map((w) => (w.length > 5 ? w.slice(0, 5) : w)) ?? [];
+    .map((w) => (w.length > 6 ? w.slice(0, 6) : w)) ?? [];
 }
 
 const overlap = (a, b) => {
@@ -40,6 +40,8 @@ const BY_SLUG = new Map(TARGETS.map((t) => [t.slug, t]));
 
 export function mapCategory(feedCategory, { threshold = 0.45 } = {}) {
   const hand = OVERRIDES.get(plain(feedCategory)) ?? OVERRIDES.get(plain(String(feedCategory).split(">").pop()));
+  if (hand === "-") return null; // a shop category that fits nowhere in the tree: better unmapped than wrong
+  // (Stems are 6 letters: with 5, "mobilier" matched "mobile" and garden furniture landed in phones.)
   if (hand && BY_SLUG.has(hand)) {
     const t = BY_SLUG.get(hand);
     return { dept: t.dept, slug: t.slug, name: t.name, score: 1 };

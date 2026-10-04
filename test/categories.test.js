@@ -20,3 +20,10 @@ test("shop categories land in the right eMAG category", () => {
 test("stems drop diacritics and stopwords", () => {
   assert.deepEqual(stems("Cărți pentru copii"), ["carti", "copii"]);
 });
+
+test("garden furniture is not a phone; phones and shampoos still map", () => {
+  assert.notEqual(mapCategory("Mobilier de grădină")?.slug, "telefoane-mobile");
+  assert.equal(mapCategory("Smartphone-uri").slug, "telefoane-mobile");
+  assert.equal(mapCategory("Telefoane").slug, "telefoane-mobile");
+  assert.equal(mapCategory("Mobilier"), null);
+});
