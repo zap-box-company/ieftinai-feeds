@@ -116,6 +116,12 @@ export function titleSimilarity(a, b) {
   const specB = [...tb].filter(isSpec);
   if (specA.length && specB.length && !specA.some((s) => tb.has(s)) ) return 0;
   if (specA.some((s) => /\d+(gb|tb)$/.test(s) && specB.some((x) => /\d+(gb|tb)$/.test(x)) && !tb.has(s))) return 0;
+  // Same for quantities: a 50 ml perfume is not the 100 ml one, 500 g is not 1 kg.
+  for (const unit of ["ml", "l", "g", "kg"]) {
+    const qa = specA.filter((s) => new RegExp(`^\\d+${unit}$`).test(s));
+    const qb = specB.filter((s) => new RegExp(`^\\d+${unit}$`).test(s));
+    if (qa.length && qb.length && !qa.some((q) => qb.includes(q))) return 0;
+  }
   const shared = [...ta].filter((t) => tb.has(t)).length;
   const dice = (2 * shared) / (ta.size + tb.size);
   const edit = 1 - levenshtein(na, nb) / Math.max(na.length, nb.length);
