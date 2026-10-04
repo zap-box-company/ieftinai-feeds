@@ -2,6 +2,7 @@
 // advertiser. Auth as in the official WP plugin and ../server/src/profitshare.js:
 // X-PS-Auth = hex(HMAC-SHA1(method + path + "/?" + query + "/" + apiUser + date, apiKey)).
 import { decodeEntities, parsePrice } from "./normalize.js";
+import { normalizeMpn } from "./match.js";
 
 const API = "https://api.profitshare.ro";
 const RETRIES = 6;
@@ -84,6 +85,8 @@ export function fromProfitshare(p) {
     brand: clean(p.brand_name),
     category: clean(p.category_name),
     gtin: null,
+    // Profitshare has no EAN; part_number is often the manufacturer's code (SM-S948BZKDEUE).
+    mpn: normalizeMpn(p.part_number),
     // Feed flag only: free delivery is 0; otherwise the cost is unknown (null), never guessed.
     shipping: Number(p.free_shipping) === 1 ? 0 : null,
   };

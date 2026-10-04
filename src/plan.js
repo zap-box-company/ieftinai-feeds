@@ -3,7 +3,7 @@
 /** Approximate D1 "rows written" per operation (table row + index entries + FTS + history). */
 export const COST = { insert: 6, priceUpdate: 3, metaUpdate: 2 };
 
-const META_FIELDS = ["title", "brand", "url", "image", "gtin", "category", "shipping"];
+const META_FIELDS = ["title", "brand", "url", "image", "gtin", "category", "shipping", "mpn"];
 
 /**
  * 32-bit FNV-1a of the descriptive fields: the catalog is held in memory as { price, oldPrice, sig }
@@ -71,8 +71,8 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
   for (const r of inserts ? queue : []) {
     if (!afford(COST.insert)) break;
     statements.push(
-      "INSERT OR IGNORE INTO products (key, store, title, price, old_price, url, aff_url, image, brand, category, gtin, shipping, first_day, updated_day) VALUES (" +
-        [r.key, r.store, r.title, r.price, r.oldPrice, r.url, r.affUrl, r.image, r.brand, r.category, r.gtin, r.shipping ?? null, day, day].map(lit).join(", ") +
+      "INSERT OR IGNORE INTO products (key, store, title, price, old_price, url, aff_url, image, brand, category, gtin, shipping, mpn, first_day, updated_day) VALUES (" +
+        [r.key, r.store, r.title, r.price, r.oldPrice, r.url, r.affUrl, r.image, r.brand, r.category, r.gtin, r.shipping ?? null, r.mpn ?? null, day, day].map(lit).join(", ") +
         ");",
       historyRow(r, day),
     );
@@ -83,7 +83,7 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
     if (!afford(COST.metaUpdate)) break;
     statements.push(
       `UPDATE products SET title=${lit(r.title)}, brand=${lit(r.brand)}, url=${lit(r.url)}, image=${lit(r.image)}, ` +
-        `gtin=${lit(r.gtin)}, category=${lit(r.category)}, shipping=${lit(r.shipping ?? null)}, aff_url=${lit(r.affUrl)} WHERE key=${lit(r.key)};`,
+        `gtin=${lit(r.gtin)}, category=${lit(r.category)}, shipping=${lit(r.shipping ?? null)}, mpn=${lit(r.mpn ?? null)}, aff_url=${lit(r.affUrl)} WHERE key=${lit(r.key)};`,
     );
     spent += COST.metaUpdate;
     done.metaChanges++;

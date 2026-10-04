@@ -43,7 +43,7 @@ export async function loadCurrent() {
   let after = "";
   for (;;) {
     const rows = await query(
-      "SELECT key, price, old_price, title, brand, url, image, gtin, category, shipping FROM products " +
+      "SELECT key, price, old_price, title, brand, url, image, gtin, category, shipping, mpn FROM products " +
         `WHERE key > '${after.replace(/'/g, "''")}' ORDER BY key LIMIT 20000`,
     );
     for (const r of rows) {

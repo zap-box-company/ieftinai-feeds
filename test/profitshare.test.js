@@ -17,7 +17,7 @@ test("Profitshare product: VAT price, https links, store from the product URL", 
     url: "https://www.vexio.ro/statii-radio/tti/147584-kit-tti-pack13/",
     affUrl: "https://app.profitshare.ro/lps/zP0/Dhp/?redirect=https%3A%2F%2Fwww.vexio.ro%2F",
     image: "https://static.profitshare.ro/product_images/photos/50/65/40/50653682.jpeg",
-    brand: "TTi", category: "Statii Radio", gtin: null, shipping: null,
+    brand: "TTi", category: "Statii Radio", gtin: null, mpn: "TTIPACK13", shipping: null,
   });
   assert.equal(fromProfitshare({ ...sample, price_vat: "" }), null);
 });
