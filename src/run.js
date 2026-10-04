@@ -27,7 +27,7 @@ const day = Number(
 /** Products written per batch (user: every 5,000): a run that stops early keeps all but the last batch. */
 const BATCH = 5_000;
 
-async function readTwoPerformantSafely(url, onBatch, attempts = 4) {
+async function readTwoPerformantSafely(url, onBatch, attempts = 2) {
   for (let i = 1; i <= attempts; i++) {
     try {
       return await readTwoPerformant(url, onBatch);
@@ -62,7 +62,11 @@ async function readTwoPerformant(url, onBatch) {
   console.log(`2performant: ${rows} rows, ${seen.size} usable products`);
 }
 
-const feedUrl = process.env.TP_FEED_URL;
+// One or more 2Performant CSV links (space, comma or newline separated). The single 300-program
+// feed is generated live and 2Performant closes the connection after 60 s, so it is split into
+// smaller feeds, each read in turn.
+const feedUrls = [process.env.TP_FEED_URL, process.env.TP_FEED_URLS].flatMap((v) => String(v ?? "").split(/[s,]+/)).map((u) => u.replace(/^["']|["']$/g, "")).filter((u) => /^https?:/.test(u));
+const feedUrl = feedUrls[0];
 // Secrets pasted into GitHub may carry spaces, newlines or quotes; Profitshare answers 400 to those.
 const secret = (v) => String(v ?? "").trim().replace(/^["']|["']$/g, "");
 const psEnv = { PS_API_USER: secret(process.env.PS_API_USER), PS_API_KEY: secret(process.env.PS_API_KEY), PS_PROXY_URL: process.env.PS_PROXY_URL };
@@ -110,8 +114,10 @@ if (psEnv.PS_API_KEY) {
     onBatch: (list) => importStage("profitshare", list, "../out/profitshare/"),
   });
 }
-if (feedUrl && left > 0) {
-  await readTwoPerformantSafely(feedUrl, async (list) => {
+for (const [i, url] of feedUrls.entries()) {
+  if (left <= 0) break;
+  console.log(`2performant: feed ${i + 1}/${feedUrls.length}`);
+  await readTwoPerformantSafely(url, async (list) => {
     await importStage("2performant", list, "../out/2performant/");
     return left > 0;
   });

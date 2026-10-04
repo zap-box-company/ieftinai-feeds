@@ -31,6 +31,7 @@ jobs:
       - name: Import feeds into D1
         env:
           TP_FEED_URL: ${{ secrets.TP_FEED_URL }}
+          TP_FEED_URLS: ${{ secrets.TP_FEED_URLS }}
           PS_API_USER: ${{ secrets.PS_API_USER }}
           PS_API_KEY: ${{ secrets.PS_API_KEY }}
           PS_PROXY_URL: https://ieftinai-affiliate.ieftinai.workers.dev # Profitshare refuses GitHub runners
