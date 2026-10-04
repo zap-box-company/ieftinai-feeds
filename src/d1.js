@@ -60,7 +60,18 @@ export async function executeStatements(statements, outDir, perFile = 20000) {
   for (let i = 0; i < statements.length; i += perFile) {
     const file = join(outDir, `batch-${String(i / perFile + 1).padStart(3, "0")}.sql`);
     await writeFile(file, statements.slice(i, i + perFile).join("\n") + "\n", "utf8");
-    await wrangler(["d1", "execute", DB, "--remote", "--yes", "--file", file]);
+    // D1's bulk import sometimes answers "Not currently importing anything": the statements are
+    // INSERT OR IGNORE / UPDATE, so running a file again is safe.
+    for (let attempt = 1; ; attempt++) {
+      try {
+        await wrangler(["d1", "execute", DB, "--remote", "--yes", "--file", file]);
+        break;
+      } catch (error) {
+        if (attempt >= 3) throw error;
+        console.log(`${file}: attempt ${attempt} failed, retrying`);
+        await new Promise((r) => setTimeout(r, 15_000 * attempt));
+      }
+    }
     console.log(`executed ${file}`);
   }
 }

@@ -88,7 +88,13 @@ async function importStage(name, records, outDir) {
     console.log("dry run: nothing written. Sample:\n" + statements.slice(0, 4).join("\n").slice(0, 1500));
     return;
   }
-  await executeStatements(statements, fileURLToPath(new URL(outDir, import.meta.url)));
+  try {
+    await executeStatements(statements, fileURLToPath(new URL(outDir, import.meta.url)));
+  } catch (error) {
+    // One batch that keeps failing is skipped; the next ones still land (it comes back next run).
+    console.log(`${name}: batch not written (${String(error.message).slice(0, 200)}); going on`);
+    return;
+  }
   await recordRun(day, "feeds", stats.seen, stats.estimatedRowsWritten);
   left -= stats.estimatedRowsWritten;
   // Later batches see these as known (no double insert when the feed lists a product twice).
