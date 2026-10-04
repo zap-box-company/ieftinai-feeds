@@ -3,7 +3,9 @@
 /** Approximate D1 "rows written" per operation (table row + index entries + FTS + history). */
 export const COST = { insert: 6, priceUpdate: 3, metaUpdate: 2 };
 
-const META_FIELDS = ["title", "brand", "url", "image", "gtin", "category", "shipping", "mpn"];
+// No "image": the server replaces Profitshare-hosted pictures with the shop's own (blocked by ad
+// blockers, often 404), so a different image alone must not rewrite the product every night.
+const META_FIELDS = ["title", "brand", "url", "gtin", "category", "shipping", "mpn"];
 
 /**
  * 32-bit FNV-1a of the descriptive fields: the catalog is held in memory as { price, oldPrice, sig }
@@ -85,7 +87,7 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
   for (const r of metaChanges) {
     if (!afford(COST.metaUpdate)) break;
     statements.push(
-      `UPDATE products SET title=${lit(r.title)}, brand=${lit(r.brand)}, url=${lit(r.url)}, image=${lit(r.image)}, ` +
+      `UPDATE products SET title=${lit(r.title)}, brand=${lit(r.brand)}, url=${lit(r.url)}, image=CASE WHEN image IS NULL OR image LIKE 'https://static.profitshare.ro/%' THEN ${lit(r.image)} ELSE image END, ` +
         `gtin=${lit(r.gtin)}, category=${lit(r.category)}, shipping=${lit(r.shipping ?? null)}, mpn=${lit(r.mpn ?? null)}, aff_url=${lit(r.affUrl)} WHERE key=${lit(r.key)};`,
     );
     spent += COST.metaUpdate;
