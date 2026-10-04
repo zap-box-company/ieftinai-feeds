@@ -24,8 +24,8 @@ const day = Number(
  * The 2Performant feed (2M+ rows, one long download) can drop mid-stream, e.g. while 2Performant
  * rebuilds it: try again a few times, then go on without it rather than lose the night's import.
  */
-/** Products written per batch: a run that stops early keeps all but the last batch. */
-const BATCH = 25_000;
+/** Products written per batch (user: every 5,000): a run that stops early keeps all but the last batch. */
+const BATCH = 5_000;
 
 async function readTwoPerformantSafely(url, onBatch, attempts = 4) {
   for (let i = 1; i <= attempts; i++) {
