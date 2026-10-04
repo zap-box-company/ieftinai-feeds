@@ -45,7 +45,10 @@ const COLORS = new Set([
  * (plain shop ids like "12345" are not manufacturer codes).
  */
 export function normalizeMpn(code) {
-  const c = String(code ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  // Region or package suffixes after "." or "/" ("22U401A-B.AEUQ", "MQ8N3ZD/A") name the same model.
+  const raw = String(code ?? "");
+  const core = raw.split(/[./]/)[0];
+  const c = (core.replace(/[^A-Za-z0-9]/g, "").length >= 5 ? core : raw).toUpperCase().replace(/[^A-Z0-9]/g, "");
   return c.length >= 5 && c.length <= 30 && /[A-Z]/.test(c) && /[0-9]/.test(c) ? c : null;
 }
 
