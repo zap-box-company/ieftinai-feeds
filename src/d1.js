@@ -65,9 +65,21 @@ export async function executeStatements(statements, outDir, perFile = 20000) {
   }
 }
 
+/** Several runs a day add up, so the monthly total (writtenThisMonth) stays right. */
 export async function recordRun(day, source, seen, written) {
   await query(
-    `INSERT OR REPLACE INTO pipeline_runs (day, source, rows_seen, rows_written, finished_at) ` +
-      `VALUES (${day}, '${source}', ${seen}, ${written}, '${new Date().toISOString()}')`,
+    `INSERT INTO pipeline_runs (day, source, rows_seen, rows_written, finished_at) ` +
+      `VALUES (${day}, '${source}', ${seen}, ${written}, '${new Date().toISOString()}') ` +
+      `ON CONFLICT (day, source) DO UPDATE SET rows_seen = excluded.rows_seen, rows_written = rows_written + excluded.rows_written, finished_at = excluded.finished_at`,
   );
+}
+
+/** Rows written since the 1st of [day]'s month by the imports and the shop crawler. */
+export async function writtenThisMonth(day) {
+  const from = Math.floor(day / 100) * 100 + 1;
+  const [runs, crawl] = await queryMany([
+    `SELECT COALESCE(SUM(rows_written), 0) AS n FROM pipeline_runs WHERE day >= ${from}`,
+    `SELECT COALESCE(SUM(rows), 0) AS n FROM crawl_days WHERE day >= ${from}`,
+  ]);
+  return (runs[0]?.n ?? 0) + (crawl[0]?.n ?? 0);
 }
