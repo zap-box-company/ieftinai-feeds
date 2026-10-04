@@ -20,6 +20,23 @@ const day = Number(
     .replace(/-/g, ""),
 );
 
+/**
+ * The 2Performant feed (2M+ rows, one long download) can drop mid-stream, e.g. while 2Performant
+ * rebuilds it: try again a few times, then go on without it rather than lose the night's import.
+ */
+async function readTwoPerformantSafely(url, attempts = 4) {
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      return await readTwoPerformant(url);
+    } catch (error) {
+      console.log(`2performant: attempt ${i}/${attempts} failed (${error.cause?.message ?? error.message})`);
+      if (i < attempts) await new Promise((r) => setTimeout(r, 60_000 * i));
+    }
+  }
+  console.log("2performant: skipped tonight; Profitshare goes on");
+  return [];
+}
+
 async function readTwoPerformant(url) {
   const response = await fetch(url, { redirect: "follow" });
   if (!response.ok) throw new Error(`feed HTTP ${response.status}`);
@@ -42,7 +59,7 @@ if (psEnv.PS_API_KEY) console.log(`profitshare credentials: user ${psEnv.PS_API_
 if (!feedUrl && !psEnv.PS_API_KEY) throw new Error("set TP_FEED_URL and/or PS_API_USER + PS_API_KEY");
 
 const records = [
-  ...(feedUrl ? await readTwoPerformant(feedUrl) : []),
+  ...(feedUrl ? await readTwoPerformantSafely(feedUrl) : []),
   // A third of the Profitshare shops in full each night (PS_ROTATION_PARTS=1 reads them all).
   ...(psEnv.PS_API_KEY ? await readProfitshare(psEnv, { rotation: { parts: Number(process.env.PS_ROTATION_PARTS ?? 3), index: Math.floor(Date.UTC(Math.floor(day / 10000), Math.floor(day / 100) % 100 - 1, day % 100) / 86_400_000) } }) : []),
 ];
