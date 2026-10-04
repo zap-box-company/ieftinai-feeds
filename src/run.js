@@ -6,7 +6,7 @@ import { parseCsvObjects, responseText } from "./csv.js";
 import { databaseBytes, executeStatements, loadCurrent, recordRun, writtenThisMonth } from "./d1.js";
 import { allowance } from "./quota.js";
 import { fromTwoPerformant } from "./normalize.js";
-import { plan } from "./plan.js";
+import { metaSig, plan } from "./plan.js";
 import { readProfitshare } from "./profitshare.js";
 import { fileURLToPath } from "node:url";
 
@@ -24,31 +24,42 @@ const day = Number(
  * The 2Performant feed (2M+ rows, one long download) can drop mid-stream, e.g. while 2Performant
  * rebuilds it: try again a few times, then go on without it rather than lose the night's import.
  */
-async function readTwoPerformantSafely(url, attempts = 4) {
+/** Products written per batch: a run that stops early keeps all but the last batch. */
+const BATCH = 25_000;
+
+async function readTwoPerformantSafely(url, onBatch, attempts = 4) {
   for (let i = 1; i <= attempts; i++) {
     try {
-      return await readTwoPerformant(url);
+      return await readTwoPerformant(url, onBatch);
     } catch (error) {
       console.log(`2performant: attempt ${i}/${attempts} failed (${error.cause?.message ?? error.message})`);
       if (i < attempts) await new Promise((r) => setTimeout(r, 60_000 * i));
     }
   }
   console.log("2performant: skipped tonight; Profitshare goes on");
-  return [];
 }
 
-async function readTwoPerformant(url) {
+/** Streams the feed; [onBatch] gets every BATCH new products and may answer false to stop early. */
+async function readTwoPerformant(url, onBatch) {
   const response = await fetch(url, { redirect: "follow" });
   if (!response.ok) throw new Error(`feed HTTP ${response.status}`);
-  const byKey = new Map();
+  const seen = new Set();
+  let batch = [];
   let rows = 0;
   for await (const row of parseCsvObjects(responseText(response))) {
     rows++;
     const product = fromTwoPerformant(row);
-    if (product) byKey.set(product.key, product);
+    if (!product || seen.has(product.key)) continue;
+    seen.add(product.key);
+    batch.push(product);
+    if (batch.length >= BATCH) {
+      const go = await onBatch(batch);
+      batch = [];
+      if (go === false) { console.log(`2performant: budget used up after ${rows} rows`); return; }
+    }
   }
-  console.log(`2performant: ${rows} rows, ${byKey.size} usable products`);
-  return [...byKey.values()];
+  if (batch.length) await onBatch(batch);
+  console.log(`2performant: ${rows} rows, ${seen.size} usable products`);
 }
 
 const feedUrl = process.env.TP_FEED_URL;
@@ -71,7 +82,7 @@ let left = budget;
 
 /** Plans and writes one source's records within what is left of the budget. */
 async function importStage(name, records, outDir) {
-  const { statements, stats } = plan(records, current, day, left, { inserts });
+  const { statements, stats, written } = plan(records, current, day, left, { inserts });
   console.log(JSON.stringify({ stage: name, day, budget: left, ...stats }, null, 2));
   if (dryRun) {
     console.log("dry run: nothing written. Sample:\n" + statements.slice(0, 4).join("\n").slice(0, 1500));
@@ -80,15 +91,23 @@ async function importStage(name, records, outDir) {
   await executeStatements(statements, fileURLToPath(new URL(outDir, import.meta.url)));
   await recordRun(day, "feeds", stats.seen, stats.estimatedRowsWritten);
   left -= stats.estimatedRowsWritten;
+  // Later batches see these as known (no double insert when the feed lists a product twice).
+  for (const w of written) current.set(w.key, { price: w.price, oldPrice: w.oldPrice ?? null, sig: metaSig(w) });
   console.log(`${name}: written, ${left} rows left in the budget`);
 }
 
 if (psEnv.PS_API_KEY) {
   // A third of the Profitshare shops in full each night (PS_ROTATION_PARTS=1 reads them all).
-  const fromProfitshare = await readProfitshare(psEnv, { rotation: { parts: Number(process.env.PS_ROTATION_PARTS || 3), index: Math.floor(Date.UTC(Math.floor(day / 10000), Math.floor(day / 100) % 100 - 1, day % 100) / 86_400_000) } });
-  await importStage("profitshare", fromProfitshare, "../out/profitshare/");
+  await readProfitshare(psEnv, {
+    rotation: { parts: Number(process.env.PS_ROTATION_PARTS || 3), index: Math.floor(Date.UTC(Math.floor(day / 10000), Math.floor(day / 100) % 100 - 1, day % 100) / 86_400_000) },
+    batchSize: BATCH,
+    onBatch: (list) => importStage("profitshare", list, "../out/profitshare/"),
+  });
 }
 if (feedUrl && left > 0) {
-  await importStage("2performant", await readTwoPerformantSafely(feedUrl), "../out/2performant/");
+  await readTwoPerformantSafely(feedUrl, async (list) => {
+    await importStage("2performant", list, "../out/2performant/");
+    return left > 0;
+  });
 }
 console.log("done");

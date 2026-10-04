@@ -53,6 +53,7 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
   const statements = [];
   let spent = 0;
   const done = { priceChanges: 0, inserts: 0, metaChanges: 0 };
+  const written = []; // records whose change was planned within the budget
   const afford = (cost) => spent + cost <= budget;
 
   for (const { r, cur } of priceChanges) {
@@ -65,6 +66,7 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
     );
     spent += COST.priceUpdate;
     done.priceChanges++;
+    written.push(r);
   }
   // Higher-priority sources first (r.priority: 0 = Profitshare), then products with an EAN.
   const queue = [...newWithGtin, ...newOther].map((r, i) => ({ r, i })).sort((x, y) => (x.r.priority ?? 1) - (y.r.priority ?? 1) || x.i - y.i).map((x) => x.r);
@@ -78,6 +80,7 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
     );
     spent += COST.insert;
     done.inserts++;
+    written.push(r);
   }
   for (const r of metaChanges) {
     if (!afford(COST.metaUpdate)) break;
@@ -87,10 +90,12 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
     );
     spent += COST.metaUpdate;
     done.metaChanges++;
+    written.push(r);
   }
 
   return {
     statements,
+    written,
     stats: {
       seen: records.length,
       pending: { priceChanges: priceChanges.length, inserts: newWithGtin.length + newOther.length, metaChanges: metaChanges.length },

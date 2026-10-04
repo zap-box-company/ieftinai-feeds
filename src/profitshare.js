@@ -112,15 +112,30 @@ export function rotationGroups(advertisers, parts) {
  * night; the remaining pages only for tonight's rotation group (rotation: { parts, index }), which
  * keeps the run inside GitHub's free Actions minutes. Products not read tonight keep their last price.
  */
-export async function readProfitshare(env, { concurrency = 4, log = console.log, fetchImpl = fetch, rotation = { parts: 1, index: 0 } } = {}) {
+export async function readProfitshare(env, { concurrency = 4, log = console.log, fetchImpl = fetch, rotation = { parts: 1, index: 0 }, onBatch = null, batchSize = 25_000 } = {}) {
   const advertisers = Object.values(await call(env, "affiliate-advertisers", "", fetchImpl)).filter((a) => !EXCLUDED_ADVERTISERS.has(Number(a.id)));
   const byKey = new Map();
-  const add = (r) => (r?.products ?? []).forEach((p) => { const x = fromProfitshare(p); if (x) byKey.set(x.key, x); });
+  // [onBatch] gets the products every [batchSize] new ones (written to the catalog as they come).
+  const pending = [];
+  let flushing = Promise.resolve();
+  const add = (r) => (r?.products ?? []).forEach((p) => {
+    const x = fromProfitshare(p);
+    if (!x) return;
+    if (!byKey.has(x.key)) pending.push(x);
+    byKey.set(x.key, x);
+  });
+  const maybeFlush = async (force = false) => {
+    if (!onBatch || (!force && pending.length < batchSize) || !pending.length) return;
+    const list = pending.splice(0);
+    flushing = flushing.then(() => onBatch(list));
+    await flushing;
+  };
   const known = [];
   for (const a of advertisers) {
     try {
       const first = await call(env, "affiliate-products", `filters[advertiser]=${a.id}&page=1`, fetchImpl);
       add(first);
+      await maybeFlush();
       known.push({ ...a, pages: Number(first.total_pages) || 0 });
     } catch (error) {
       log(`profitshare: ${a.name} skipped (${error.message})`);
@@ -138,6 +153,7 @@ export async function readProfitshare(env, { concurrency = 4, log = console.log,
           const page = list[i++];
           try {
             add(await call(env, "affiliate-products", `filters[advertiser]=${a.id}&page=${page}`, fetchImpl));
+            await maybeFlush();
           } catch (error) {
             if (final) log(`profitshare: ${a.name} page ${page} failed (${error.message})`);
             else failed.push(page);
@@ -150,6 +166,7 @@ export async function readProfitshare(env, { concurrency = 4, log = console.log,
     if (failed.length) await run(failed, 1, true);
     log(`profitshare: ${a.name} ${a.pages} pages, ${failed.length} retried`);
   }
+  await maybeFlush(true);
   log(`profitshare: group ${(rotation.index % parts) + 1}/${parts} tonight, ${byKey.size} usable products`);
   return [...byKey.values()];
 }
