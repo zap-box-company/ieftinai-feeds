@@ -58,28 +58,37 @@ const psEnv = { PS_API_USER: secret(process.env.PS_API_USER), PS_API_KEY: secret
 if (psEnv.PS_API_KEY) console.log(`profitshare credentials: user ${psEnv.PS_API_USER.length} chars, key ${psEnv.PS_API_KEY.length} chars`);
 if (!feedUrl && !psEnv.PS_API_KEY) throw new Error("set TP_FEED_URL and/or PS_API_USER + PS_API_KEY");
 
-// Profitshare first (user, 2026-10-04): new products are inserted in this order until the night's
-// write budget runs out, so its shops land before the 2M-row 2Performant feed.
-const fromProfitshare = psEnv.PS_API_KEY
-  // A third of the Profitshare shops in full each night (PS_ROTATION_PARTS=1 reads them all).
-  ? await readProfitshare(psEnv, { rotation: { parts: Number(process.env.PS_ROTATION_PARTS || 3), index: Math.floor(Date.UTC(Math.floor(day / 10000), Math.floor(day / 100) % 100 - 1, day % 100) / 86_400_000) } })
-  : [];
-const records = [...fromProfitshare.map((r) => ({ ...r, priority: 0 })), ...(feedUrl ? await readTwoPerformantSafely(feedUrl) : [])];
+// Profitshare first (user, 2026-10-04), and written as soon as it is read: a run that later runs
+// out of time on the 2M-row 2Performant feed keeps what it already imported.
 const current = dryRun ? new Map() : await loadCurrent();
 console.log(`catalog currently has ${current.size} products`);
-
 const size = dryRun ? 0 : await databaseBytes();
 const used = dryRun ? 0 : await writtenThisMonth(day);
 const { budget, inserts, reason } = allowance(requested, size, used);
 console.log(`written this month so far: ${used}`);
 console.log(`database ${(size / 1024 ** 2).toFixed(0)} MB; write budget ${budget}${reason ? ` (${reason})` : ""}`);
-const { statements, stats } = plan(records, current, day, budget, { inserts });
-console.log(JSON.stringify({ day, budget, ...stats }, null, 2));
+let left = budget;
 
-if (dryRun) {
-  console.log("dry run: nothing written. Sample:\n" + statements.slice(0, 4).join("\n").slice(0, 1500));
-} else {
-  await executeStatements(statements, fileURLToPath(new URL("../out/", import.meta.url)));
+/** Plans and writes one source's records within what is left of the budget. */
+async function importStage(name, records, outDir) {
+  const { statements, stats } = plan(records, current, day, left, { inserts });
+  console.log(JSON.stringify({ stage: name, day, budget: left, ...stats }, null, 2));
+  if (dryRun) {
+    console.log("dry run: nothing written. Sample:\n" + statements.slice(0, 4).join("\n").slice(0, 1500));
+    return;
+  }
+  await executeStatements(statements, fileURLToPath(new URL(outDir, import.meta.url)));
   await recordRun(day, "feeds", stats.seen, stats.estimatedRowsWritten);
-  console.log("done");
+  left -= stats.estimatedRowsWritten;
+  console.log(`${name}: written, ${left} rows left in the budget`);
 }
+
+if (psEnv.PS_API_KEY) {
+  // A third of the Profitshare shops in full each night (PS_ROTATION_PARTS=1 reads them all).
+  const fromProfitshare = await readProfitshare(psEnv, { rotation: { parts: Number(process.env.PS_ROTATION_PARTS || 3), index: Math.floor(Date.UTC(Math.floor(day / 10000), Math.floor(day / 100) % 100 - 1, day % 100) / 86_400_000) } });
+  await importStage("profitshare", fromProfitshare, "../out/profitshare/");
+}
+if (feedUrl && left > 0) {
+  await importStage("2performant", await readTwoPerformantSafely(feedUrl), "../out/2performant/");
+}
+console.log("done");
