@@ -66,7 +66,9 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
     spent += COST.priceUpdate;
     done.priceChanges++;
   }
-  for (const r of inserts ? [...newWithGtin, ...newOther] : []) {
+  // Higher-priority sources first (r.priority: 0 = Profitshare), then products with an EAN.
+  const queue = [...newWithGtin, ...newOther].map((r, i) => ({ r, i })).sort((x, y) => (x.r.priority ?? 1) - (y.r.priority ?? 1) || x.i - y.i).map((x) => x.r);
+  for (const r of inserts ? queue : []) {
     if (!afford(COST.insert)) break;
     statements.push(
       "INSERT OR IGNORE INTO products (key, store, title, price, old_price, url, aff_url, image, brand, category, gtin, shipping, first_day, updated_day) VALUES (" +

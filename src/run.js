@@ -58,11 +58,13 @@ const psEnv = { PS_API_USER: secret(process.env.PS_API_USER), PS_API_KEY: secret
 if (psEnv.PS_API_KEY) console.log(`profitshare credentials: user ${psEnv.PS_API_USER.length} chars, key ${psEnv.PS_API_KEY.length} chars`);
 if (!feedUrl && !psEnv.PS_API_KEY) throw new Error("set TP_FEED_URL and/or PS_API_USER + PS_API_KEY");
 
-const records = [
-  ...(feedUrl ? await readTwoPerformantSafely(feedUrl) : []),
+// Profitshare first (user, 2026-10-04): new products are inserted in this order until the night's
+// write budget runs out, so its shops land before the 2M-row 2Performant feed.
+const fromProfitshare = psEnv.PS_API_KEY
   // A third of the Profitshare shops in full each night (PS_ROTATION_PARTS=1 reads them all).
-  ...(psEnv.PS_API_KEY ? await readProfitshare(psEnv, { rotation: { parts: Number(process.env.PS_ROTATION_PARTS ?? 3), index: Math.floor(Date.UTC(Math.floor(day / 10000), Math.floor(day / 100) % 100 - 1, day % 100) / 86_400_000) } }) : []),
-];
+  ? await readProfitshare(psEnv, { rotation: { parts: Number(process.env.PS_ROTATION_PARTS || 3), index: Math.floor(Date.UTC(Math.floor(day / 10000), Math.floor(day / 100) % 100 - 1, day % 100) / 86_400_000) } })
+  : [];
+const records = [...fromProfitshare.map((r) => ({ ...r, priority: 0 })), ...(feedUrl ? await readTwoPerformantSafely(feedUrl) : [])];
 const current = dryRun ? new Map() : await loadCurrent();
 console.log(`catalog currently has ${current.size} products`);
 

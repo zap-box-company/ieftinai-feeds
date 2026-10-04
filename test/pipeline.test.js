@@ -92,3 +92,10 @@ test("2Performant program names become bare shop domains", async () => {
   const p = fromTwoPerformant({ title: "Set oale", price: "99", aff_code: "https://event.2performant.com/x", campaign_name: "bazarulonline.ro/ ", product_id: "7" });
   assert.equal(p.store, "bazarulonline.ro");
 });
+
+test("Profitshare products are inserted before the rest, whatever their EAN", async () => {
+  const { plan, COST } = await import("../src/plan.js");
+  const mk = (key, gtin, priority) => ({ key, store: key.split(":")[0], title: key, price: 10, oldPrice: null, url: "u", affUrl: "a", image: null, brand: null, category: null, gtin, priority });
+  const r = plan([mk("ozone.ro:1", "5901234123457"), mk("vegis.ro:1", null, 0)], new Map(), 20261004, COST.insert);
+  assert.match(r.statements[0], /vegis.ro:1/);
+});
