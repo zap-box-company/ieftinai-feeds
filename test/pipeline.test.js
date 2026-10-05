@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { parseCsv, parseCsvObjects } from "../src/csv.js";
-import { fromTwoPerformant, normalizeGtin, parsePrice } from "../src/normalize.js";
+import { feedUrlsFrom, fromTwoPerformant, normalizeGtin, parsePrice } from "../src/normalize.js";
 import { COST, lit, plan } from "../src/plan.js";
 
 async function* chunks(...parts) { yield* parts; }
@@ -98,4 +98,14 @@ test("Profitshare products are inserted before the rest, whatever their EAN", as
   const mk = (key, gtin, priority) => ({ key, store: key.split(":")[0], title: key, price: 10, oldPrice: null, url: "u", affUrl: "a", image: null, brand: null, category: null, gtin, priority });
   const r = plan([mk("ozone.ro:1", "5901234123457"), mk("vegis.ro:1", null, 0)], new Map(), 20261004, COST.insert);
   assert.match(r.statements[0], /vegis.ro:1/);
+});
+
+test("feed links: one or several per secret, split on spaces, commas and new lines", () => {
+  const a = "https://api.2performant.com/feed/aaa.csv";
+  const b = "https://feeds.2performant.com/feed/bss.csv";
+  assert.deepEqual(feedUrlsFrom(a, undefined), [a]);
+  assert.deepEqual(feedUrlsFrom(a, `"${b}"
+${a} , https://x.ro/c.csv
+`), [a, b, "https://x.ro/c.csv"]);
+  assert.deepEqual(feedUrlsFrom("", "not a link"), []);
 });

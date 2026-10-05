@@ -86,3 +86,12 @@ export function fromTwoPerformant(row) {
     shipping: null,
   };
 }
+
+/**
+ * The 2Performant CSV links to read, from secrets holding one or several of them (separated by
+ * spaces, commas or new lines; quotes pasted around a link are dropped). Anything else is ignored.
+ */
+export function feedUrlsFrom(...values) {
+  const links = values.flatMap((v) => String(v ?? "").split(/[\s,]+/)).map((u) => u.replace(/^["']+|["']+$/g, "")).filter((u) => /^https?:\/\//.test(u));
+  return [...new Set(links)];
+}

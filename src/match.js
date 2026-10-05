@@ -88,8 +88,8 @@ const isSpec = (t) => /\d/.test(t);
  * same product even when one shop's title is twice as long (Ozone vs Flanco, TCL 50S5L).
  */
 const STANDARDS = new Set(["hdr10", "dvbt2", "dvbs2", "dvbc2", "ddr4", "ddr5", "lpddr5", "wifi6", "wifi7", "usb30", "usb31", "usb32", "h265", "hevc265", "x86", "64bit"]);
-const isModelCode = (t) => t.length >= 5 && /[a-z]/.test(t) && /d/.test(t) && !STANDARDS.has(t)
-  && !/^d+(gb|tb|mb|mah|w|hz|inch|inci|ml|l|kg|g|mm|cm)$/.test(t) && !/^d+xd+/.test(t);
+const isModelCode = (t) => t.length >= 5 && /[a-z]/.test(t) && /\d/.test(t) && !STANDARDS.has(t)
+  && !/^\d+(gb|tb|mb|mah|w|hz|inch|inci|ml|l|kg|g|mm|cm)$/.test(t) && !/^\d+x\d+/.test(t);
 
 /**
  * 0..1 similarity of two product titles. Different capacities or model numbers on both sides

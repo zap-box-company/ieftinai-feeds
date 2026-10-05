@@ -5,7 +5,7 @@
 import { parseCsvObjects, responseText } from "./csv.js";
 import { databaseBytes, executeStatements, loadCurrent, recordRun, writtenThisMonth } from "./d1.js";
 import { allowance } from "./quota.js";
-import { fromTwoPerformant } from "./normalize.js";
+import { feedUrlsFrom, fromTwoPerformant } from "./normalize.js";
 import { metaSig, plan } from "./plan.js";
 import { readProfitshare } from "./profitshare.js";
 import { fileURLToPath } from "node:url";
@@ -65,7 +65,8 @@ async function readTwoPerformant(url, onBatch) {
 // One or more 2Performant CSV links (space, comma or newline separated). The single 300-program
 // feed is generated live and 2Performant closes the connection after 60 s, so it is split into
 // smaller feeds, each read in turn.
-const feedUrls = [process.env.TP_FEED_URL, process.env.TP_FEED_URLS].flatMap((v) => String(v ?? "").split(/[s,]+/)).map((u) => u.replace(/^["']|["']$/g, "")).filter((u) => /^https?:/.test(u));
+const feedUrls = feedUrlsFrom(process.env.TP_FEED_URL, process.env.TP_FEED_URLS);
+console.log(`2performant: ${feedUrls.length} feed link(s) configured`);
 const feedUrl = feedUrls[0];
 // Secrets pasted into GitHub may carry spaces, newlines or quotes; Profitshare answers 400 to those.
 const secret = (v) => String(v ?? "").trim().replace(/^["']|["']$/g, "");
