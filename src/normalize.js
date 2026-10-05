@@ -52,6 +52,8 @@ const pick = (row, ...names) => {
   return null;
 };
 
+const FOREIGN_SHOP = /\.(gr|bg|hu|it|de|at|pl|cz|sk|fr|es|uk|md|rs)$/;
+
 /**
  * 2Performant CSV row -> product. Field names follow the feed's header row; aliases cover the
  * optional fields we enabled (Product URL, GTIN, Brand, Category, Old price, Product ID).
@@ -63,6 +65,9 @@ export function fromTwoPerformant(row) {
   // Program names come as "bazarulonline.ro/ " or "https://www.x.ro": keep the bare domain.
   const store = clean(pick(row, "campaign_name", "merchant program"))?.toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/+$/, "");
   if (!affUrl || !title || !price || !store) return null;
+  // Shops of other countries price in their own currency (flip.gr in euro, zapatos.hu in forint):
+  // shown as lei they made an iPhone "1.107,99 lei".
+  if (FOREIGN_SHOP.test(store)) return null;
 
   const productUnique = /[?&]unique=([^&]+)/.exec(affUrl)?.[1];
   const id = clean(pick(row, "product_id", "product id")) ?? productUnique;
