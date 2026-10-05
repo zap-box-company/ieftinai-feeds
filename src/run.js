@@ -20,14 +20,16 @@ const day = Number(
     .replace(/-/g, ""),
 );
 
-/**
- * The 2Performant feed (2M+ rows, one long download) can drop mid-stream, e.g. while 2Performant
- * rebuilds it: try again a few times, then go on without it rather than lose the night's import.
- */
 /** Products written per batch (user: every 5,000): a run that stops early keeps all but the last batch. */
 const BATCH = 5_000;
 
-async function readTwoPerformantSafely(url, onBatch, attempts = 2) {
+/**
+ * A 2Performant feed is generated on the first request of the day: that request can answer 504
+ * after 30 s while the file is being built and the next one, a minute later, gets it at once
+ * (seen 2026-10-05 on feeds with many programs). A download can also drop mid-stream. So: try
+ * again a few times, then go on without that feed rather than lose the night's import.
+ */
+async function readTwoPerformantSafely(url, onBatch, attempts = 4) {
   for (let i = 1; i <= attempts; i++) {
     try {
       return await readTwoPerformant(url, onBatch);
