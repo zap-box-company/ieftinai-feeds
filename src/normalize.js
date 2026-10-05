@@ -52,7 +52,7 @@ const pick = (row, ...names) => {
   return null;
 };
 
-const FOREIGN_SHOP = /\.(gr|bg|hu|it|de|at|pl|cz|sk|fr|es|uk|md|rs)$/;
+const FOREIGN_SHOP = /\.(gr|bg|hu|it|de|at|pl|cz|sk|fr|es|uk|ie|md|rs)$/;
 
 /**
  * 2Performant CSV row -> product. Field names follow the feed's header row; aliases cover the
