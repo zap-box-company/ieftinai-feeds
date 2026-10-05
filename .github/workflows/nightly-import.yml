@@ -52,3 +52,6 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: node src/trending.js
+      - name: Tell IndexNow (Bing and others) which pages to read
+        continue-on-error: true
+        run: node src/indexnow.js
