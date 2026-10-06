@@ -1,3 +1,4 @@
+import { restricted } from "./restricted.js";
 // Profitshare product feeds (API affiliate-products, 20 products per page) for every approved
 // advertiser. Auth as in the official WP plugin and ../server/src/profitshare.js:
 // X-PS-Auth = hex(HMAC-SHA1(method + path + "/?" + query + "/" + apiUser + date, apiKey)).
@@ -71,6 +72,7 @@ export function fromProfitshare(p) {
   const price = parsePrice(p.price_vat);
   if (!title || !price || !p.affiliate_link) return null;
   const store = url.hostname.toLowerCase().replace(/^www\./, "");
+  if (restricted(store, title)) return null;
   const id = clean(p.part_number) ?? url.pathname.replace(/\/+$/, "");
   const image = clean(p.image_original ?? p.image)?.replace(/^http:\/\//, "https://") ?? null;
   return {

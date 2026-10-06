@@ -1,3 +1,4 @@
+import { restricted } from "./restricted.js";
 // Turns feed rows from different networks into one product shape.
 
 /** "1.299,99" / "1299.99" / "1,299.99" -> 1299.99; null if not a positive number. */
@@ -68,6 +69,8 @@ export function fromTwoPerformant(row) {
   // Shops of other countries price in their own currency (flip.gr in euro, zapatos.hu in forint):
   // shown as lei they made an iPhone "1.107,99 lei".
   if (FOREIGN_SHOP.test(store)) return null;
+  // Alcohol, tobacco, adult products, weapons: not listed (see restricted.js).
+  if (restricted(store, title)) return null;
 
   const productUnique = /[?&]unique=([^&]+)/.exec(affUrl)?.[1];
   const id = clean(pick(row, "product_id", "product id")) ?? productUnique;
