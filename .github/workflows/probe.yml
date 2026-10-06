@@ -1,0 +1,24 @@
+name: Probe a shop from GitHub
+
+# Does a shop answer our bot from GitHub's addresses? A few plain requests, statuses only.
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: "Addresses to ask, separated by spaces"
+        required: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ask
+        env:
+          URLS: ${{ inputs.urls }}
+        run: |
+          for u in $URLS; do
+            curl -s -m 30 --compressed -o /tmp/body -A "Mozilla/5.0 (compatible; PretAIbot/1.0; +https://pretai.ro/despre)" -w "$u -> http %{http_code}, %{size_download} bytes\n" "$u" || echo "$u -> no answer"
+            grep -o -m1 '"price": *"[0-9.]*"' /tmp/body || true
+            sleep 2
+          done
