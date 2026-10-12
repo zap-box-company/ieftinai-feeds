@@ -7,6 +7,7 @@ import { databaseBytes, executeStatements, feedsBudgetCap, loadCurrent, recordRu
 import { allowance } from "./quota.js";
 import { feedUrlsFrom, fromTwoPerformant } from "./normalize.js";
 import { metaSig, plan } from "./plan.js";
+import { implausiblePrice } from "./categories.js";
 import { readProfitshare } from "./profitshare.js";
 import { fileURLToPath } from "node:url";
 
@@ -90,7 +91,10 @@ console.log(`database ${(size / 1024 ** 2).toFixed(0)} MB; write budget ${budget
 let left = budget;
 
 /** Plans and writes one source's records within what is left of the budget. */
-async function importStage(name, records, outDir) {
+async function importStage(name, all, outDir) {
+  // Prices a feed got plainly wrong (categories.js PRICE_FLOOR) are not written.
+  const records = all.filter((r) => !implausiblePrice(r));
+  if (records.length < all.length) console.log(`${name}: ${all.length - records.length} rows under their category's price floor left out`);
   const { statements, stats, written } = plan(records, current, day, left, { inserts });
   console.log(JSON.stringify({ stage: name, day, budget: left, ...stats }, null, 2));
   if (dryRun) {

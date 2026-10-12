@@ -32,3 +32,24 @@ test("an accessories category never lands in the main product", () => {
   assert.equal(mapCategory("Accesorii Telefoane Mobile").slug, "alte-accesorii-telefoane");
   assert.notEqual(mapCategory("Accesorii laptop")?.slug, "laptopuri");
 });
+
+test("departments and paths: cases and cables never land in laptops (2026-10-12)", () => {
+  const slug = (c) => mapCategory(c)?.slug ?? null;
+  assert.equal(slug("Laptop, Telefoane, Tablete"), null);
+  assert.equal(slug("Laptop-Desktop"), null);
+  assert.equal(slug("Laptop, Tablete si Telefoane>Tablete>Accesorii tablete"), "alte-accesorii-tablete");
+  assert.equal(slug("Laptop, Tablete si Telefoane>Laptopuri si accesorii>Alte accesorii"), null);
+  assert.equal(slug("Laptopuri / Notebook"), "laptopuri");
+  assert.equal(slug("Switch-uri"), "accesorii_switch");
+  assert.equal(slug("ÎMBRĂCĂMINTE > BĂRBAȚI > TRICOURI"), "tricouri-barbati");
+  assert.equal(slug("Femei"), null);
+});
+
+test("feed prices under their category's floor are implausible", async () => {
+  const { implausiblePrice } = await import("../src/categories.js");
+  assert.equal(implausiblePrice({ category: "Laptopuri", price: 23, title: "Laptop Lenovo ThinkPad X1 YoGa" }), true);
+  assert.equal(implausiblePrice({ category: "Laptopuri", price: 2057, title: "Laptop Lenovo ThinkPad X1 YoGa" }), false);
+  assert.equal(implausiblePrice({ category: "Laptopuri", price: 120, title: "Baterie laptop HP G14" }), false);
+  assert.equal(implausiblePrice({ category: "Huse telefoane", price: 9 }), false);
+  assert.equal(implausiblePrice({ category: null, price: 1 }), false);
+});
