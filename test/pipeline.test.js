@@ -87,6 +87,19 @@ test("compact catalog: metadata changes are found through the signature", async 
   assert.equal(plan([r], renamed, 20261004, 1000).stats.pending.metaChanges, 1);
 });
 
+test("metadata change: only the groups that changed are written, the others match nothing", async () => {
+  const { DatabaseSync } = await import("node:sqlite");
+  const { metaStatements } = await import("../src/plan.js");
+  const db = new DatabaseSync(":memory:");
+  db.exec("CREATE TABLE products (key TEXT PRIMARY KEY, title TEXT, brand TEXT, url TEXT, aff_url TEXT, image TEXT, gtin TEXT, category TEXT, shipping REAL, mpn TEXT)");
+  db.exec("INSERT INTO products VALUES ('s:1', 'Lego 21034', 'LEGO', 'u', 'a', 'https://static.profitshare.ro/x.jpg', NULL, 'Jucarii', NULL, NULL)");
+  const r = { key: "s:1", title: "Lego 21034", brand: "LEGO", url: "u2", affUrl: "a", image: "https://shop/x.jpg", gtin: null, category: "Jucarii", shipping: null, mpn: null };
+  const changed = metaStatements(r).map((sql) => Number(db.prepare(sql).run().changes));
+  assert.deepEqual(changed, [1, 0, 0, 0, 0]);
+  assert.deepEqual({ ...db.prepare("SELECT url, image, title FROM products").get() }, { url: "u2", image: "https://shop/x.jpg", title: "Lego 21034" });
+  assert.deepEqual(metaStatements({ ...r, category: "Lego" }).map((sql) => Number(db.prepare(sql).run().changes)), [0, 0, 0, 1, 0]);
+});
+
 test("2Performant program names become bare shop domains", async () => {
   const { fromTwoPerformant } = await import("../src/normalize.js");
   const p = fromTwoPerformant({ title: "Set oale", price: "99", aff_code: "https://event.2performant.com/x", campaign_name: "bazarulonline.ro/ ", product_id: "7" });

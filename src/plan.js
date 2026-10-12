@@ -86,10 +86,7 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
   }
   for (const r of metaChanges) {
     if (!afford(COST.metaUpdate)) break;
-    statements.push(
-      `UPDATE products SET title=${lit(r.title)}, brand=${lit(r.brand)}, url=${lit(r.url)}, image=CASE WHEN image IS NULL OR image LIKE 'https://static.profitshare.ro/%' THEN ${lit(r.image)} ELSE image END, ` +
-        `gtin=${lit(r.gtin)}, category=${lit(r.category)}, shipping=${lit(r.shipping ?? null)}, mpn=${lit(r.mpn ?? null)}, aff_url=${lit(r.affUrl)} WHERE key=${lit(r.key)};`,
-    );
+    statements.push(...metaStatements(r));
     spent += COST.metaUpdate;
     done.metaChanges++;
     written.push(r);
@@ -105,6 +102,29 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
       estimatedRowsWritten: spent,
     },
   };
+}
+
+/**
+ * A descriptive change as one UPDATE per group of indexed columns, each run only when its group
+ * really changed (only the signature is held in memory, not the fields). SQLite rewrites every index
+ * on a column named in SET, changed or not: one UPDATE of all fields cost 8 rows written in D1 when
+ * only the link had changed; an UPDATE whose WHERE matches nothing costs none (measured 2026-10-12).
+ */
+export function metaStatements(r) {
+  const k = lit(r.key);
+  const image = `CASE WHEN image IS NULL OR image LIKE 'https://static.profitshare.ro/%' THEN ${lit(r.image)} ELSE image END`;
+  const plain = { url: lit(r.url), aff_url: lit(r.affUrl), shipping: lit(r.shipping ?? null) };
+  const set = (cols) => cols.map(([c, v]) => `${c}=${v}`).join(", ");
+  const differs = (cols) => cols.map(([c, v]) => `${c} IS NOT ${v}`).join(" OR ");
+  const unindexed = [...Object.entries(plain), ["image", image]];
+  const groups = [
+    unindexed, // no index on these: 1 row
+    [["title", lit(r.title)], ["brand", lit(r.brand)]], // the full-text index
+    [["gtin", lit(r.gtin)]],
+    [["category", lit(r.category)]],
+    [["mpn", lit(r.mpn ?? null)]],
+  ];
+  return groups.map((cols) => `UPDATE products SET ${set(cols)} WHERE key=${k} AND (${differs(cols)});`);
 }
 
 function historyRow(r, day) {
