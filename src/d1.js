@@ -94,3 +94,17 @@ export async function writtenThisMonth(day) {
   ]);
   return (runs[0]?.n ?? 0) + (crawl[0]?.n ?? 0);
 }
+
+/**
+ * The feeds' part of today's database budget, in counted rows, or null when no fresh budget is known.
+ * Written hourly by the site's Worker (../web/src/budget.js); same rule as ../server/src/budget.js
+ * (feeds 50% of the day's share, real rows ≈ 1.7 × counted). User, 2026-10-12: no cost beyond the $5 plan.
+ */
+export async function feedsBudgetCap(now = Date.now()) {
+  const [rows] = await queryMany(["SELECT value FROM crawl_state WHERE key = 'd1-budget'"]);
+  let b = null;
+  try { b = rows?.[0] ? JSON.parse(rows[0].value) : null; } catch {}
+  if (!b || !(now - b.at < 3 * 3_600_000) || !Number.isFinite(b.writesBudget)) return null;
+  if (b.writesToday >= b.writesBudget) return 0;
+  return Math.floor((b.writesBudget * 0.5) / 1.7);
+}

@@ -3,7 +3,7 @@
 // Env: TP_FEED_URL (2Performant CSV), PS_API_USER + PS_API_KEY (Profitshare), CLOUDFLARE_API_TOKEN +
 // CLOUDFLARE_ACCOUNT_ID in CI. Each source is optional; at least one must be set.
 import { parseCsvObjects, responseText } from "./csv.js";
-import { databaseBytes, executeStatements, loadCurrent, recordRun, writtenThisMonth } from "./d1.js";
+import { databaseBytes, executeStatements, feedsBudgetCap, loadCurrent, recordRun, writtenThisMonth } from "./d1.js";
 import { allowance } from "./quota.js";
 import { feedUrlsFrom, fromTwoPerformant } from "./normalize.js";
 import { metaSig, plan } from "./plan.js";
@@ -82,7 +82,9 @@ const current = dryRun ? new Map() : await loadCurrent();
 console.log(`catalog currently has ${current.size} products`);
 const size = dryRun ? 0 : await databaseBytes();
 const used = dryRun ? 0 : await writtenThisMonth(day);
-const { budget, inserts, reason } = allowance(requested, size, used);
+const dayCap = dryRun ? null : await feedsBudgetCap().catch(() => null);
+const { budget, inserts, reason } = allowance(dayCap === null ? requested : Math.min(Number(requested) || 0, dayCap), size, used);
+if (dayCap !== null) console.log(`feeds' part of today's database budget: ${dayCap}`);
 console.log(`written this month so far: ${used}`);
 console.log(`database ${(size / 1024 ** 2).toFixed(0)} MB; write budget ${budget}${reason ? ` (${reason})` : ""}`);
 let left = budget;
