@@ -83,7 +83,9 @@ const current = dryRun ? new Map() : await loadCurrent();
 console.log(`catalog currently has ${current.size} products`);
 const size = dryRun ? 0 : await databaseBytes();
 const used = dryRun ? 0 : await writtenThisMonth(day);
-const dayCap = dryRun ? null : await feedsBudgetCap().catch(() => null);
+// IMPORT_FULL_MONTH=1: the last day before the monthly reset, the month's whole remainder may go to the feeds (user, 2026-11-02: "folosește toate scrierile");
+// import-lant.sh sizes each round from the month's writes instead of the day's share.
+const dayCap = dryRun || process.env.IMPORT_FULL_MONTH === "1" ? null : await feedsBudgetCap().catch(() => null);
 const { budget, inserts, reason } = allowance(dayCap === null ? requested : Math.min(Number(requested) || 0, dayCap), size, used);
 if (dayCap !== null) console.log(`feeds' part of today's database budget: ${dayCap}`);
 console.log(`written this month so far: ${used}`);

@@ -1,3 +1,5 @@
+import { mapCategory } from "./categories.js";
+
 // Decides what to write tonight, within the write budget (src/quota.js), and renders it as SQL.
 
 /** Approximate D1 "rows written" per operation (table row + index entries + FTS + history). */
@@ -16,6 +18,16 @@ export function metaSig(r) {
   const s = META_FIELDS.map((f) => (r[f] ?? "")).join("");
   for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 0x01000193);
   return h >>> 0;
+}
+
+const TECH = new Set(["laptop-tablete-telefoane", "pc-periferice-software", "tv-audio-video-foto", "electrocasnice-climatizare"]);
+const techCache = new Map();
+/** True when a shop's category name maps onto one of eMAG's four electronics / appliances departments (cached per category string). */
+export function isTech(category) {
+  const k = String(category ?? "");
+  let v = techCache.get(k);
+  if (v === undefined) { try { v = TECH.has(mapCategory(k)?.dept); } catch { v = false; } techCache.set(k, v); }
+  return v;
 }
 
 /** SQL literal; feed data is untrusted, so every string is escaped. */
@@ -70,8 +82,10 @@ export function plan(records, current, day, budget, { inserts = true } = {}) {
     done.priceChanges++;
     written.push(r);
   }
-  // Higher-priority sources first (r.priority: 0 = Profitshare), then products with an EAN.
-  const queue = [...newWithGtin, ...newOther].map((r, i) => ({ r, i })).sort((x, y) => (x.r.priority ?? 1) - (y.r.priority ?? 1) || x.i - y.i).map((x) => x.r);
+  // Higher-priority sources first (r.priority: 0 = Profitshare); inside a source (user, 2026-11-03, Q515: the database is nearly full and Black Friday is electronics): electronics and appliances
+  // with an EAN, then the rest of electronics, then other products with an EAN, then the rest.
+  const rank = (r) => (isTech(r.category) ? 0 : 2) + (r.gtin ? 0 : 1);
+  const queue = [...newWithGtin, ...newOther].map((r, i) => ({ r, i, k: rank(r) })).sort((x, y) => (x.r.priority ?? 1) - (y.r.priority ?? 1) || x.k - y.k || x.i - y.i).map((x) => x.r);
   for (const r of inserts ? queue : []) {
     if (!afford(COST.insert)) break;
     statements.push(

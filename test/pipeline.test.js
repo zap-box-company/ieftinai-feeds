@@ -122,3 +122,11 @@ ${a} , https://x.ro/c.csv
 `), [a, b, "https://x.ro/c.csv"]);
   assert.deepEqual(feedUrlsFrom("", "not a link"), []);
 });
+
+test("inside one source, electronics with an EAN are inserted first, then other electronics, then the rest", async () => {
+  const { plan, COST } = await import("../src/plan.js");
+  const mk = (key, category, gtin) => ({ key, store: "s.ro", title: key, price: 10, oldPrice: null, url: "u", affUrl: "a", image: null, brand: null, category, gtin });
+  const r = plan([mk("s.ro:toy", "Jucarii>Puzzle", "5940000000001"), mk("s.ro:tv", "Televizoare", null), mk("s.ro:tvean", "Televizoare", "5940000000002"), mk("s.ro:toy2", "Jucarii>Puzzle", null)], new Map(), 20261103, COST.insert * 4);
+  const order = r.statements.filter((x) => x.startsWith("INSERT OR IGNORE INTO products")).map((x) => x.match(/VALUES \('s\.ro:(\w+)/)[1]);
+  assert.deepEqual(order, ["tvean", "tv", "toy", "toy2"]);
+});
