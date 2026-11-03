@@ -11,9 +11,10 @@ test("the nightly budget never exceeds the included-quota cap", () => {
   assert.deepEqual(allowance(90_000, 0.01 * GB), { budget: 90_000, inserts: true, reason: null });
 });
 
-test("storage: price updates only past 4 GB, nothing past 4.6 GB", () => {
-  assert.equal(allowance(1e6, 4.2 * GB).inserts, false);
-  assert.equal(allowance(1e6, 4.2 * GB).budget, 1e6);
+test("storage: price updates only past 4.5 GB, nothing past 4.6 GB", () => {
+  assert.equal(allowance(1e6, 4.2 * GB).inserts, true);
+  assert.equal(allowance(1e6, 4.55 * GB).inserts, false);
+  assert.equal(allowance(1e6, 4.55 * GB).budget, 1e6);
   assert.equal(allowance(1e6, 4.7 * GB).budget, 0);
 });
 
