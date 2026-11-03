@@ -6,7 +6,7 @@ import { plan } from "../src/plan.js";
 const GB = 1024 ** 3;
 
 test("the nightly budget never exceeds the included-quota cap", () => {
-  assert.equal(allowance(9_000_000, 1 * GB).budget, NIGHTLY_WRITE_CAP);
+  assert.equal(allowance(NIGHTLY_WRITE_CAP + 9_000_000, 1 * GB).budget, NIGHTLY_WRITE_CAP);
   assert.ok(MONTHLY_WRITE_CAP + 10_000_000 <= 50_000_000); // 10M left for the app and the rest
   assert.deepEqual(allowance(90_000, 0.01 * GB), { budget: 90_000, inserts: true, reason: null });
 });

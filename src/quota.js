@@ -4,7 +4,7 @@
 //    MONTHLY_WRITE_CAP a month (counted in pipeline_runs and crawl_days), leaving 10M for the
 //    prices app users send, the trending table and anything not counted;
 //  - storage: no new products past INSERT_STOP_BYTES, nothing written past WRITE_STOP_BYTES.
-export const NIGHTLY_WRITE_CAP = 4_000_000; // nights ask for 1M; manual catch-up runs up to 4M
+export const NIGHTLY_WRITE_CAP = 20_000_000; // no daily limit during Black Friday week (user, 2026-11-03): a run may use what the month still has (MONTHLY_WRITE_CAP)
 export const MONTHLY_WRITE_CAP = 40_000_000;
 export const INSERT_STOP_BYTES = 4.5 * 1024 ** 3;
 export const WRITE_STOP_BYTES = 4.6 * 1024 ** 3;

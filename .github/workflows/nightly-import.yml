@@ -39,7 +39,7 @@ jobs:
           PS_ROTATION_PARTS: ${{ github.event.inputs.ps_parts || '3' }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: node src/run.js --budget "${{ github.event.inputs.budget || '1000000' }}"
+        run: node src/run.js --budget "${{ github.event.inputs.budget || '20000000' }}"
       - name: Map shop categories onto the eMAG tree
         continue-on-error: true
         env:
