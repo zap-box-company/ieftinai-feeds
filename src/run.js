@@ -13,7 +13,8 @@ import { fileURLToPath } from "node:url";
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
-const requested = Number(args[args.indexOf("--budget") + 1]) || 90_000;
+// On our Oracle server (d1.js ORACLE) there is no D1 write budget: every change of the night is written.
+const requested = Number(args[args.indexOf("--budget") + 1]) || (process.env.PRETAI_DB_URL ? 20_000_000 : 90_000);
 
 const day = Number(
   new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Bucharest", year: "numeric", month: "2-digit", day: "2-digit" })

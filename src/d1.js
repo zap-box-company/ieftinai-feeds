@@ -19,20 +19,44 @@ async function wrangler(args) {
   return stdout;
 }
 
+// User, 2026-11-08: the catalog moved to our Oracle server (PostgreSQL behind https://db.pretai.ro/sql, which
+// translates this SQLite SQL). With PRETAI_DB_URL + PRETAI_DB_TOKEN set, everything goes there; without them, D1 as before.
+export const ORACLE = !!(process.env.PRETAI_DB_URL && process.env.PRETAI_DB_TOKEN);
+async function oracle(sqls, tx = false) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const res = await fetch(process.env.PRETAI_DB_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${process.env.PRETAI_DB_TOKEN}` },
+        body: JSON.stringify({ stmts: sqls.map((sql) => ({ sql, params: [], kind: "all" })), tx }),
+      });
+      const body = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
+      if (!res.ok || body.error) throw new Error(`Oracle DB: ${body.error ?? res.status}`);
+      return body.results.map((r) => r.results ?? []);
+    } catch (error) {
+      if (attempt >= 3) throw error;
+      await new Promise((r) => setTimeout(r, 5_000 * attempt));
+    }
+  }
+}
+
 async function query(sql) {
+  if (ORACLE) return (await oracle([sql]))[0];
   const out = await wrangler(["d1", "execute", DB, "--remote", "--json", "--command", sql]);
   const parsed = JSON.parse(out.slice(out.indexOf("[")));
   return parsed[0]?.results ?? [];
 }
 
-/** Current database size in bytes (wrangler d1 info). */
+/** Current database size in bytes (wrangler d1 info). On Oracle there is no 5 GB cap: 0. */
 export async function databaseBytes() {
+  if (ORACLE) return 0;
   const out = await wrangler(["d1", "info", DB, "--json"]);
   return Number(JSON.parse(out.slice(out.indexOf("{"))).database_size) || 0;
 }
 
 /** Several SELECTs in one wrangler call; one result array per statement, in order. */
 export async function queryMany(sqls) {
+  if (ORACLE) return oracle(sqls);
   const out = await wrangler(["d1", "execute", DB, "--remote", "--json", "--command", sqls.join(";\n")]);
   return JSON.parse(out.slice(out.indexOf("["))).map((r) => r.results ?? []);
 }
@@ -56,6 +80,12 @@ export async function loadCurrent() {
 
 /** Writes statements in files of [perFile] and executes them (wrangler uses D1's bulk import). */
 export async function executeStatements(statements, outDir, perFile = 20000) {
+  if (ORACLE) {
+    // 500 statements per request, each request one transaction.
+    for (let i = 0; i < statements.length; i += 500) await oracle(statements.slice(i, i + 500).map((s) => s.replace(/;\s*$/, "")), true);
+    console.log(`executed ${statements.length} statements on Oracle`);
+    return;
+  }
   await mkdir(outDir, { recursive: true });
   for (let i = 0; i < statements.length; i += perFile) {
     const file = join(outDir, `batch-${String(i / perFile + 1).padStart(3, "0")}.sql`);
@@ -87,6 +117,7 @@ export async function recordRun(day, source, seen, written) {
 
 /** Rows written since the 1st of [day]'s month by the imports and the shop crawler. */
 export async function writtenThisMonth(day) {
+  if (ORACLE) return 0; // no monthly write budget on our own server
   const from = Math.floor(day / 100) * 100 + 1;
   const [runs, crawl] = await queryMany([
     `SELECT COALESCE(SUM(rows_written), 0) AS n FROM pipeline_runs WHERE day >= ${from}`,
@@ -101,6 +132,7 @@ export async function writtenThisMonth(day) {
  * (feeds 50% of the day's share, real rows ≈ 1.7 × counted). User, 2026-10-12: no cost beyond the $5 plan.
  */
 export async function feedsBudgetCap(now = Date.now()) {
+  if (ORACLE) return null;
   const [rows] = await queryMany(["SELECT value FROM crawl_state WHERE key = 'd1-budget'"]);
   let b = null;
   try { b = rows?.[0] ? JSON.parse(rows[0].value) : null; } catch {}

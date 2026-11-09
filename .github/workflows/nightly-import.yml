@@ -28,7 +28,7 @@ jobs:
       - run: npm ci
       - name: Unit tests
         run: npm test
-      - name: Import feeds into D1
+      - name: Import feeds into the catalog (Oracle PostgreSQL)
         env:
           TP_FEED_URL: ${{ secrets.TP_FEED_URL }}
           TP_FEED_URLS: ${{ secrets.TP_FEED_URLS }}
@@ -37,18 +37,24 @@ jobs:
           PS_PROXY_URL: https://ieftinai-affiliate.ieftinai.workers.dev # Profitshare refuses GitHub runners
           NODE_OPTIONS: --max-old-space-size=5120 # 2M+ feed rows in memory
           PS_ROTATION_PARTS: ${{ github.event.inputs.ps_parts || '3' }}
+          PRETAI_DB_URL: https://db.pretai.ro/sql # 2026-11-08: the catalog is on our Oracle server (src/d1.js ORACLE)
+          PRETAI_DB_TOKEN: ${{ secrets.PRETAI_DB_TOKEN }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: node src/run.js --budget "${{ github.event.inputs.budget || '20000000' }}"
       - name: Map shop categories onto the eMAG tree
         continue-on-error: true
         env:
+          PRETAI_DB_URL: https://db.pretai.ro/sql # 2026-11-08: the catalog is on our Oracle server (src/d1.js ORACLE)
+          PRETAI_DB_TOKEN: ${{ secrets.PRETAI_DB_TOKEN }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: node src/category-sync.js
       - name: Rebuild "Cele mai căutate"
         continue-on-error: true # needs migration 0005 (trending table) on the catalog
         env:
+          PRETAI_DB_URL: https://db.pretai.ro/sql # 2026-11-08: the catalog is on our Oracle server (src/d1.js ORACLE)
+          PRETAI_DB_TOKEN: ${{ secrets.PRETAI_DB_TOKEN }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: node src/trending.js
