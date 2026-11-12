@@ -130,3 +130,14 @@ test("inside one source, electronics with an EAN are inserted first, then other 
   const order = r.statements.filter((x) => x.startsWith("INSERT OR IGNORE INTO products")).map((x) => x.match(/VALUES \('s\.ro:(\w+)/)[1]);
   assert.deepEqual(order, ["tvean", "tv", "toy", "toy2"]);
 });
+
+test("2performant product id is the manufacturer code only when the title names it", async () => {
+  const { idAsMpn } = await import("../src/normalize.js");
+  assert.equal(idAsMpn("RH6878WO", "Aspirator vertical Rowenta X-Pert 6.60 RH6878WO"), "RH6878WO");
+  assert.equal(idAsMpn("GUDE83810", "Fierastrau cu banda GBS 200 Gude 83810, 250 W"), "GUDE83810");
+  assert.equal(idAsMpn("JKM480N-60HL4-V", "Panou fotovoltaic Jinko 480W - JKM480N-60HL4-V N-Type"), "JKM480N60HL4V");
+  assert.equal(idAsMpn("H8920-3XL", "Fleece de lucru reflectorizant REF 401"), null);
+  assert.equal(idAsMpn("7656", "Miere De Manuka (MGO 400+) 250g"), null);
+  assert.equal(idAsMpn("AR118", "Gene False Ardell Glamour 118"), null);
+  assert.equal(idAsMpn("SM-A556B", "Samsung Galaxy A55 5G SM-A556B 128GB"), "SMA556B");
+});

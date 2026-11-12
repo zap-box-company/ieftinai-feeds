@@ -1,4 +1,5 @@
 import { restricted } from "./restricted.js";
+import { normalizeMpn } from "./match.js";
 // Turns feed rows from different networks into one product shape.
 
 /** "1.299,99" / "1299.99" / "1,299.99" -> 1299.99; null if not a positive number. */
@@ -90,9 +91,30 @@ export function fromTwoPerformant(row) {
     brand: clean(pick(row, "brand")),
     category: clean(pick(row, "category")),
     gtin: normalizeGtin(pick(row, "gtin", "ean")),
-    mpn: null,
+    mpn: idAsMpn(id, title),
     shipping: null,
   };
+}
+
+/**
+ * 2Performant feeds have no manufacturer-code column, but many shops use the code as their
+ * product id ("RH6878WO", "28143KS0", "JKM480N-60HL4-V"); others use their own ("PZ026",
+ * "H8920-3XL"). The id counts as the manufacturer code only when the title names it too, as one
+ * word or up to three adjacent words ("Gude 83810" for "GUDE83810"): a shop's own id never does.
+ */
+export function idAsMpn(id, title) {
+  const code = normalizeMpn(id);
+  if (!code) return null;
+  const words = String(title ?? "").toUpperCase().split(/[^A-Z0-9]+/).filter(Boolean);
+  for (let i = 0; i < words.length; i++) {
+    let joined = "";
+    for (let j = i; j < Math.min(i + 3, words.length); j++) {
+      joined += words[j];
+      if (joined === code) return code;
+      if (joined.length >= code.length) break;
+    }
+  }
+  return null;
 }
 
 /**
