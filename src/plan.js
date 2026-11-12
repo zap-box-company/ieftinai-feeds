@@ -129,7 +129,9 @@ export function metaStatements(r) {
   const image = `CASE WHEN image IS NULL OR image LIKE 'https://static.profitshare.ro/%' THEN ${lit(r.image)} ELSE image END`;
   const plain = { url: lit(r.url), aff_url: lit(r.affUrl), shipping: lit(r.shipping ?? null) };
   const set = (cols) => cols.map(([c, v]) => `${c}=${v}`).join(", ");
-  const differs = (cols) => cols.map(([c, v]) => `${c} IS NOT ${v}`).join(" OR ");
+  // IS DISTINCT FROM: the null-safe comparison both PostgreSQL and SQLite read. "image IS NOT CASE…"
+  // was a syntax error on Oracle and lost the whole batch with it (10-12 Nov: 316 of 380 batches).
+  const differs = (cols) => cols.map(([c, v]) => `${c} IS DISTINCT FROM ${v}`).join(" OR ");
   const unindexed = [...Object.entries(plain), ["image", image]];
   const groups = [
     unindexed, // no index on these: 1 row
