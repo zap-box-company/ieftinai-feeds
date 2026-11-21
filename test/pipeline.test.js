@@ -141,3 +141,14 @@ test("2performant product id is the manufacturer code only when the title names 
   assert.equal(idAsMpn("AR118", "Gene False Ardell Glamour 118"), null);
   assert.equal(idAsMpn("SM-A556B", "Samsung Galaxy A55 5G SM-A556B 128GB"), "SMA556B");
 });
+
+test("2performant product id is the EAN when gtin is empty and the id is a valid GTIN", async () => {
+  const { idAsGtin } = await import("../src/normalize.js");
+  assert.equal(idAsGtin("5021769277125"), "05021769277125");
+  assert.equal(idAsGtin("800897018016"), "00800897018016");
+  assert.equal(idAsGtin("5021769277126"), null);   // wrong check digit
+  assert.equal(idAsGtin("00012345"), null);        // shop's running number
+  assert.equal(idAsGtin("RH6878WO"), null);
+  const p = fromTwoPerformant({ title: "Paleta Technic Colour Fix", aff_code: "https://event.2performant.com/x?unique=a1", price: "39.9", campaign_name: "produsecosmetice.ro", product_id: "5021769277125", gtin: "" });
+  assert.equal(p.gtin, "05021769277125");
+});

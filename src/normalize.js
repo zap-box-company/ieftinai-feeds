@@ -90,10 +90,22 @@ export function fromTwoPerformant(row) {
     image,
     brand: clean(pick(row, "brand")),
     category: clean(pick(row, "category")),
-    gtin: normalizeGtin(pick(row, "gtin", "ean")),
+    gtin: normalizeGtin(pick(row, "gtin", "ean")) ?? idAsGtin(id),
     mpn: idAsMpn(id, title),
     shipping: null,
   };
+}
+
+/**
+ * 21 Nov 2026: many shops write the EAN as their product id and leave the gtin column empty
+ * (produsecosmetice.ro: product_id "5021769277125", gtin ""). The id counts as the EAN only when it is
+ * all digits, passes the GS1 check digit and has at least 8 digits after the leading zeros (a shop's own
+ * running number like "00012345" never does).
+ */
+export function idAsGtin(id) {
+  const s = String(id ?? "").trim();
+  if (!/^\d+$/.test(s) || s.replace(/^0+/, "").length < 8) return null;
+  return normalizeGtin(s);
 }
 
 /**
